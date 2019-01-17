@@ -26,7 +26,10 @@ export default restart => {
 
         platform: Platform(
             world,
-            { x: cx, y: offsetY + 405 },
+            { 
+                x: cx, 
+                y: offsetY + 405 
+            },
             0,
             platformWidth * 1
         ),
