@@ -22,9 +22,16 @@ const updatePhysicsEngine = (entities, time) => {
 	Matter.Engine.update(engine, time.delta);
 };
 
+//keeps sprite from rolling when interacting with entities
+const setMarioUpright = entities => {
+	let mario = entities.mario;
+	Matter.Body.setAngle(mario.body, 0);
+};
+
 export default (entities, { time, dispatch }) => {
 	updatePlatformCollisionFilters(entities);
 	updatePhysicsEngine(entities, time);
+	setMarioUpright(entities);
 
 	return entities;
 };

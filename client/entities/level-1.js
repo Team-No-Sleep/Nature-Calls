@@ -19,12 +19,12 @@ export default restart => {
     let engine = Matter.Engine.create({ enableSleeping: false });
     let world = engine.world;
 
-    world.gravity = { x: 0, y: 2 };
+    world.gravity = { x: 0, y: 1.5 };
 
     return {
         physics: { engine: engine, world: world },
 
-        platform: Platform(
+        floor: Platform(
             world,
             { 
                 x: cx, 
@@ -32,6 +32,16 @@ export default restart => {
             },
             0,
             platformWidth * 1
+        ),
+
+        platform: Platform(
+            world,
+            { 
+                x: cx + 90, 
+                y: offsetY + 360 
+            },
+            0,
+            platformWidth * 0.2
         ),
 
         leftBarrier: Barrier(
