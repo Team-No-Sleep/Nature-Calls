@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions } from "react-native";
 import Matter from "matter-js";
-import Platform from "../components/Platform"
+import Platform from "../components/platform"
 import Barrier from "../components/barrier";
 import Mario from "../components/mario";
 
