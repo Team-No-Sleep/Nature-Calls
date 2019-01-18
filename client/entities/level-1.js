@@ -50,7 +50,7 @@ export default restart => {
                 x: cx - platformWidth / 2 + 10,
                 y: cy 
             }, 
-            1.5708,
+            
             height
         ),
 
@@ -60,7 +60,7 @@ export default restart => {
                 x: cx + platformWidth / 2 - 10,
                 y: cy
             },
-            1.5708,
+            
             height
         ),
 

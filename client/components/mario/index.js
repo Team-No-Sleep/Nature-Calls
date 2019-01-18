@@ -20,7 +20,7 @@ export class Renderer extends Component {
     const x = body.position.x - width / 2;
     const y = body.position.y - height / 2;
     const angle = body.angle;
-    const direction = this.props.direction.vertical;
+    const direction = this.props.direction.horizontal;
     
     return (
       <Image
@@ -32,7 +32,7 @@ export class Renderer extends Component {
             top: y,
             transform: [
               { rotateZ: -90 + "deg" },
-              { rotateY: (direction === "right" ? 180 : 0) + "deg" }
+              { rotateY: (direction === "right" ? 0 : 180) + "deg" }
             ]
           }
         ]}
