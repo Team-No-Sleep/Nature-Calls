@@ -27,7 +27,7 @@ export default restart => {
         floor: Platform(
             world,
             { 
-                x: cx +90, 
+                x: cx + 90, 
                 y: offsetY + 405 
             },
             1.5708,
@@ -37,8 +37,18 @@ export default restart => {
         platform: Platform(
             world,
             { 
-                x: cx - 90, 
-                y: offsetY + 360 
+                x: cx + 60, 
+                y: offsetY + 660 
+            },
+            1.5708,
+            platformWidth * 0.2
+        ),
+
+        platformTwo: Platform(
+            world,
+            { 
+                x: cx + 60, 
+                y: offsetY + 160 
             },
             1.5708,
             platformWidth * 0.2
