@@ -2,12 +2,12 @@ const express = require('express')
 const router = express.Router()
 const User = require('../db/models/user')
 const passport = require('../passport')
-
+console.log("auth index");
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 
 router.get('/google/callback',
 	passport.authenticate('google', {
-		successRedirect: '/',
+		successRedirect: '/user',
 		failureRedirect: '/login'
 	})
 )
@@ -43,7 +43,7 @@ router.post(
 	}
 )
 
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
 	if (req.user) {
 		req.session.destroy()
 		res.clearCookie('connect.sid') // clean up!

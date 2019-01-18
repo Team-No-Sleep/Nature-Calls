@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions } from "react-native";
 import Matter from "matter-js";
-import Platform from "../components/platform";
+import Platform from "../components/Platform"
 import Barrier from "../components/barrier";
 import Mario from "../components/mario";
 
@@ -9,7 +9,7 @@ const { width, height } = Dimensions.get("window");
 const scale = Math.min(width, 430) / 375;
 const cx = width / 2;
 const cy = height / 2;
-const offsetY = (height - 465) / 2 - 35;
+const offsetY = (height - 465) / 2 -180;
 const platformWidth = Math.min(width, 430);
 
 export default restart => {
@@ -19,7 +19,7 @@ export default restart => {
     let engine = Matter.Engine.create({ enableSleeping: false });
     let world = engine.world;
 
-    world.gravity = { x: 0, y: 1.5 };
+    world.gravity = { x: 1.5, y: 0 };
 
     return {
         physics: { engine: engine, world: world },
@@ -27,20 +27,20 @@ export default restart => {
         floor: Platform(
             world,
             { 
-                x: cx, 
+                x: cx +90, 
                 y: offsetY + 405 
             },
-            0,
-            platformWidth * 1
+            1.5708,
+            platformWidth * 1.5
         ),
 
         platform: Platform(
             world,
             { 
-                x: cx + 90, 
+                x: cx - 90, 
                 y: offsetY + 360 
             },
-            0,
+            1.5708,
             platformWidth * 0.2
         ),
 
@@ -49,7 +49,8 @@ export default restart => {
             {  
                 x: cx - platformWidth / 2 + 10,
                 y: cy 
-            },
+            }, 
+            1.5708,
             height
         ),
 
@@ -59,9 +60,10 @@ export default restart => {
                 x: cx + platformWidth / 2 - 10,
                 y: cy
             },
-            height,
+            1.5708,
+            height
         ),
 
-        mario: Mario(world, { x: cx, y: offsetY + 405 - 20 / 2 - 20 }),
+        mario: Mario(world, { x: cx + 80, y: offsetY + 405 - 20 / 2 - 20 }),
     };
 };

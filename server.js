@@ -60,7 +60,7 @@ app.get(
 	},
 	passport.authenticate('google', { failureRedirect: '/login' }),
 	(req, res) => {
-		res.redirect('/')
+		res.redirect('/auth/user')
 	}
 )
 
@@ -75,6 +75,7 @@ app.get(
 // }
 
 /* Express app ROUTING */
+console.log("server.js");
 app.use('/auth', require('./auth'))
 
 // ====== Error handler ====

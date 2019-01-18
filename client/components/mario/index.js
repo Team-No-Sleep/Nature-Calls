@@ -20,7 +20,7 @@ export class Renderer extends Component {
     const x = body.position.x - width / 2;
     const y = body.position.y - height / 2;
     const angle = body.angle;
-    const direction = this.props.direction.horizontal;
+    const direction = this.props.direction.vertical;
     
     return (
       <Image
@@ -31,7 +31,7 @@ export class Renderer extends Component {
             left: x,
             top: y,
             transform: [
-              { rotateZ: angle + "rad" },
+              { rotateZ: -90 + "deg" },
               { rotateY: (direction === "right" ? 180 : 0) + "deg" }
             ]
           }
@@ -53,6 +53,7 @@ export default (world, pos) => {
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
     density: 0.8,
     frictionAir: 0.2,
+    angle: 0,
     friction: 1,
     collisionFilter: {
       category: collisionCategories.mario,
