@@ -6,16 +6,16 @@ const swipe = (touches, dispatch) => {
 	
 	if (move) {
 		if (move.delta.locationX < -2)
-			dispatch({ type: "swipe-left" });
-
-		if (move.delta.locationX > 2)
-			dispatch({ type: "swipe-right" });
-
-		if (move.delta.locationY < -2)
 			dispatch({ type: "swipe-up" });
 
-		if (move.delta.locationY > 2)
+		if (move.delta.locationX > 2)
 			dispatch({ type: "swipe-down" });
+
+		if (move.delta.locationY < -2)
+			dispatch({ type: "swipe-left" });
+
+		if (move.delta.locationY > 2)
+			dispatch({ type: "swipe-right" });
 	}
 };
 

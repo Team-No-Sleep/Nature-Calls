@@ -24,8 +24,8 @@ const jump = mario => {
 				: 0;
 			let forceY = interpolateY(percent);
 			Matter.Body.applyForce(mario.body, mario.body.position, {
-				x: forceX,
-				y: -forceY
+				x: -forceY,
+				y: forceX
 			});
 		},
 		complete() {
@@ -59,8 +59,8 @@ export default (entities, { events }) => {
 			then: () => {
 				mario.action = "walking";
 				Matter.Body.applyForce(mario.body, mario.body.position, {
-					x: mario.direction.horizontal === "right" ? 2.5 : -2.5,
-					y: 0
+					x: 0,
+					y: mario.direction.horizontal === "right" ? 2.5 : -2.5
 				});
 			}
 		},
