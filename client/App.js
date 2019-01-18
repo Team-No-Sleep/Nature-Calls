@@ -5,14 +5,26 @@ import AppNavigator from './navigation/AppNavigator';
 import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
 import LevelOne from "./entities/level-1";
 import Systems from "./systems";
+//import Orientation from 'react-native-orientation-locker';
+
 
 export default class App extends React.Component {
+  
   state = {
     isLoadingComplete: true,
     guestLogin: true
   };
 
+
+
+  // componentDidMount() {
+  //   console.log(Orientation);
+  //   //Orientation.lockToLandscapeLeft();
+
+  // }
+
   render() {
+    
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         //TODO: 
@@ -24,6 +36,9 @@ export default class App extends React.Component {
       );
     } else {
       return (
+
+       
+
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         
