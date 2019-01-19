@@ -20,7 +20,7 @@ const jump = mario => {
 		) {
 			mario.action = "jumping";
 			let forceX = walking
-				? interpolateX(percent) * (direction === "right" ? 1 : -1)
+				? interpolateX(percent) * (direction === "right" ? -1 : 1)
 				: 0;
 			let forceY = interpolateY(percent);
 			Matter.Body.applyForce(mario.body, mario.body.position, {
@@ -55,14 +55,17 @@ export default (entities, { events }) => {
 			}
 		},
 		{
-			if: grounded && gestures.hold && !jumping,
+			if: grounded && (gestures.holdLeft || gestures.holdRight || gestures.hold) && !jumping,
 			then: () => {
 				mario.action = "walking";
-				Matter.Body.applyForce(mario.body, mario.body.position, {
-					x: 0,
-					y: mario.direction.horizontal === "right" ? 2.5 : -2.5
-				});
-			}
+				if (gestures.hold) {
+					console.log("hold")
+					Matter.Body.applyForce(mario.body, mario.body.position, {
+						x: 0,
+						y: mario.direction.horizontal === "right" ? -2.5 : 2.5
+					});
+				} 
+			},
 		},
 
 		{
