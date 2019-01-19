@@ -16,13 +16,13 @@ const app = express()
 const PORT = process.env.PORT || 3001
 
 // ===== Middleware ====
-app.use(morgan('dev'))
+app.use(morgan('dev'));
 app.use(
 	bodyParser.urlencoded({
 		extended: false
 	})
-)
-app.use(bodyParser.json())
+);
+app.use(bodyParser.json());
 app.use(
 	session({
 		secret: process.env.APP_SECRET || 'this is the default passphrase',
@@ -30,7 +30,7 @@ app.use(
 		resave: false,
 		saveUninitialized: false
 	})
-)
+);
 
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -39,17 +39,17 @@ app.use(function(req, res, next) {
   });
 
 // ===== Passport ====
-app.use(passport.initialize())
-app.use(passport.session()) // will call the deserializeUser
+app.use(passport.initialize());
+app.use(passport.session()); // will call the deserializeUser
 
 // ===== testing middleware =====
 app.use(function(req, res, next) {
-	console.log('===== passport user =======')
-	console.log(req.session)
-	console.log(req.user)
-	console.log('===== END =======')
-	next()
-})
+	console.log('===== passport user =======');
+	console.log(req.session);
+	console.log(req.user);
+	console.log('===== END =======');
+	next();
+});
 // testing
 app.get(
 	'/auth/google/callback',
@@ -62,7 +62,7 @@ app.get(
 	(req, res) => {
 		res.redirect('/auth/user')
 	}
-)
+);
 
 // ==== if its production environment!
 // if (process.env.NODE_ENV === 'production') {
@@ -76,16 +76,16 @@ app.get(
 
 /* Express app ROUTING */
 console.log("server.js");
-app.use('/auth', require('./auth'))
+app.use('/auth', require('./auth'));
 
 // ====== Error handler ====
 app.use(function(err, req, res, next) {
-	console.log('====== ERROR =======')
-	console.error(err.stack)
-	res.status(500)
-})
+	console.log('====== ERROR =======');
+	console.error(err.stack);
+	res.status(500);
+});
 
 // ==== Starting Server =====
 app.listen(PORT, () => {
 	console.log(`App listening on PORT: ${PORT}`)
-})
+});
