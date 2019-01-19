@@ -1,11 +1,11 @@
 
 export default (entities, { events }) => {
 	let mario = entities.mario;
-	let { swipeLeft, swipeRight, swipeUp, swipeDown } = mario.controls.gestures
+	let { holdLeft, holdRight, swipeUp, swipeDown } = mario.controls.gestures
 
 	let horizontal = [
-		{ if: swipeLeft, then: "left" },
-		{ if: swipeRight, then: "right" },
+		{ if: holdLeft, then: "left" },
+		{ if: holdRight, then: "right" },
 		{ if: true, then: mario.direction.horizontal }
 	];
 
