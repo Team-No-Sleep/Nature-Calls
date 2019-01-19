@@ -96,8 +96,48 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx - 150, 
-                y: offsetY + 225 
+                x: cx + 80, 
+                // left and right
+                y: offsetY + 315
+            },
+            -1.5708,
+            platformWidth * 0.2
+        ),
+
+        // Tilemapping platform middle of the screen
+        middleOfScreen2: Platform(
+            world,
+            { 
+                //up and down
+                x: cx + 50, 
+                // left and right
+                y: offsetY + 215
+            },
+            -1.5708,
+            platformWidth * 0.2
+        ),
+
+        // Tilemapping platform middle of the screen
+        middleLeftOfScreen: Platform(
+            world,
+            { 
+                //up and down
+                x: cx + 50, 
+                // left and right
+                y: offsetY + 580
+            },
+            -1.5708,
+            platformWidth * 0.2
+        ),
+
+        // Tilemapping platform middle of the screen
+        middleLeftOfScreen2: Platform(
+            world,
+            { 
+                //up and down
+                x: cx + 80, 
+                // left and right
+                y: offsetY + 470
             },
             -1.5708,
             platformWidth * 0.2
