@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import Matter from "matter-js";
-import Platform from "./platform.png";
+import Platform from "./grass.png";
 import Tile from "../common/tile";
 import { collisionCategories } from "../../utils/constants";
 
