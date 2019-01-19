@@ -30,7 +30,7 @@ export default restart => {
                 x: cx +90, 
                 y: offsetY + 405 
             },
-            1.5708,
+            -1.5708,
             platformWidth * 1.5
         ),
 
@@ -40,7 +40,7 @@ export default restart => {
                 x: cx - 90, 
                 y: offsetY + 360 
             },
-            1.5708,
+            -1.5708,
             platformWidth * 0.2
         ),
 
