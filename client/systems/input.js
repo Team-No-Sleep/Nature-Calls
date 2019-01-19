@@ -23,7 +23,6 @@ const hold = (touches, events, dispatch) => {
 	let fingerDown = any(touches, "type", ["long-press", "move"]);
 	let fingerUp = any(touches, "type", "end");
 	let hold =  any(events, "type", "hold");
-	
 	if ((fingerDown || hold) && !fingerUp)
 		dispatch({ type: "hold" });
 };
