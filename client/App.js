@@ -49,7 +49,7 @@ export default class App extends React.Component {
                 visible={this.props.visible}
                 onRequestClose={this.quit}
                 >
-                <ImageBackground style = {styles.container} source = {require("./assets/backgrounds/jungle.png")}>
+                <ImageBackground style = {styles.container} source = {require("./assets/backgrounds/jungle.gif")}>
                   <GameEngine
                     ref={"engine"}
                     // style={styles.game}
@@ -76,12 +76,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: "center",
-      justifyContent: "center"
-    },
-    // game: {
-    //   backgroundColor: "red"
-    // }
+    }
 
   
 });
