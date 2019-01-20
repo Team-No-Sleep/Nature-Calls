@@ -37,7 +37,7 @@ export default class App extends React.Component {
     } else {
       return (
         
-        <ImageBackground source = {require("./assets/backgrounds/jungle.png")} style={styles.container} >
+        <ImageBackground source={require("./assets/backgrounds/jungle.png")} style={styles.container} >
           <View>
               {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
             
