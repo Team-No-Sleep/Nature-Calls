@@ -24,6 +24,7 @@ export default class App extends React.Component {
   // }
 
   render() {
+
     
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
@@ -37,18 +38,18 @@ export default class App extends React.Component {
     } else {
       return (
         
-        <ImageBackground source={require("./assets/backgrounds/jungle.png")} style={styles.container} >
-          <View>
-              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            
-                <AppNavigator />
+        <View >
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          
+              <AppNavigator />
 
-                <Modal
-                  transparent={false}
-                  animationType="slide"
-                  visible={this.props.visible}
-                  onRequestClose={this.quit}
-                  >
+              <Modal
+                transparent={false}
+                animationType="slide"
+                visible={this.props.visible}
+                onRequestClose={this.quit}
+                >
+                <ImageBackground style = {styles.container} source = {require("./assets/backgrounds/jungle.png")}>
                   <GameEngine
                     ref={"engine"}
                     // style={styles.game}
@@ -62,21 +63,25 @@ export default class App extends React.Component {
                     onEvent={this.handleEvent}
                     >
                   </GameEngine>
-                </Modal>
-              </View>
-        </ImageBackground>
+                </ImageBackground>
+              </Modal>
+            </View>
         
       );
     }
   }
 }
 
+
 const styles = StyleSheet.create({
-  game: {
     container: {
       flex: 1,
       alignItems: "center",
       justifyContent: "center"
-    }
-  }
+    },
+    // game: {
+    //   backgroundColor: "red"
+    // }
+
+  
 });
