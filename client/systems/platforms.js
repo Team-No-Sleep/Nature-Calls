@@ -4,7 +4,9 @@ import { find, filter, any } from "../utils";
 import { standing } from "../utils/platforms";
 import { collisionCategories } from "../utils/constants";
 
-const jump = mario => {
+const jump = (mario, entities) => {
+	let gestures = mario.controls.gestures;
+
 	return {
 		args: {
 			direction: mario.direction.horizontal,
@@ -12,17 +14,18 @@ const jump = mario => {
 			interpolateX: interpolateBasis([2, 2, 3, 4, 2, 2, 1]),
 			interpolateY: interpolateBasis([3, 3, 4, 6, 2, -2, -1, -1, -1, -1])
 		},
-		duration: 700,
+		duration: 1000,
 		animate(
 			_,
 			percent,
 			{ walking, direction, interpolateX, interpolateY }
 		) {
 			mario.action = "jumping";
-			let forceX = walking
+			let forceX = (gestures.swipeRight || gestures.swipeLeft)
 				? interpolateX(percent) * (direction === "right" ? -1 : 1)
 				: 0;
 			let forceY = interpolateY(percent);
+			console.log(gestures.swipeRight);
 			Matter.Body.applyForce(mario.body, mario.body.position, {
 				x: -forceY,
 				y: forceX
@@ -36,47 +39,53 @@ const jump = mario => {
 
 export default (entities, { events }) => {
 	let mario = entities.mario;
+	let dino2 = entities.dino2;
 
-	if (mario.controls.mode !== "platform") return entities;
+	let characters = [mario, dino2];
+		for (let char of characters) {
+			if (char.controls.mode !== "platform") return entities;
 
-	Matter.Sleeping.set(mario.body, false);
-	mario.body.collisionFilter.mask = collisionCategories.barrier | collisionCategories.platform;
+			Matter.Sleeping.set(char.body, false);
+			char.body.collisionFilter.mask = collisionCategories.barrier | collisionCategories.platform;
 
-	let platforms = filter(entities, "platform");
-	let gestures = mario.controls.gestures;
-	let grounded = any(platforms, p => standing(p, mario));
-	let jumping = mario.animations.jump;
+			let platforms = filter(entities, "platform");
+			let gestures = char.controls.gestures;
+			let grounded = any(platforms, p => standing(p, char));
+			let jumping = char.animations.jump;
 
-	let actions = [
-		{
-			if: grounded && !jumping && (gestures.tap || gestures.swipeUp),
-			then: () => {
-				mario.animations.jump = jump(mario);
-			}
-		},
-		{
-			if: grounded && (gestures.holdLeft || gestures.holdRight || gestures.hold) && !jumping,
-			then: () => {
-				mario.action = "walking";
-				if (gestures.hold) {
-					console.log("hold")
-					Matter.Body.applyForce(mario.body, mario.body.position, {
-						x: 0,
-						y: mario.direction.horizontal === "right" ? -2.5 : 2.5
-					});
-				} 
-			},
-		},
+			let actions = [
+				{
+					if: grounded && !jumping && (gestures.tap || gestures.swipeUp),
+					then: () => {
+						char.animations.jump = jump(char, entities);
+					}
+				},
+				{
+					if: grounded && (gestures.holdLeft || gestures.holdRight || gestures.hold) && !jumping,
+					then: () => {
+						char.action = "walking";
+						if (gestures.hold) {
+							console.log("hold")
+							Matter.Body.applyForce(char.body, char.body.position, {
+								x: 0,
+								y: char.direction.horizontal === "right" ? -2.5 : 2.5
+							});
+						} 
+					},
+				},
 
-		{
-			if: true,
-			then: () => {
-				mario.action = "idling";
-			}
-		}
-	];
+				{
+					if: true,
+					then: () => {
+						mario.action = "idling";
+					}
+				}
+			];
 
-	find(actions, "if").then();
+			find(actions, "if").then();
+
+	}
+
 
 	return entities;
 };

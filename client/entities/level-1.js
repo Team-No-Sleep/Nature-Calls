@@ -171,6 +171,7 @@ export default restart => {
             height
         ),
 
-        mario: Mario(world, { x: cx + 80, y: offsetY + 405 - 20 / 2 - 20 }),
+        mario: Mario(world, { x: cx +20, y: 600 }),
+        dino2: Mario(world, { x: cx + 20, y: 70 })
     };
 };
