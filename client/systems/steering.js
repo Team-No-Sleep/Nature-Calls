@@ -1,22 +1,30 @@
 
 export default (entities, { events }) => {
 	let mario = entities.mario;
-	let { holdLeft, holdRight, swipeUp, swipeDown } = mario.controls.gestures
+	let dino2 = entities.dino2;
+
+	let characters = [mario, dino2];
+	for (let char of characters) {
+
+
+	let { holdLeft, holdRight, swipeUp, swipeDown } = char.controls.gestures
 
 	let horizontal = [
 		{ if: holdLeft, then: "left" },
 		{ if: holdRight, then: "right" },
-		{ if: true, then: mario.direction.horizontal }
+		{ if: true, then: char.direction.horizontal }
 	];
 
 	let vertical = [
 		{ if: swipeUp, then: "up" },
 		{ if: swipeDown, then: "down" },
-		{ if: true, then: mario.direction.vertical }
+		{ if: true, then: char.direction.vertical }
 	];
 
-	mario.direction.horizontal = horizontal.find(x => x.if).then;
-	mario.direction.vertical = vertical.find(x => x.if).then;
+	char.direction.horizontal = horizontal.find(x => x.if).then;
+	char.direction.vertical = vertical.find(x => x.if).then;
+
+	}	
 
 	return entities;
 };

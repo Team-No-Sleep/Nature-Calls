@@ -16,6 +16,9 @@ import {
 
 export default (entities, { events }) => {
 	let mario = entities.mario;
+
+	// idk???
+	let dino2 = entities.dino2;
 	let platforms = filter(entities, "platform");
 	let swipeUp = any(events, "type", "swipe-up");
 	let swipeDown = any(events, "type", "swipe-down");
@@ -41,6 +44,19 @@ export default (entities, { events }) => {
 		holdLeft,
 		hold
 	}
+
+	dino2.controls.gestures = {
+		swipeUp,
+		swipeDown,
+		 swipeLeft,
+		 swipeRight,
+		tap,
+		holdRight,
+		holdLeft,
+		hold
+	}
+
+
 
 	return entities;
 };
