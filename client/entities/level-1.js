@@ -25,7 +25,7 @@ export default restart => {
     return {
         physics: { engine: engine, world: world },
 
-        // Tilemapping for the top level of the floor platform
+        // Tilemapping for the top level of the floor platform / FLOOR
         floorLevelOne: Platform(
             world,
             { 
@@ -36,7 +36,7 @@ export default restart => {
             platformWidth * 1.9
         ),
 
-        // Tilemapping for second level down from the floor platform
+        // Tilemapping for second level down from the floor platform / FLOOR
         floorLevelTwodown: Platform2Down(
             world,
             { 
@@ -47,7 +47,7 @@ export default restart => {
             platformWidth * 1.9
         ),
 
-        // Tilemapping platform for top left potty
+        // Tilemapping platform for top left potty / LEFT POTTY
         pottyLeftTop: Platform(
             world,
             { 
@@ -58,7 +58,7 @@ export default restart => {
             platformWidth * 0.2
         ),
 
-        // Tilemapping for second level down from left potty
+        // Tilemapping for second level down from left potty / LEFT POTTY
         pottyLeftLevelTwodown: Platform2Down(
             world,
             { 
@@ -69,7 +69,7 @@ export default restart => {
             platformWidth * 0.2
         ),
 
-        // Tilemapping platform for top right potty
+        // Tilemapping platform for top right potty / RIGHT POTTY
         pottyrightTop: Platform(
             world,
             { 
@@ -80,7 +80,7 @@ export default restart => {
             platformWidth * 0.2
         ),
 
-        // Tilemapping for second level down from the right potty
+        // Tilemapping for second level down from the right potty / RIGHT POTTY
         pottyrightLevelTwodown: Platform2Down(
             world,
             { 
@@ -91,12 +91,12 @@ export default restart => {
             platformWidth * 0.2
         ),
 
-        // Tilemapping platform middle of the screen
+        // Tilemapping platform middle of the screen / MIDDLE PLATFORM
         middleOfScreen: Platform(
             world,
             { 
                 //up and down
-                x: cx + 80, 
+                x: cx + 100, 
                 // left and right
                 y: offsetY + 315
             },
@@ -104,7 +104,7 @@ export default restart => {
             platformWidth * 0.2
         ),
 
-        // Tilemapping platform middle of the screen
+        // Tilemapping platform middle of the screen / MIDDLE PLATFORM
         middleOfScreen2: Platform(
             world,
             { 
@@ -117,7 +117,7 @@ export default restart => {
             platformWidth * 0.2
         ),
 
-        // Tilemapping platform middle of the screen
+        // Tilemapping platform middle of the screen / MIDDLE PLATFORM
         middleLeftOfScreen: Platform(
             world,
             { 
@@ -130,7 +130,7 @@ export default restart => {
             platformWidth * 0.2
         ),
 
-        // Tilemapping platform middle of the screen
+        // Tilemapping platform middle of the screen / MIDDLE PLATFORM
         middleLeftOfScreen2: Platform(
             world,
             { 
@@ -152,7 +152,7 @@ export default restart => {
 
 
 
-
+        // Left barrier of landscap map
         leftBarrier: Barrier(
             world,
             {  
@@ -161,7 +161,7 @@ export default restart => {
             }, 
             height
         ),
-
+        // RIght barrier of landscap map
         rightBarrier: Barrier(
             world,
             {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Text, Modal, Alert } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, ImageBackground, Text, Modal, Alert } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
@@ -36,35 +36,36 @@ export default class App extends React.Component {
       );
     } else {
       return (
-
-       
-
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         
-          <AppNavigator />
+        <ImageBackground source = {require("./assets/backgrounds/jungle.png")} style={styles.container} >
+          <View>
+              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            
+                <AppNavigator />
 
-          <Modal
-            transparent={false}
-            animationType="slide"
-            visible={this.props.visible}
-            onRequestClose={this.quit}
-            >
-            <GameEngine
-              ref={"engine"}
-              // style={styles.game}
-              systems={Systems}
-              entities={LevelOne()}
-              touchProcessor={DefaultTouchProcessor({
-                triggerPressEventBefore: 150,
-                triggerLongPressEventAfter: 151
-              })}
-              running={this.state.isLoadingComplete}
-              onEvent={this.handleEvent}
-              >
-            </GameEngine>
-          </Modal>
-        </View>
+                <Modal
+                  transparent={false}
+                  animationType="slide"
+                  visible={this.props.visible}
+                  onRequestClose={this.quit}
+                  >
+                  <GameEngine
+                    ref={"engine"}
+                    // style={styles.game}
+                    systems={Systems}
+                    entities={LevelOne()}
+                    touchProcessor={DefaultTouchProcessor({
+                      triggerPressEventBefore: 150,
+                      triggerLongPressEventAfter: 151
+                    })}
+                    running={this.state.isLoadingComplete}
+                    onEvent={this.handleEvent}
+                    >
+                  </GameEngine>
+                </Modal>
+              </View>
+        </ImageBackground>
+        
       );
     }
   }
@@ -72,6 +73,10 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   game: {
-    backgroundColor: "#000"
+    container: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center"
+    }
   }
 });
