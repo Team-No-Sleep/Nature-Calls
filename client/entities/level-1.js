@@ -70,49 +70,30 @@ export default restart => {
             platformWidth * 1.9
         ),
 
-        // Tilemapping platform for top left potty / LEFT POTTY
-        // pottyLeftTop: Platform(
-        //     world,
-        //     { 
-        //         x: cx - 100, 
-        //         y: offsetY + 720 
-        //     },
-        //     -1.5708,
-        //     platformWidth * 0.2
-        // ),
+        // Tilemapping platform for top left potty / LEFT POTTY PLATFORM
+        pottyLeftTop: PlatGrass(
+            world,
+            { 
+                x: cx - 100, 
+                y: offsetY + 690
+            },
+            -1.5708,
+            platformWidth * 0.2
+        ),
 
-        // Tilemapping for second level down from left potty / LEFT POTTY
-        // pottyLeftLevelTwodown: PlatGrass(
-        //     world,
-        //     { 
-        //         x: cx - 85, 
-        //         y: offsetY + 720
-        //     },
-        //     -1.5708,
-        //     platformWidth * 0.2
-        // ),
 
-        // Tilemapping platform for top right potty / RIGHT POTTY
-        // pottyrightTop: Platform(
-        //     world,
-        //     { 
-        //         x: cx - 100, 
-        //         y: offsetY + 115 
-        //     },
-        //     -1.5708,
-        //     platformWidth * 0.2
-        // ),
 
-        // Tilemapping for second level down from the right potty / RIGHT POTTY
-        // pottyrightLevelTwodown: PlatGrass(
-        //     world,
-        //     { 
-        //         x: cx - 85, 
-        //         y: offsetY + 115 
-        //     },
-        //     -1.5708,
-        //     platformWidth * 0.2
-        // ),
+        // Tilemapping platform for top right potty / RIGHT POTTY PLATFORM
+        pottyrightTop: PlatGrass(
+            world,
+            { 
+                x: cx - 100, 
+                y: offsetY + 115 
+            },
+            -1.5708,
+            platformWidth * 0.2
+        ),
+
 
         // Tilemapping platform middle of the screen / BOTTOM RIGHT PLATFORM
         middleOfScreen: PlatGrass(
@@ -179,18 +160,6 @@ export default restart => {
             platformWidth * 0.1
         ),
 
-        // Tilemapping platform middle of the screen / MIDDLE PLATFORM
-        // middleLeftOfScreen2: PlatGrass(
-        //     world,
-        //     { 
-        //         //up and down
-        //         x: cx + 80, 
-        //         // left and right
-        //         y: offsetY + 470
-        //     },
-        //     -1.5708,
-        //     platformWidth * 0.2
-        // ),
 
         // Left barrier of landscap map
         leftBarrier: Barrier(
@@ -209,6 +178,71 @@ export default restart => {
                 y: cy
             },
             height
+        ),
+
+        // Tilemapping platform middle of the screen / UPPER LEFT MIDDLE PLATFORM
+        upperMiddlePlatLeft: PlatGrass(
+            world,
+            { 
+                //up and down
+                x: cx + 0, 
+                // left and right
+                y: offsetY + 500
+            },
+            -1.5708,
+            platformWidth * 0.14
+        ),
+
+         // Tilemapping platform middle of the screen / BETWEEN MIDDLE PLATFORMS
+         betweenMiddlePlatforms: PlatGrass(
+            world,
+            { 
+                //up and down
+                x: cx + 0, 
+                // left and right
+                y: offsetY + 410
+            },
+            -1.5708,
+            platformWidth * 0.05
+        ),
+
+        // Tilemapping platform middle of the screen / UPPER RIGHT MIDDLE PLATFORM
+        upperMiddlePlatRight: PlatGrass(
+            world,
+            { 
+                //up and down
+                x: cx + 0, 
+                // left and right
+                y: offsetY + 320
+            },
+            -1.5708,
+            platformWidth * 0.14
+        ),
+
+        // Tilemapping platform top right / LOWER RIGHT POTTY PLATFORM
+        lowerPottyRight: PlatGrass(
+            world,
+            { 
+                //up and down
+                x: cx - 55, 
+                // left and right
+                y: offsetY + 230
+            },
+            -1.5708,
+            platformWidth * 0.15
+        ),
+
+        // Tilemapping platform top right / LOWER RIGHT POTTY PLATFORM
+        lowerPottyLeft: PlatGrass(
+            world,
+            { 
+                //up and down
+                x: cx - 55, 
+                // left and right
+                y: offsetY + 580
+            },
+            -1.5708,
+            platformWidth * 0.15
         ),
 
         mario: Mario(world, { x: cx +20, y: 600 }),
