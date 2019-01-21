@@ -143,15 +143,6 @@ export default restart => {
             platformWidth * 0.2
         ),
 
-
-
-
-
-
-
-
-
-
         // Left barrier of landscap map
         leftBarrier: Barrier(
             world,
