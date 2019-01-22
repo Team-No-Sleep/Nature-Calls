@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
 
 socketio.on('connection', function (socket) {
 	console.log(socket.id);
-	socket.on('update', () => io.emit('update'));
+	socket.on('update', () => socketio.emit('update'));
 
 });
 
