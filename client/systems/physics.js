@@ -6,10 +6,16 @@ import { collisionCategories } from "../utils/constants";
 //detects when mario is standing on a platform
 const updatePlatformCollisionFilters = entities => {
 	let mario = entities.mario;
+	let dino2 = entities.dino2;
 	let platforms = filter(entities, "platform");
 	let active = filter(platforms, p => aboveTopEdge(p, shift(base(mario), 0, -20)));
+	let active2 = filter(platforms, p => aboveTopEdge(p, shift(base(dino2), 0, -20)));
 
 	active.forEach(x => {
+		x.body.collisionFilter.mask = collisionCategories.mario;
+	});
+
+	active2.forEach(x => {
 		x.body.collisionFilter.mask = collisionCategories.mario;
 	});
 
@@ -25,7 +31,9 @@ const updatePhysicsEngine = (entities, time) => {
 //keeps sprite from rolling when interacting with entities
 const setMarioUpright = entities => {
 	let mario = entities.mario;
+	let dino2 = entities.dino2
 	Matter.Body.setAngle(mario.body, 0);
+	Matter.Body.setAngle(dino2.body, 0);
 };
 
 export default (entities, { time, dispatch }) => {
