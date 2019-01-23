@@ -7,11 +7,13 @@ export default (entities, { events }) => {
 	for (let char of characters) {
 
 
-	let { holdLeft, holdRight, swipeUp, swipeDown } = char.controls.gestures
+	let { holdLeft, holdRight, swipeUp, swipeDown, swipeLeft, swipeRight } = char.controls.gestures
 
 	let horizontal = [
-		{ if: holdLeft, then: "left" },
-		{ if: holdRight, then: "right" },
+		// { if: holdLeft, then: "left" },
+		// { if: holdRight, then: "right" },
+		{ if: swipeLeft, then: "right" },
+		{ if: swipeRight, then: "left" },
 		{ if: true, then: char.direction.horizontal }
 	];
 
