@@ -34,6 +34,8 @@ export default class App extends React.Component {
 //     });
 //   }
 
+
+
 clicked = () => {
   
   const dataObj = {
@@ -48,6 +50,7 @@ clicked = () => {
   //   //Orientation.lockToLandscapeLeft();
 
   // }
+
 
   render() {
 
