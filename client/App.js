@@ -34,7 +34,13 @@ export default class App extends React.Component {
 //     });
 //   }
 
+<<<<<<< HEAD
 // clicked = () => {
+=======
+
+
+clicked = () => {
+>>>>>>> 9caaf61f0dec142f74bc7d4025ce90c46a01ec29
   
 //   const dataObj = {
 //     action: 'click'
@@ -49,6 +55,10 @@ export default class App extends React.Component {
 
   // }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9caaf61f0dec142f74bc7d4025ce90c46a01ec29
   render() {
 
     
