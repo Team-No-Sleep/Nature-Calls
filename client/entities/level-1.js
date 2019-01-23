@@ -250,7 +250,7 @@ export default restart => {
 
         mario: Mario(world, { x: cy +20, y: 600 }),
         dino2: Mario(world, { x: cy + 20, y: 70 }),
-        toiletPaper: ToiletPaper( {x: cy + 150, y: cy} )
+        toiletPaper: ToiletPaper( {x: cy + 125, y: cy} )
 
         
     };
