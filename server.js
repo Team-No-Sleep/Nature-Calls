@@ -6,14 +6,38 @@ if (process.env.NODE_ENV !== 'production') {
 require('dotenv').config()
 
 const express = require('express')
+const app = express()
+const server = require('http').Server(app);
+const socketio = require('socket.io')(server);
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const dbConnection = require('./db') // loads our connection to the mongo database
 const passport = require('./passport')
-const app = express()
 const PORT = process.env.PORT || 3001
+
+// const websocket = socketio(server); //Initiate Socket
+
+// websocket.on('channel1', (data) => {
+//   console.log('Greetings from RN app', data);
+// }
+
+// websocket.emit('channel2', 'new channel');
+// websocket.on('channel2', (obj) => {
+//   console.log('Object from RN app', obj);
+// }
+
+// ===== socket.io =====
+app.get('/', function (req, res) {
+	res.sendFile(__dirname + '/server/index.html');
+});
+
+socketio.on('connection', function (socket) {
+	console.log(socket.id);
+	socket.on('update', () => socketio.emit('update'));
+
+});
 
 // ===== Middleware ====
 app.use(morgan('dev'));
@@ -86,6 +110,7 @@ app.use(function(err, req, res, next) {
 });
 
 // ==== Starting Server =====
-app.listen(PORT, () => {
+server.listen(PORT, () => {
 	console.log(`App listening on PORT: ${PORT}`)
 });
+

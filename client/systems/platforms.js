@@ -25,7 +25,7 @@ const jump = (mario, entities) => {
 				? interpolateX(percent) * (direction === "right" ? -1 : 1)
 				: 0;
 			let forceY = interpolateY(percent);
-			console.log(gestures.swipeRight);
+			//(gestures.swipeRight);
 			Matter.Body.applyForce(mario.body, mario.body.position, {
 				x: -forceY,
 				y: forceX
@@ -65,7 +65,7 @@ export default (entities, { events }) => {
 					then: () => {
 						char.action = "walking";
 						if (gestures.hold) {
-							console.log("hold")
+							//console.log("hold")
 							Matter.Body.applyForce(char.body, char.body.position, {
 								x: 0,
 								y: char.direction.horizontal === "right" ? -2.5 : 2.5
