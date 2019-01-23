@@ -6,12 +6,15 @@ import Platform2Down from "../components/platform2Down";
 import PlatGrass from "../components/platformGrass";
 import Barrier from "../components/barrier";
 import Mario from "../components/mario";
+import ToiletPaper from "../components/toiletPaper";
+
+
 
 const { width, height } = Dimensions.get("window");
 const scale = Math.min(width, 430) / 375;
 const cx = width / 2;
 const cy = height / 2;
-const offsetY = (height - 465) / 2 -180;
+const offsetY = (width - 465) / 2 -180;
 const platformWidth = Math.min(width, 430);
 
 export default restart => {
@@ -30,7 +33,7 @@ export default restart => {
         floorLevelOne: Platform(
             world,
             { 
-                x: cx + 160, 
+                x: cy + 160, 
                 y: offsetY + 405 
             },
             -1.5708,
@@ -41,7 +44,7 @@ export default restart => {
         floorLevelTwodown: Platform2Down(
             world,
             { 
-                x: cx + 177, 
+                x: cy + 177, 
                 y: offsetY + 405 
             },
             -1.5708,
@@ -52,7 +55,7 @@ export default restart => {
         floorLevelThreedown: Platform2Down(
             world,
             { 
-                x: cx + 188, 
+                x: cy + 188, 
                 y: offsetY + 405 
             },
             -1.5708,
@@ -63,7 +66,7 @@ export default restart => {
         floorLevelThreedown: Platform2Down(
             world,
             { 
-                x: cx + 197, 
+                x: cy + 197, 
                 y: offsetY + 405 
             },
             -1.5708,
@@ -74,7 +77,7 @@ export default restart => {
         pottyLeftTop: PlatGrass(
             world,
             { 
-                x: cx - 100, 
+                x: cy - 100, 
                 y: offsetY + 690
             },
             -1.5708,
@@ -87,7 +90,7 @@ export default restart => {
         pottyrightTop: PlatGrass(
             world,
             { 
-                x: cx - 100, 
+                x: cy - 100, 
                 y: offsetY + 115 
             },
             -1.5708,
@@ -100,7 +103,7 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx + 111, 
+                x: cy + 111, 
                 // left and right
                 y: offsetY + 140
             },
@@ -113,7 +116,7 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx + 80, 
+                x: cy + 80, 
                 // left and right
                 y: offsetY + 200
             },
@@ -126,7 +129,7 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx + 50, 
+                x: cy + 50, 
                 // left and right
                 y: offsetY + 410
             },
@@ -139,7 +142,7 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx + 111, 
+                x: cy + 111, 
                 // left and right
                 y: offsetY + 690
             },
@@ -152,7 +155,7 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx + 80, 
+                x: cy + 80, 
                 // left and right
                 y: offsetY + 620
             },
@@ -165,7 +168,7 @@ export default restart => {
         leftBarrier: Barrier(
             world,
             {  
-                x: cx - platformWidth / 2 + 10,
+                x: cy - platformWidth / 2 + 10,
                 y: cy 
             }, 
             height
@@ -174,7 +177,7 @@ export default restart => {
         rightBarrier: Barrier(
             world,
             {
-                x: cx + platformWidth / 2 - 10,
+                x: cy + platformWidth / 2 - 10,
                 y: cy
             },
             height
@@ -185,7 +188,7 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx + 0, 
+                x: cy + 0, 
                 // left and right
                 y: offsetY + 500
             },
@@ -198,7 +201,7 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx + 0, 
+                x: cy + 0, 
                 // left and right
                 y: offsetY + 410
             },
@@ -211,7 +214,7 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx + 0, 
+                x: cy + 0, 
                 // left and right
                 y: offsetY + 320
             },
@@ -224,7 +227,7 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx - 55, 
+                x: cy - 55, 
                 // left and right
                 y: offsetY + 230
             },
@@ -237,7 +240,7 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cx - 55, 
+                x: cy - 55, 
                 // left and right
                 y: offsetY + 580
             },
@@ -245,7 +248,10 @@ export default restart => {
             platformWidth * 0.15
         ),
 
-        mario: Mario(world, { x: cx +20, y: 600 }),
-        dino2: Mario(world, { x: cx + 20, y: 70 })
+        mario: Mario(world, { x: cy +20, y: 600 }),
+        dino2: Mario(world, { x: cy + 20, y: 70 }),
+        toiletPaper: ToiletPaper( {x: cy + 150, y: cy} )
+
+        
     };
 };

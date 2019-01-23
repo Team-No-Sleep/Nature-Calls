@@ -16,13 +16,6 @@ export default class App extends React.Component {
   };
 
 
-
-  // componentDidMount() {
-  //   console.log(Orientation);
-  //   //Orientation.lockToLandscapeLeft();
-
-  // }
-
   render() {
 
     
