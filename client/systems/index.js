@@ -5,6 +5,8 @@ import Platforms from "./platforms";
 import Physics from "./physics";
 import Animation from "./animation";
 import Camera from "./camera";
+import PowerUps from "./power-ups";
+
 
 export default [
 	Input,
@@ -13,5 +15,6 @@ export default [
 	Platforms,
 	Animation,
 	Camera,
-	Physics
+	Physics,
+	PowerUps
 ];

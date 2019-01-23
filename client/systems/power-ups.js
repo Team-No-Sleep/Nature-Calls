@@ -1,31 +1,42 @@
 import Matter from "matter-js";
-import Hammer from "../components/props/hammer";
-import { distance, base, position, any } from "../utils";
 
+import { distance, base, position, any } from "../utils";
+import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
+
+
+const MarioIdling = resolveAssetSource(
+	require("../components/mario/mario-idling.gif")
+);
+const MarioWalking = resolveAssetSource(
+	require("../components/mario/mario-walking.gif")
+);
 let powerUpId = 0;
 
-const pickupHammers = entities => {
+const pickupTP = entities => {
+    
 	let mario = entities.mario;
-	let tpKeys = Object.keys(entities).filter(k => entities[k].toiletPaper);
-    console.log("here")
+	let tpKeys = Object.keys(entities).filter(k => entities[k].ToiletPaper);
 	tpKeys.forEach(k => {
+        
         let tp = entities[k];
-        console.log("here")
-
-		if (distance(tp.position, mario.body.position) < 10) {
+        //console.log(distance(tp.position, mario.body.position));
+		if (distance(tp.position, mario.body.position) < 20) {
             console.log("tp picked up")
 			let holding = {
                 ...mario.actions,
                 // ***** need new gif here? ***** //
-				idling: MarioIdlingHammering,
-				walking: MarioWalkingHammering
-			};
+				idling: MarioIdling,
+				walking: MarioWalking
+            };
+            
+            // I guess here we need new gifs for holding the TP
 
 			mario.animations.hammering = {
 				duration: 1000000000,
 				animate() {
 					mario.actions = holding;
-					mario["power-ups"].holding = true;
+                    mario["power-ups"].holding = true;
+                    //console.log(mario["power-ups"])
 				},
 				complete() {
 					mario.actions = {
@@ -43,7 +54,7 @@ const pickupHammers = entities => {
 };
 
 export default (entities, { events, dispatch }) => {
-	pickupHammers(entities);
+	pickupTP(entities);
 
 	return entities;
 };
