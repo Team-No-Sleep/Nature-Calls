@@ -2,12 +2,14 @@ import Matter from "matter-js";
 import { distance, base, position, any } from "../utils";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 
-
 const MarioIdling = resolveAssetSource(
 	require("../components/mario/mario-idling.gif")
 );
 const MarioWalking = resolveAssetSource(
 	require("../components/mario/mario-walking.gif")
+);
+const MarioJumping = resolveAssetSource(
+	require("../components/mario/mario-jumping.gif")
 );
 const MarioIdlingHammering = resolveAssetSource(
 	require("../components/mario/mario-idling-hammering.gif")
@@ -51,7 +53,8 @@ const pickupTP = entities => {
 					mario.actions = {
 						...mario.actions,
 						idling: MarioIdling,
-						walking: MarioWalking
+						walking: MarioWalking,
+						jumping: MarioJumping
 					};
 					mario["power-ups"].holding = false;
 				}
