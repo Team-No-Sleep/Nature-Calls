@@ -34,20 +34,18 @@ export default class App extends React.Component {
 //     });
 //   }
 
-<<<<<<< HEAD
-// clicked = () => {
-=======
+
 
 
 clicked = () => {
->>>>>>> 9caaf61f0dec142f74bc7d4025ce90c46a01ec29
+
   
-//   const dataObj = {
-//     action: 'click'
-//   };
+  const dataObj = {
+    action: 'click'
+  };
   
-//   this.socket.emit('channel2', dataObj);
-// }
+  this.socket.emit('channel2', dataObj);
+}
 
   // componentDidMount() {
   //   console.log(Orientation);
@@ -55,10 +53,6 @@ clicked = () => {
 
   // }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 9caaf61f0dec142f74bc7d4025ce90c46a01ec29
   render() {
 
     
