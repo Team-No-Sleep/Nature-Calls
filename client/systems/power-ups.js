@@ -1,5 +1,4 @@
 import Matter from "matter-js";
-
 import { distance, base, position, any } from "../utils";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 
@@ -9,6 +8,15 @@ const MarioIdling = resolveAssetSource(
 );
 const MarioWalking = resolveAssetSource(
 	require("../components/mario/mario-walking.gif")
+);
+const MarioIdlingHammering = resolveAssetSource(
+	require("../components/mario/mario-idling-hammering.gif")
+);
+const MarioWalkingHammering = resolveAssetSource(
+	require("../components/mario/mario-walking-hammering.gif")
+);
+const MarioJumpingHammering = resolveAssetSource(
+	require("../components/mario/mario-walking-hammering.gif")
 );
 let powerUpId = 0;
 
@@ -25,8 +33,9 @@ const pickupTP = entities => {
 			let holding = {
                 ...mario.actions,
                 // ***** need new gif here? ***** //
-				idling: MarioIdling,
-				walking: MarioWalking
+				idling: MarioIdlingHammering,
+				walking: MarioWalkingHammering,
+				jumping: MarioJumpingHammering
             };
             
             // I guess here we need new gifs for holding the TP
