@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, ImageBackground, Text, Modal, Alert } from 'react-native';
-// import SocketIOClient from 'socket.io-client'
+import SocketIOClient from 'socket.io-client'
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
@@ -19,7 +19,7 @@ export default class App extends React.Component {
   constructor() {
     super();
     
-    // this.socket = SocketIOClient('http://localhost:3001');
+    this.socket = SocketIOClient('http://localhost:3001');
     
  }
 
