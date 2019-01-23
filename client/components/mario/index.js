@@ -72,8 +72,8 @@ export default (world, pos) => {
       mode: "platform"
     },
     direction: {
-      horizontal: "up",
-      vertical: "down"
+      horizontal: "right",
+      vertical: "up"
     },
     action: "idling",
     actions: {
