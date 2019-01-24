@@ -8,16 +8,21 @@ const updatePlatformCollisionFilters = entities => {
 	let mario = entities.mario;
 	let dino2 = entities.dino2;
 	let platforms = filter(entities, "platform");
-	let active = filter(platforms, p => aboveTopEdge(p, shift(base(mario), 0, -20)));
-	let active2 = filter(platforms, p => aboveTopEdge(p, shift(base(dino2), 0, -20)));
+	if (mario) {
+		let active = filter(platforms, p => aboveTopEdge(p, shift(base(mario), 0, -20)));
+		active.forEach(x => {
+			x.body.collisionFilter.mask = collisionCategories.mario;
+		});
+	}
 
-	active.forEach(x => {
-		x.body.collisionFilter.mask = collisionCategories.mario;
-	});
+	if (dino2) {
 
-	active2.forEach(x => {
-		x.body.collisionFilter.mask = collisionCategories.mario;
-	});
+		let active2 = filter(platforms, p => aboveTopEdge(p, shift(base(dino2), 0, -20)));
+
+		active2.forEach(x => {
+			x.body.collisionFilter.mask = collisionCategories.mario;
+		});	
+	}
 
 	return entities;
 };
@@ -32,8 +37,12 @@ const updatePhysicsEngine = (entities, time) => {
 const setMarioUpright = entities => {
 	let mario = entities.mario;
 	let dino2 = entities.dino2
-	Matter.Body.setAngle(mario.body, 0);
-	Matter.Body.setAngle(dino2.body, 0);
+	if (mario) {
+		Matter.Body.setAngle(mario.body, 0);
+	}
+	if (dino2) {
+		Matter.Body.setAngle(dino2.body, 0);
+	}
 };
 
 export default (entities, { time, dispatch }) => {
