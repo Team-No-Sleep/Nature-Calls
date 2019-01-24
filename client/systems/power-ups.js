@@ -1,5 +1,6 @@
 import Matter from "matter-js";
 import { distance, base, position, any } from "../utils";
+import Mario from "../components/mario"
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 
 const MarioIdling = resolveAssetSource(
