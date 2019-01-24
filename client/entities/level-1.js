@@ -83,7 +83,7 @@ export default restart => {
                 y: offsetY + 690
             },
             -1.5708,
-            platformWidth * 0.2
+            platformWidth * 0.15
         ),
 
 
@@ -96,7 +96,7 @@ export default restart => {
                 y: offsetY + 115 
             },
             -1.5708,
-            platformWidth * 0.2
+            platformWidth * 0.15
         ),
 
 
@@ -105,12 +105,12 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cy + 111, 
+                x: cy + 105, 
                 // left and right
-                y: offsetY + 140
+                y: offsetY + 125
             },
             -1.5708,
-            platformWidth * 0.1
+            platformWidth * 0.138
         ),
 
         // Tilemapping platform middle of the screen / BOTTOM RIGHT PLATFORM 2
@@ -120,7 +120,7 @@ export default restart => {
                 //up and down
                 x: cy + 80, 
                 // left and right
-                y: offsetY + 200
+                y: offsetY + 225
             },
             -1.5708,
             platformWidth * 0.1
@@ -136,7 +136,7 @@ export default restart => {
                 y: offsetY + 410
             },
             -1.5708,
-            platformWidth * 0.70
+            platformWidth * 0.69
         ),
 
         // Tilemapping platform middle of the screen / BOTTOM LEFT PLATFORM
@@ -144,12 +144,12 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cy + 111, 
+                x: cy + 105, 
                 // left and right
-                y: offsetY + 690
+                y: offsetY + 695
             },
             -1.5708,
-            platformWidth * 0.1
+            platformWidth * 0.138
         ),
 
         // Tilemapping platform middle of the screen / BOTTOM LEFT PLATFORM 2
@@ -159,7 +159,7 @@ export default restart => {
                 //up and down
                 x: cy + 80, 
                 // left and right
-                y: offsetY + 620
+                y: offsetY + 590
             },
             -1.5708,
             platformWidth * 0.1
@@ -167,23 +167,23 @@ export default restart => {
 
 
         // Left barrier of landscap map
-        leftBarrier: Barrier(
-            world,
-            {  
-                x: cy - platformWidth / 2 + 10,
-                y: cy 
-            }, 
-            height
-        ),
+        // leftBarrier: Barrier(
+        //     world,
+        //     {  
+        //         x: cy - platformWidth / 2 + 10,
+        //         y: cy 
+        //     }, 
+        //     height
+        // ),
         // RIght barrier of landscap map
-        rightBarrier: Barrier(
-            world,
-            {
-                x: cy + platformWidth / 2 - 10,
-                y: cy
-            },
-            height
-        ),
+        // rightBarrier: Barrier(
+        //     world,
+        //     {
+        //         x: cy + platformWidth / 2 - 10,
+        //         y: cy
+        //     },
+        //     height
+        // ),
 
         // Tilemapping platform middle of the screen / UPPER LEFT MIDDLE ROCK RIGHT
         upperMiddlePlatRockRight: MiniRockRight(
