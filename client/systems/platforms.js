@@ -40,8 +40,10 @@ const jump = (mario, entities) => {
 export default (entities, { events }) => {
 	let mario = entities.mario;
 	let dino2 = entities.dino2;
+	// TODO: Make better data structure for holding which characters are alive
 
-	let characters = [mario, dino2];
+
+	let characters = [mario];
 		for (let char of characters) {
 			if (char.controls.mode !== "platform") return entities;
 

@@ -16,8 +16,6 @@ import {
 
 export default (entities, { events }) => {
 	let mario = entities.mario;
-
-	// idk???
 	let dino2 = entities.dino2;
 	let platforms = filter(entities, "platform");
 	let swipeUp = any(events, "type", "swipe-up");
@@ -34,26 +32,32 @@ export default (entities, { events }) => {
 	// let platformAbove = closestAbove(platforms, current);
 	let grounded = find(platforms, p => standing(p, mario));
 
-	mario.controls.gestures = {
-		swipeUp,
-		swipeDown,
-		 swipeLeft,
-		 swipeRight,
-		tap,
-		holdRight,
-		holdLeft,
-		hold
+	// TODO: 
+	// Fix this so that there's a better structure to hold the characters
+	if (mario) {
+		mario.controls.gestures = {
+			swipeUp,
+			swipeDown,
+			swipeLeft,
+			swipeRight,
+			tap,
+			holdRight,
+			holdLeft,
+			hold
+		}
 	}
 
-	dino2.controls.gestures = {
-		swipeUp,
-		swipeDown,
-		 swipeLeft,
-		 swipeRight,
-		tap,
-		holdRight,
-		holdLeft,
-		hold
+	if (dino2) {
+		dino2.controls.gestures = {
+			swipeUp,
+			swipeDown,
+			swipeLeft,
+			swipeRight,
+			tap,
+			holdRight,
+			holdLeft,
+			hold
+		}
 	}
 
 
