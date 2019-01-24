@@ -45,46 +45,48 @@ export default (entities, { events }) => {
 
 	let characters = [mario];
 		for (let char of characters) {
-			if (char.controls.mode !== "platform") return entities;
+			if (char) {
+				if (char.controls.mode !== "platform") return entities;
 
-			Matter.Sleeping.set(char.body, false);
-			char.body.collisionFilter.mask = collisionCategories.barrier | collisionCategories.platform;
+				Matter.Sleeping.set(char.body, false);
+				char.body.collisionFilter.mask = collisionCategories.barrier | collisionCategories.platform;
 
-			let platforms = filter(entities, "platform");
-			let gestures = char.controls.gestures;
-			let grounded = any(platforms, p => standing(p, char));
-			let jumping = char.animations.jump;
+				let platforms = filter(entities, "platform");
+				let gestures = char.controls.gestures;
+				let grounded = any(platforms, p => standing(p, char));
+				let jumping = char.animations.jump;
 
-			let actions = [
-				{
-					if: grounded && !jumping && (gestures.tap || gestures.swipeUp),
-					then: () => {
-						char.animations.jump = jump(char, entities);
-					}
-				},
-				{
-					if: grounded && (gestures.holdLeft || gestures.holdRight || gestures.hold) && !jumping,
-					then: () => {
-						char.action = "walking";
-						if (gestures.hold) {
-							//console.log("hold")
-							Matter.Body.applyForce(char.body, char.body.position, {
-								x: 0,
-								y: char.direction.horizontal === "right" ? -2.5 : 2.5
-							});
-						} 
+				let actions = [
+					{
+						if: grounded && !jumping && (gestures.tap || gestures.swipeUp),
+						then: () => {
+							char.animations.jump = jump(char, entities);
+						}
 					},
-				},
+					{
+						if: grounded && (gestures.holdLeft || gestures.holdRight || gestures.hold) && !jumping,
+						then: () => {
+							char.action = "walking";
+							if (gestures.hold) {
+								//console.log("hold")
+								Matter.Body.applyForce(char.body, char.body.position, {
+									x: 0,
+									y: char.direction.horizontal === "right" ? -2.5 : 2.5
+								});
+							} 
+						},
+					},
 
-				{
-					if: true,
-					then: () => {
-						mario.action = "idling";
+					{
+						if: true,
+						then: () => {
+							char.action = "idling";
+						}
 					}
-				}
-			];
+				];
 
-			find(actions, "if").then();
+				find(actions, "if").then();
+		}
 
 	}
 

@@ -30,7 +30,7 @@ export default (entities, { events }) => {
 
 	// let current = closest(mario);
 	// let platformAbove = closestAbove(platforms, current);
-	let grounded = find(platforms, p => standing(p, mario));
+	// let grounded = find(platforms, p => standing(p, mario));
 
 	// TODO: 
 	// Fix this so that there's a better structure to hold the characters
