@@ -9,6 +9,7 @@ import PlatGrass from "../components/platformGrass";
 import Barrier from "../components/barrier";
 import Mario from "../components/mario";
 import ToiletPaper from "../components/toiletPaper";
+import Outhouse from "../components/outhouse";
 
 
 
@@ -291,9 +292,30 @@ export default restart => {
             platformWidth * 0.15
         ),
         
+
+        outhouse: Outhouse(
+            {
+                x: cy - 145, 
+                y: offsetY + 115
+            },
+        ),
+        outhouse2: Outhouse( 
+            {
+                x: cy - 145, 
+                y: offsetY + 710,
+            },
+        ),
+        
+        //Spawns at the bottom
         mario: Mario(world, { x: cy +20, y: 600 }),
-        dino2: Mario(world, { x: cy + 60, y: 350 }),
+        dino2: Mario(world, { x: cy + 20, y: 70 }),
+
+        //Spawns on top of outhouse
+        // mario: Mario(world, { x: cy - 210, y: 620 }), 
+        // dino2: Mario(world, { x: cy - 210, y: 100 }),
+
         toiletPaper: ToiletPaper( {x: cy + 125, y: cy} )
+        
 
         
     };
