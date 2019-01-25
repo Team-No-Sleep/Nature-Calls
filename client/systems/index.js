@@ -6,7 +6,7 @@ import Physics from "./physics";
 import Animation from "./animation";
 import Camera from "./camera";
 import PowerUps from "./power-ups";
-
+import Joust from "./joust";
 
 export default [
 	Input,
@@ -16,5 +16,6 @@ export default [
 	Animation,
 	Camera,
 	Physics,
-	PowerUps
+	PowerUps,
+	Joust
 ];

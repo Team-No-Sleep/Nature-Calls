@@ -3,6 +3,8 @@ import { Dimensions } from "react-native";
 import Matter from "matter-js";
 import Platform from "../components/platform";
 import Platform2Down from "../components/platform2Down";
+import MiniRockRight from "../components/miniFloatingRock";
+import MiniRockLeft from "../components/miniFloatingRockLeft";
 import PlatGrass from "../components/platformGrass";
 import Barrier from "../components/barrier";
 import Mario from "../components/mario";
@@ -81,7 +83,7 @@ export default restart => {
                 y: offsetY + 690
             },
             -1.5708,
-            platformWidth * 0.2
+            platformWidth * 0.15
         ),
 
 
@@ -94,7 +96,7 @@ export default restart => {
                 y: offsetY + 115 
             },
             -1.5708,
-            platformWidth * 0.2
+            platformWidth * 0.15
         ),
 
 
@@ -103,12 +105,12 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cy + 111, 
+                x: cy + 105, 
                 // left and right
-                y: offsetY + 140
+                y: offsetY + 125
             },
             -1.5708,
-            platformWidth * 0.1
+            platformWidth * 0.138
         ),
 
         // Tilemapping platform middle of the screen / BOTTOM RIGHT PLATFORM 2
@@ -118,7 +120,7 @@ export default restart => {
                 //up and down
                 x: cy + 80, 
                 // left and right
-                y: offsetY + 200
+                y: offsetY + 225
             },
             -1.5708,
             platformWidth * 0.1
@@ -134,7 +136,7 @@ export default restart => {
                 y: offsetY + 410
             },
             -1.5708,
-            platformWidth * 0.70
+            platformWidth * 0.69
         ),
 
         // Tilemapping platform middle of the screen / BOTTOM LEFT PLATFORM
@@ -142,12 +144,12 @@ export default restart => {
             world,
             { 
                 //up and down
-                x: cy + 111, 
+                x: cy + 105, 
                 // left and right
-                y: offsetY + 690
+                y: offsetY + 695
             },
             -1.5708,
-            platformWidth * 0.1
+            platformWidth * 0.138
         ),
 
         // Tilemapping platform middle of the screen / BOTTOM LEFT PLATFORM 2
@@ -157,7 +159,7 @@ export default restart => {
                 //up and down
                 x: cy + 80, 
                 // left and right
-                y: offsetY + 620
+                y: offsetY + 590
             },
             -1.5708,
             platformWidth * 0.1
@@ -165,62 +167,103 @@ export default restart => {
 
 
         // Left barrier of landscap map
-        leftBarrier: Barrier(
-            world,
-            {  
-                x: cy - platformWidth / 2 + 10,
-                y: cy 
-            }, 
-            height
-        ),
+        // leftBarrier: Barrier(
+        //     world,
+        //     {  
+        //         x: cy - platformWidth / 2 + 10,
+        //         y: cy 
+        //     }, 
+        //     height
+        // ),
         // RIght barrier of landscap map
-        rightBarrier: Barrier(
-            world,
-            {
-                x: cy + platformWidth / 2 - 10,
-                y: cy
-            },
-            height
-        ),
+        // rightBarrier: Barrier(
+        //     world,
+        //     {
+        //         x: cy + platformWidth / 2 - 10,
+        //         y: cy
+        //     },
+        //     height
+        // ),
 
-        // Tilemapping platform middle of the screen / UPPER LEFT MIDDLE PLATFORM
-        upperMiddlePlatLeft: PlatGrass(
+        // Tilemapping platform middle of the screen / UPPER LEFT MIDDLE ROCK RIGHT
+        upperMiddlePlatRockRight: MiniRockRight(
             world,
             { 
                 //up and down
-                x: cy + 0, 
+                x: cy - 10, 
                 // left and right
-                y: offsetY + 500
+                y: offsetY + 510
             },
             -1.5708,
-            platformWidth * 0.14
+            platformWidth * 0.047
         ),
 
-         // Tilemapping platform middle of the screen / BETWEEN MIDDLE PLATFORMS
-         betweenMiddlePlatforms: PlatGrass(
+        // Tilemapping platform middle of the screen / UPPER LEFT MIDDLE ROCK RIGHT
+        upperMiddlePlatRockLeft: MiniRockLeft(
             world,
             { 
                 //up and down
-                x: cy + 0, 
+                x: cy - 10, 
                 // left and right
-                y: offsetY + 410
+                y: offsetY + 530
             },
             -1.5708,
-            platformWidth * 0.05
+            platformWidth * 0.047
         ),
 
-        // Tilemapping platform middle of the screen / UPPER RIGHT MIDDLE PLATFORM
-        upperMiddlePlatRight: PlatGrass(
+         // Tilemapping platform middle of the screen / BETWEEN MIDDLE PLATFORMS RIGHT
+         betweenRockRight: MiniRockRight(
             world,
             { 
                 //up and down
-                x: cy + 0, 
+                x: cy - 20, 
                 // left and right
-                y: offsetY + 320
+                y: offsetY + 404
             },
             -1.5708,
-            platformWidth * 0.14
+            platformWidth * 0.047
         ),
+
+        
+         // Tilemapping platform middle of the screen / BETWEEN MIDDLE PLATFORMS LEFT
+         betweenRockLeft: MiniRockLeft(
+            world,
+            { 
+                //up and down
+                x: cy - 20 , 
+                // left and right
+                y: offsetY + 424
+            },
+            -1.5708,
+            platformWidth * 0.047
+        ),
+
+        // Tilemapping platform middle of the screen / UPPER RIGHT MIDDLE ROCKRIGHT
+        upperMiddlePlatRightRock: MiniRockRight(
+            world,
+            { 
+                //up and down
+                x: cy - 10, 
+                // left and right
+                y: offsetY + 300
+            },
+            -1.5708,
+            platformWidth * 0.047
+        ),
+
+        // Tilemapping platform middle of the screen / UPPER RIGHT MIDDLE ROCK LEFT
+        upperMiddlePlatLeftRock: MiniRockLeft(
+            world,
+            { 
+                //up and down
+                x: cy - 10, 
+                // left and right
+                y: offsetY + 320.
+            },
+            -1.5708,
+            platformWidth * 0.046
+        ),
+
 
         // Tilemapping platform top right / LOWER RIGHT POTTY PLATFORM
         lowerPottyRight: PlatGrass(
@@ -247,10 +290,10 @@ export default restart => {
             -1.5708,
             platformWidth * 0.15
         ),
-
+        
         mario: Mario(world, { x: cy +20, y: 600 }),
-        dino2: Mario(world, { x: cy + 20, y: 70 }),
-        toiletPaper: ToiletPaper( {x: cy + 150, y: cy} )
+        dino2: Mario(world, { x: cy + 60, y: 350 }),
+        toiletPaper: ToiletPaper( {x: cy + 125, y: cy} )
 
         
     };
