@@ -42,7 +42,7 @@ export default (entities, { events }) => {
 	let dino2 = entities.dino2;
 	// TODO: Make better data structure for holding which characters are alive
 
-
+	console.log("here")
 	let characters = [mario];
 		for (let char of characters) {
 			if (char) {
@@ -53,18 +53,21 @@ export default (entities, { events }) => {
 
 				let platforms = filter(entities, "platform");
 				let gestures = char.controls.gestures;
-				let grounded = any(platforms, p => standing(p, char));
+				// let grounded = any(platforms, p => standing(p, char));
 				let jumping = char.animations.jump;
+				// if(grounded) {
+				// 	console.log("grounded")
+				// }
 
 				let actions = [
 					{
-						if: grounded && !jumping && (gestures.tap || gestures.swipeUp),
+						if: !jumping && (gestures.tap || gestures.swipeUp),
 						then: () => {
 							char.animations.jump = jump(char, entities);
 						}
 					},
 					{
-						if: grounded && (gestures.holdLeft || gestures.holdRight || gestures.hold) && !jumping,
+						if: (gestures.holdLeft || gestures.holdRight || gestures.hold) ,
 						then: () => {
 							char.action = "walking";
 							if (gestures.hold) {
