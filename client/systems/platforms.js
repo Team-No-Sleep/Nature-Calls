@@ -42,7 +42,7 @@ export default (entities, { events }) => {
 	let dino2 = entities.dino2;
 	// TODO: Make better data structure for holding which characters are alive
 
-	console.log("here")
+	//console.log("here")
 	let characters = [mario];
 		for (let char of characters) {
 			if (char) {

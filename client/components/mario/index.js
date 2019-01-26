@@ -87,6 +87,7 @@ export default (world, pos) => {
     },
     "power-ups": {},
     animations: {},
+    score: 0,
     renderer: <Renderer />
   };
 };
