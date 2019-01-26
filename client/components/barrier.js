@@ -17,4 +17,6 @@ export default (world, pos, angle, height, mask = collisionCategories.mario) => 
 		body,
 		size: { width, height }
 	};
-};
+}; 
+
+
