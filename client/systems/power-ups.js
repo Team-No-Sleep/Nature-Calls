@@ -1,6 +1,5 @@
 import Matter from "matter-js";
 import { distance, base, position, any } from "../utils";
-import Mario from "../components/mario"
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 
 const MarioIdling = resolveAssetSource(
@@ -40,33 +39,15 @@ const pickupTP = entities => {
 			if(char) { 
 				if (distance(tp.position, char.body.position) < 20) {
 					console.log("tp picked up")
-					let holding = {
+					char.actions = {
 						...char.actions,
 						// ***** need new gif here? ***** //
 						idling: MarioIdlingHammering,
 						walking: MarioWalkingHammering,
 						jumping: MarioJumpingHammering
 					};
+					char["power-ups"].holding = true;
 					
-					// I guess here we need new gifs for holding the TP
-
-					char.animations.hammering = {
-						duration: 1000000000,
-						animate() {
-							char.actions = holding;
-							char["power-ups"].holding = true;
-							//console.log(char["power-ups"])
-						},
-						complete() {
-							char.actions = {
-								...char.actions,
-								idling: MarioIdling,
-								walking: MarioWalking,
-								jumping: MarioJumping
-							};
-							char["power-ups"].holding = false;
-						}
-					};
 
 					delete entities[k];
 				}
