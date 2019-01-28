@@ -7,8 +7,21 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StatusBar,
+  ImageBackground,
+  Modal,
+  Alert
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import SocketIOClient from 'socket.io-client';
+import { WebBrowser, AppLoading, Asset, Font, Icon } from 'expo';
+import AppNavigator from "../navigation/AppNavigator";
+import axios from "axios";
+import { NavigationActions } from "react-navigation";
+import API from "../utils/API";
+import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
+import LevelOne from "../entities/level-1";
+import Systems from "../systems";
+
 
 import { MonoText } from '../components/StyledText';
 
@@ -16,15 +29,62 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-
+  state = {
+    user: null
+  }
+  componentDidMount() {
+    console.log(this.props.navigation.state.params.data.user);
+    const user = this.props.navigation.state.params.data.user;
+    //this.props.navigation.setParams({ user });
+    const navigateAction = NavigationActions.setParams({
+      key: "id-1547683730508-2",
+      params: { user: user }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    console.log("params set");
+    //this.props.navigation.goBack();
+  }
+  goHome = () => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Auth"
+    });
+    this.props.navigation.dispatch(navigateAction);
+    //this.props.navigation.goBack();
+  }
+  logout = () => {
+    API.logout()
+    .then(res => this.goHome())
+    .catch(err => console.log(err));
+  }
   render() {
     return (
       <View style={styles.container}>
-
+      {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+      <Modal
+            transparent={false}
+            animationType="slide"
+            visible={this.props.visible}
+            onRequestClose={this.quit}
+          >
+            <ImageBackground style={styles.container} source={require("../assets/backgrounds/jungle.gif")}>
+              <GameEngine
+                ref={"engine"}
+                // style={styles.game}
+                systems={Systems}
+                entities={LevelOne()}
+                touchProcessor={DefaultTouchProcessor({
+                  triggerPressEventBefore: 150,
+                  triggerLongPressEventAfter: 151
+                })}
+                running={this.state.isLoadingComplete}
+                onEvent={this.handleEvent}
+              >
+              </GameEngine>
+            </ImageBackground>
+          </Modal>
       </View>
     );
   }
-
   _maybeRenderDevelopmentModeWarning() {
     if (__DEV__) {
       const learnMoreButton = (
