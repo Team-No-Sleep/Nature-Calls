@@ -1,15 +1,17 @@
 import axios from "axios";
+import { getServerUrl } from "./constants";
+
 export default{
     login: (userObj) => {
-        return axios.post("http://localhost:3001/auth/login", userObj)
+        return axios.post(`${getServerUrl()}/auth/login`, userObj)
     },
     logout: () => {
-        return axios.post("http://localhost:3001/auth/logout")
+        return axios.post(`${getServerUrl()}/auth/logout`)
     },
     getUser: () => {
-        return axios.get("http://localhost:3001/auth/user")
+        return axios.get(`${getServerUrl()}/auth/user`)
     },
     registerUser: (userObj) => {
-        return axios.post("http://localhost:3001/auth/signup",userObj)
+        return axios.post(`${getServerUrl()}/auth/signup`,userObj)
     }
 }

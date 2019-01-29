@@ -10,9 +10,9 @@
     ],
     "version": "1.0.0",
     "orientation": "landscape",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/nature_calls_icon.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/nature_calls_loading.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,6 +24,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "extra": {
+      "serverUrl": "https://nature-calls.herokuapp.com"
     }
   }
 }
