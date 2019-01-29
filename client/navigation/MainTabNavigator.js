@@ -6,12 +6,10 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import LobbyScreen from '../screens/LobbyScreen'
+import LobbyScreen from '../screens/LobbyScreen';
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-
-  Lobby: LobbyScreen
+  Home: HomeScreen
 });
 
 HomeStack.navigationOptions = {
@@ -41,7 +39,19 @@ LinksStack.navigationOptions = {
     />
   ),
 };
+const LobbyStack = createStackNavigator({
+  Lobby: LobbyScreen,
+});
 
+LobbyStack.navigationOptions = {
+  tabBarLabel: 'Lobby',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+    />
+  ),
+};
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
 });
@@ -58,6 +68,7 @@ SettingsStack.navigationOptions = {
 
 export default createMaterialTopTabNavigator({
   HomeStack,
+  LobbyStack,
   LinksStack,
   SettingsStack,
 });
