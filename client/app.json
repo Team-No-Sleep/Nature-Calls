@@ -23,7 +23,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.teamnosleep.naturecalls"
     },
     "extra": {
       "serverUrl": "https://nature-calls.herokuapp.com"
