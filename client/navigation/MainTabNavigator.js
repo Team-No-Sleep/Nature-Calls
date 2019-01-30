@@ -45,7 +45,7 @@ const LobbyStack = createStackNavigator({
 
 LobbyStack.navigationOptions = {
   tabBarLabel: 'Lobby',
-  tabBarIcon: ({ focused }) => (
+  tabBarIcon: ({ focused }) => (  
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
