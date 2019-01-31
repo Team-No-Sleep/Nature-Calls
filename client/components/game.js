@@ -76,11 +76,11 @@ export default class Game extends PureComponent {
           onRequestClose={this.quit}
         >
 
-    <ImageBackground style={this.props.containerStyle} source={require("../assets/backgrounds/jungle.gif")}>
+    <ImageBackground style={styles.container} source={require("../assets/backgrounds/jungle.gif")}>
 
           <GameEngine
             ref={"engine"}
-            style={styles.game}
+            // style={styles.game}
             systems={Systems}
             entities={LevelOne()}
             touchProcessor={DefaultTouchProcessor({
@@ -109,6 +109,9 @@ export default class Game extends PureComponent {
   const styles = StyleSheet.create({
     game: {
       backgroundColor: "#000"
+    },
+    container: {
+      flex: 1,
     }
   });
   
