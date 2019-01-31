@@ -62,31 +62,7 @@ export default class App extends React.Component {
 
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-
           <AppNavigator />
-
-          {/* <Modal
-            transparent={false}
-            animationType="slide"
-            visible={this.props.visible}
-            onRequestClose={this.quit}
-          >
-            <ImageBackground style={styles.container} source={require("./assets/backgrounds/jungle.gif")}>
-              <GameEngine
-                ref={"engine"}
-                // style={styles.game}
-                systems={Systems}
-                entities={LevelOne()}
-                touchProcessor={DefaultTouchProcessor({
-                  triggerPressEventBefore: 150,
-                  triggerLongPressEventAfter: 151
-                })}
-                running={this.state.isLoadingComplete}
-                onEvent={this.handleEvent}
-              >
-              </GameEngine>
-            </ImageBackground>
-          </Modal> */}
         </View>
 
       );

@@ -19,8 +19,10 @@ import axios from "axios";
 import { NavigationActions } from "react-navigation";
 import API from "../utils/API";
 import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
-import LevelOne from "../entities/level-1";
-import Systems from "../systems";
+
+import Game from "../components/game";
+import Lobby from "../components/lobby";
+
 
 
 import { MonoText } from '../components/StyledText';
@@ -30,8 +32,16 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
   state = {
-    user: null
+    user: null,
+    gameVisible: false
+    
   }
+
+  toggleGame = gameVisible => {
+    this.setState({
+      gameVisible
+    });
+  };
   // componentDidMount() {
   //   console.log(this.props.navigation.state.params.data.user);
   //   const user = this.props.navigation.state.params.data.user;
@@ -60,46 +70,31 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
       {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-      <ImageBackground style={styles.container} source={require("../assets/backgrounds/jungle.gif")}>
-              <GameEngine
-                ref={"engine"}
-                // style={styles.game}
-                systems={Systems}
-                entities={LevelOne()}
-                touchProcessor={DefaultTouchProcessor({
-                  triggerPressEventBefore: 150,
-                  triggerLongPressEventAfter: 151
-                })}
-                running={this.state.isLoadingComplete}
-                onEvent={this.handleEvent}
-              >
-              </GameEngine>
-            </ImageBackground>
-      {/* <Modal
-            transparent={false}
-            animationType="slide"
-            visible={this.props.navigation.state.routeName === "Home"}
-            onRequestClose={this.quit}
-          >
-            <ImageBackground style={styles.container} source={require("../assets/backgrounds/jungle.gif")}>
-              <GameEngine
-                ref={"engine"}
-                // style={styles.game}
-                systems={Systems}
-                entities={LevelOne()}
-                touchProcessor={DefaultTouchProcessor({
-                  triggerPressEventBefore: 150,
-                  triggerLongPressEventAfter: 151
-                })}
-                running={this.state.isLoadingComplete}
-                onEvent={this.handleEvent}
-              >
-              </GameEngine>
-            </ImageBackground><Text>Am i showing up?</Text>
-          </Modal> */}
+
+  {/* Lobby component or main menu? 
+        Maybe in the Lobby you can have the log in, log out, register features.*/}
+      <Lobby 
+          onPlayGame={_ => this.toggleGame(true)}
+          containerStyle={styles.container}
+       />
+
+      <Game
+          visible={this.state.gameVisible}
+          onClose={_ => this.toggleGame(false)} 
+          containerStyle={styles.container}    
+      />
       </View>
     );
   }
+
+
+
+
+
+
+
+
+
   _maybeRenderDevelopmentModeWarning() {
     if (__DEV__) {
       const learnMoreButton = (
