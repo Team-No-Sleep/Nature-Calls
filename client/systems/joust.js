@@ -28,8 +28,9 @@ const joust = entities => {
                 if (dino2["power-ups"].holding) {
                     tpDropped = true;
                 }
+                let dino2Color = entities.dino2.color;
                 delete entities.dino2;
-                entities.dino2 = Mario(entities.physics.world, {x:  250, y: 65 });
+                entities.dino2 = Mario(entities.physics.world, {x:  250, y: 65 }, dino2Color);
                 entities.dino2.score = score;
 
             } else if (mario.body.position.y < dino2.body.position.y  && !dino2["power-ups"].holding) {
@@ -38,8 +39,9 @@ const joust = entities => {
                 if (mario["power-ups"].holding) {
                     tpDropped = true;
                 }
+                let marioColor = entities.mario.color;
                 delete entities.mario
-                entities.mario = Mario(entities.physics.world, { x: 250, y: 600 });
+                entities.mario = Mario(entities.physics.world, { x: 250, y: 600 }, marioColor);
                 entities.mario.score = score;
 
 
