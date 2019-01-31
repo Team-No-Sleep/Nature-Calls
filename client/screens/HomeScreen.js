@@ -20,8 +20,8 @@ import { NavigationActions } from "react-navigation";
 import API from "../utils/API";
 import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
 
-import Game from "./game";
-import Lobby from "./lobby";
+import Game from "../components/game";
+import Lobby from "../components/lobby";
 
 
 
