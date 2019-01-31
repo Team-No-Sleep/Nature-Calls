@@ -10,7 +10,7 @@ module.exports = {
 		if(!env || env === "dev") {
 			return "http://localhost:3001";
 		}
-		if(env === "prod") {
+		if(env === "default") {
 			return Constants.manifest.extra.serverUrl;
 		}
 	}
