@@ -1,12 +1,11 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import LobbyScreen from '../screens/LobbyScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen
@@ -39,19 +38,7 @@ LinksStack.navigationOptions = {
     />
   ),
 };
-const LobbyStack = createStackNavigator({
-  Lobby: LobbyScreen,
-});
 
-LobbyStack.navigationOptions = {
-  tabBarLabel: 'Lobby',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-    />
-  ),
-};
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
 });
@@ -66,9 +53,8 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-export default createMaterialTopTabNavigator({
+export default createBottomTabNavigator({
   HomeStack,
-  LobbyStack,
   LinksStack,
   SettingsStack,
 });

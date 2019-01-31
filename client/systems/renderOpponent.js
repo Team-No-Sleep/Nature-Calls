@@ -1,15 +1,15 @@
 import Matter from "matter-js";
-import MarioIdling from "./mario-idling.gif";
+// import MarioIdling from "../components/mario/mario-idling.gif";
 
 
 let position = {};
 const socketInformation = () => {
     // Take in opponent's  information from the socket
 
-    position =  {x: 5/* socket.x? */, y: 2 /* socket.y */};
-    gif = socket.gif/* opponent's gif */;
-    holdingTP = socket.holdingTP; /* if opponent is holding TP */
-    score = socket.score;
+    // position =  {x: 5/* socket.x? */, y: 2 /* socket.y */};
+    // gif = socket.gif/* opponent's gif */;
+    // holdingTP = socket.holdingTP; /* if opponent is holding TP */
+    // score = socket.score;
 
 
 }

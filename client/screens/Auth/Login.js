@@ -9,10 +9,10 @@ export default class SignInScreen extends Component {
         username: "",
         password: ""
     }
-    goToMain = (userObj) => {console.log("loading lobby")
+    goToMain = (userObj) => {console.log("loading Home")
     console.log(userObj);
         const navigateAction = NavigationActions.navigate({
-            routeName: "Lobby",
+            routeName: "Home",
             params: { data: userObj }
         });
         this.props.navigation.dispatch(navigateAction);

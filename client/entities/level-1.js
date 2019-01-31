@@ -26,6 +26,8 @@ export default restart => {
 
     let engine = Matter.Engine.create({ enableSleeping: false });
     let world = engine.world;
+    //set the asset colors to be loaded per dino
+    let color = {dino1: "red", dino2: "green"};
 
     world.gravity = { x: 1.5, y: 0 };
 
@@ -311,8 +313,10 @@ export default restart => {
         ),
         
         //Spawns at the bottom
-        mario: Mario(world, { x: cy +20, y: 600 }),
-        dino2: Mario(world, { x: cy + 20, y: 70 }),
+
+        //ToDo: make a new mario object have an extra paramater that passes in color
+        mario: Mario(world, { x: cy +20, y: 600 }, color.dino1),
+        dino2: Mario(world, { x: cy + 20, y: 70 }, color.dino2),
 
         //Spawns on top of outhouse
         // mario: Mario(world, { x: cy - 210, y: 620 }), 

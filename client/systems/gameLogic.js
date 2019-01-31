@@ -10,15 +10,15 @@ const scale = Math.min(width, 430) / 375;
 const cx = width / 2;
 const cy = height / 2;
 
-const MarioIdling = resolveAssetSource(
-	require("../components/mario/mario-idling.gif")
-);
-const MarioWalking = resolveAssetSource(
-	require("../components/mario/mario-walking.gif")
-);
-const MarioJumping = resolveAssetSource(
-	require("../components/mario/mario-jumping.gif")
-);
+// const MarioIdling = resolveAssetSource(
+// 	require("../components/mario/mario-idling.gif")
+// );
+// const MarioWalking = resolveAssetSource(
+// 	require("../components/mario/mario-walking.gif")
+// );
+// const MarioJumping = resolveAssetSource(
+// 	require("../components/mario/mario-jumping.gif")
+// );
 const score = entities => {
 
     let mario = entities.mario;
@@ -39,9 +39,9 @@ const score = entities => {
             console.log(mario["power-ups"].holding)
             mario.actions = {
                 ...mario.actions,
-                idling: MarioIdling,
-                walking: MarioWalking,
-                jumping: MarioJumping
+                // idling: mario.actions.MarioIdling,
+                // walking: mario.actions.MarioWalking,
+                // jumping: mario.actions.MarioJumping
             };
             mario.score++;
             console.log(mario.score)
@@ -56,9 +56,9 @@ const score = entities => {
             console.log(dino2["power-ups"].holding)
             dino2.actions = {
                 ...dino2.actions,
-                idling: MarioIdling,
-                walking: MarioWalking,
-                jumping: MarioJumping
+                // idling: dino2.actions.MarioIdling,
+                // walking: dino2.actions.MarioWalking,
+                // jumping: dino2.actions.MarioJumping
             };
             dino2.score++;
             scored = true;

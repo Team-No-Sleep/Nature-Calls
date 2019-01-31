@@ -2,24 +2,24 @@ import Matter from "matter-js";
 import { distance, base, position, any } from "../utils";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 
-const MarioIdling = resolveAssetSource(
-	require("../components/mario/mario-idling.gif")
-);
-const MarioWalking = resolveAssetSource(
-	require("../components/mario/mario-walking.gif")
-);
-const MarioJumping = resolveAssetSource(
-	require("../components/mario/mario-jumping.gif")
-);
-const MarioIdlingHammering = resolveAssetSource(
-	require("../components/mario/mario-idling-hammering.gif")
-);
-const MarioWalkingHammering = resolveAssetSource(
-	require("../components/mario/mario-walking-hammering.gif")
-);
-const MarioJumpingHammering = resolveAssetSource(
-	require("../components/mario/mario-walking-hammering.gif")
-);
+// const MarioIdling = resolveAssetSource(
+// 	require("../components/mario/mario-idling.gif")
+// );
+// const MarioWalking = resolveAssetSource(
+// 	require("../components/mario/mario-walking.gif")
+// );
+// const MarioJumping = resolveAssetSource(
+// 	require("../components/mario/mario-jumping.gif")
+// );
+// const MarioIdlingHammering = resolveAssetSource(
+// 	require("../components/mario/mario-idling-hammering.gif")
+// );
+// const MarioWalkingHammering = resolveAssetSource(
+// 	require("../components/mario/mario-walking-hammering.gif")
+// );
+// const MarioJumpingHammering = resolveAssetSource(
+// 	require("../components/mario/mario-walking-hammering.gif")
+// );
 let powerUpId = 0;
 
 const pickupTP = entities => {
@@ -42,9 +42,9 @@ const pickupTP = entities => {
 					char.actions = {
 						...char.actions,
 						// ***** need new gif here? ***** //
-						idling: MarioIdlingHammering,
-						walking: MarioWalkingHammering,
-						jumping: MarioJumpingHammering
+						idling: char.actions.idlingHammering,
+						walking: char.actions.walkingHammering,
+						jumping: char.actions.JumpingHammering
 					};
 					char["power-ups"].holding = true;
 					
