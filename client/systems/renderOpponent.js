@@ -1,5 +1,5 @@
 import Matter from "matter-js";
-import MarioIdling from "./mario-idling.gif";
+// import MarioIdling from "./mario-idling.gif";
 
 
 let position = {};

@@ -3,6 +3,7 @@ import { View, Button, TextInput } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { Container, Header, Conntent, Form, Item, Input, Label } from "native-base";
 import API from "../../utils/API";
+// import "./login.css";
 
 export default class SignInScreen extends Component {
     state = {
@@ -49,6 +50,7 @@ export default class SignInScreen extends Component {
                     <Button
                         title="Register"
                         onPress={() => this.signUp()}
+                        className="registerButton"
                     />
                 </Form>
             </Container>
