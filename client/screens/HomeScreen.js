@@ -19,10 +19,9 @@ import axios from "axios";
 import { NavigationActions } from "react-navigation";
 import API from "../utils/API";
 import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
-import LevelOne from "../entities/level-1";
-import Systems from "../systems";
+
 import Game from "./game";
-import Lobby from "./LobbyScreen";
+import Lobby from "./lobby";
 
 
 
@@ -74,15 +73,28 @@ export default class HomeScreen extends React.Component {
 
   {/* Lobby component or main menu? 
         Maybe in the Lobby you can have the log in, log out, register features.*/}
-      <Lobby onPlayGame={_ => this.toggleGame(true)} />
+      <Lobby 
+          onPlayGame={_ => this.toggleGame(true)}
+          containerStyle={styles.container}
+       />
 
       <Game
           visible={this.state.gameVisible}
-          onClose={_ => this.toggleGame(false)}     
+          onClose={_ => this.toggleGame(false)} 
+          containerStyle={styles.container}    
       />
       </View>
     );
   }
+
+
+
+
+
+
+
+
+
   _maybeRenderDevelopmentModeWarning() {
     if (__DEV__) {
       const learnMoreButton = (

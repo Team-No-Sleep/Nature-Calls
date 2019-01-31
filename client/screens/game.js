@@ -76,7 +76,7 @@ export default class Game extends PureComponent {
           onRequestClose={this.quit}
         >
 
-    <ImageBackground style={styles.container} source={require("../assets/backgrounds/jungle.gif")}>
+    <ImageBackground style={this.props.containerStyle} source={require("../assets/backgrounds/jungle.gif")}>
 
           <GameEngine
             ref={"engine"}
