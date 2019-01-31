@@ -8,6 +8,7 @@ import Camera from "./camera";
 import PowerUps from "./power-ups";
 import Joust from "./joust";
 import gameLogic from "./gameLogic";
+import renderOpponent from "./renderOpponent";
 
 export default [
 	Input,
@@ -19,5 +20,6 @@ export default [
 	Physics,
 	PowerUps,
 	Joust,
-	gameLogic
+	gameLogic,
+	renderOpponent
 ];
