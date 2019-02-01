@@ -33,7 +33,8 @@ export default class HomeScreen extends React.Component {
   };
   state = {
     user: null,
-    gameVisible: false
+    gameVisible: false,
+    leaderboardVisible: false
     
   }
 
@@ -42,6 +43,13 @@ export default class HomeScreen extends React.Component {
       gameVisible
     });
   };
+
+  toggleLeaderboard = leaderboardVisible => {
+    this.setState({
+      leaderboardVisible
+    })
+  }
+
   // componentDidMount() {
   //   console.log(this.props.navigation.state.params.data.user);
   //   const user = this.props.navigation.state.params.data.user;
@@ -75,7 +83,9 @@ export default class HomeScreen extends React.Component {
         Maybe in the Lobby you can have the log in, log out, register features.*/}
       <Lobby 
           onPlayGame={_ => this.toggleGame(true)}
+          onLeaderBoard={_ => this.toggleLeaderboard(true)}
           containerStyle={styles.container}
+
        />
 
       <Game
