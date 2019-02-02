@@ -22,6 +22,17 @@ import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource"
 // );
 let powerUpId = 0;
 
+MarioIdlingRed = require( "../components/mario/red/mario-idling.gif");
+MarioWalkingRed = require("../components/mario/red/mario-walking.gif");
+MarioJumpingRed = require("../components/mario/red/mario-jumping.gif");
+
+MarioIdlingGreen = require( "../components/mario/green/mario-idling.gif");
+MarioWalkingGreen = require("../components/mario/green/mario-walking.gif");
+MarioJumpingGreen = require("../components/mario/green/mario-jumping.gif");
+
+
+
+
 const pickupTP = entities => {
 	
 	// TODO: Add so dino2 can also
@@ -39,13 +50,7 @@ const pickupTP = entities => {
 			if(char) { 
 				if (distance(tp.position, char.body.position) < 20) {
 					console.log("tp picked up")
-					char.actions = {
-						...char.actions,
-						// ***** need new gif here? ***** //
-						idling: char.actions.idlingHammering,
-						walking: char.actions.walkingHammering,
-						jumping: char.actions.JumpingHammering
-					};
+					
 					char["power-ups"].holding = true;
 					
 
