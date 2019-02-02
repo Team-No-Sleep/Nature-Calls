@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Button, Image, View } from "react-native";
-import { Container, Header, Content, Form, Item, Input, Label, Text, Thumbnail } from "native-base";
+import {Image, View, ImageBackground} from "react-native";
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Form, Item, Label, Input } from 'native-base';
 import { NavigationActions } from "react-navigation";
 import { ImagePicker, Permissions } from "expo";
+import styles from "./styles";
 import API from "../../utils/API";
 
 export default class SignUp extends Component {
@@ -55,39 +56,46 @@ export default class SignUp extends Component {
     render() {
         return(
         <Container>
-            <Content>
-                <Form>
-                    <Item floatingLabel>
-                        <Label>Username</Label>
-                        <Input name="username" onChangeText={(value) => this.setState({ username: value })} />
-                    </Item>
-                    <Item floatingLabel>
-                        <Label>Password</Label>
-                        <Input secureTextEntry={true} onChangeText={(value) => this.setState({ password: value })} />
-                    </Item>
-                    <Item floatingLabel>
-                        <Label>First Name</Label>
-                        <Input onChangeText={(value) => this.setState({ firstName: value })} />
-                    </Item>
-                    <Item floatingLabel last>
-                        <Label>Last Name</Label>
-                        <Input onChangeText={(value) => this.setState({ lastName: value })} />
-                    </Item>
-                    <Item fixedLabel disabled style={{ paddingTop: "10%", justifyContent: "flex-end" }}>
-                        <Label>Profile Picture</Label>
+            <ImageBackground style={styles.background} source={require("../../assets/backgrounds/userLogin-1.png")}>
+                <Content>
+                    <Form>
+                        <Item rounded style={styles.textBox}>
+                                <Icon active name='people' />
+                                <Input placeholder='Username' onChangeText={(value) => this.setState({ username: value })}/>
+                        </Item>
 
-                        <Text note style={{ marginRight: '20%' }}>{this.state.photo ? "uploaded profile picture" : null}</Text>
-                    </Item>
-                    <Button onPress={this._pickImage} title="Upload from Photo Library" />
-                    <View style={{ justifyContent: 'center' }}>
-                        {/* {this.state.image === null ? null :
-                <Image large source={{ uri: this.state.image }} resizeMethod='scale' resizeMode='contain' style={{width: '100%', height: 200}}/>}   */}
-                    </View>
-                    <View>
-                        <Button onPress={this.signUp} title="Sign Up" />
-                    </View>
-                </Form>
-            </Content>
+                        <Item rounded style={styles.textBox}>
+                                <Icon active name='finger-print' />
+                                <Input placeholder = "Password" secureTextEntry={true} onChangeText={(value) => this.setState({ password: value })}></Input>
+                        </Item>
+
+                        <Item rounded style={styles.textBox}>
+                            <Icon active name='person-add' />
+                            <Input placeholder = "First Name" onChangeText={(value) => this.setState({ firstName: value })} />
+                        </Item>
+                        <Item rounded style={styles.textBox}>
+                            <Icon active name='person' />
+                            <Input placeholder = "Last Name" onChangeText={(value) => this.setState({ lastName: value })} />
+                        </Item>
+
+                        <Item rounded style={styles.textBox}>
+                            <Icon active name="download"></Icon>
+                            <Label>Profile Picture</Label>
+
+                            <Text note style={{ marginRight: '20%' }}>{this.state.photo ? "uploaded profile picture" : null}</Text>
+                        </Item>
+
+                        <Button block onPress={this._pickImage} title="Upload from Photo Library" style={styles.buttons}>
+                            <Text>Upload Photo</Text>
+                        </Button>
+
+                        <Button block onPress={this.signUp} title="Sign Up" style={styles.buttons}>
+                            <Text>Sign Up</Text>
+                        </Button>
+                        
+                    </Form>
+                </Content>
+            </ImageBackground>
         </Container>
         );
     }

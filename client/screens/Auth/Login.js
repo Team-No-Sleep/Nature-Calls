@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { View, Button, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, ImageBackground } from "react-native";
 import { NavigationActions } from "react-navigation";
-import { Container, Header, Conntent, Form, Item, Input, Label } from "native-base";
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Form, Item, Label, Input } from 'native-base';
 import styles from "./styles";
 import API from "../../utils/API";
 
@@ -33,26 +33,30 @@ export default class SignInScreen extends Component {
     }
     render() {
         return (
-            <Container style={styles.backImage}>
-                <Form >
-                    <Item floatingLabel style={styles.userNameTextBox}>
-                        <Label>Username</Label>
-                        <Input onChangeText={(value) => this.setState({ username: value })} />
-                    </Item>
-                    <Item floatingLabel last style={styles.userNameTextBox}>
-                        <Label>Password</Label>
-                        <Input secureTextEntry={true} onChangeText={(value) => this.setState({ password: value })}></Input>
-                    </Item>
-                    <Button
-                        title="Login"
-                        onPress={() => this.login()}
-                    />
-                    <Button
-                        title="Register"
-                        onPress={() => this.signUp()}
-                    />
-                </Form>
-            </Container>
+                <Container>
+                    <ImageBackground style={styles.background} source={require("../../assets/backgrounds/userLogin-1.png")}>
+                    <Form >
+                        <Item rounded style={styles.textBox}>
+                            <Icon active name='people' />
+                            <Input placeholder='Username' onChangeText={(value) => this.setState({ username: value })}/>
+                        </Item>
+
+                        <Item rounded style={styles.textBox}>
+                            <Icon active name='finger-print' />
+                            <Input placeholder = "Password" secureTextEntry={true} onChangeText={(value) => this.setState({ password: value })}></Input>
+                        </Item>
+
+                        <Button  block title="Login" onPress={() => this.login()} style={styles.buttons}>
+                            <Text>Login</Text>
+                        </Button>
+
+                        <Button block title="Register" onPress={() => this.signUp()} style={styles.buttons}>
+                            <Text>Register</Text>
+                        </Button>
+                    </Form>
+                    </ImageBackground>
+                </Container>
+            
         );
     }
 };

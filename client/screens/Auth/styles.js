@@ -4,15 +4,23 @@ import React, {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
 
-    userNameTextBox: {
-        width: "50%",
-        backgroundColor: "#009933",
-        marginLeft: "25%"
+    textBox: {
+        width: "70%",
+        marginTop: "1%",
+        marginLeft: "16%",
+        marginBottom: "2%"
     },
 
-    // backImage: {
-    //     backgroundImage: "url('./logo.png')"
-    // }
+    buttons: {
+        width: "55%",
+        marginLeft: "22.8%",
+        marginBottom: "2%",
+        backgroundColor: "#006400"
+    },
+
+    background: {
+        flex: 1,
+    }
     
     
     });
