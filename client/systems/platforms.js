@@ -6,11 +6,16 @@ import { collisionCategories } from "../utils/constants";
 
 const jump = (mario, entities) => {
 	let gestures = mario.controls.gestures;
-
+	let walk;
+	if (mario["power-ups"].holding) {
+		walk = "walkingHammering";
+	} else {
+		walk = "walking";
+	}
 	return {
 		args: {
 			direction: mario.direction.horizontal,
-			walking: mario.action === "walking",
+			walking: mario.action === walk,
 			interpolateX: interpolateBasis([2, 2, 3, 4, 2, 2, 1]),
 			interpolateY: interpolateBasis([3, 3, 4, 6, 2, -2, -1, -1, -1, -1])
 		},
@@ -20,7 +25,11 @@ const jump = (mario, entities) => {
 			percent,
 			{ walking, direction, interpolateX, interpolateY }
 		) {
-			mario.action = "jumping";
+			if (mario["power-ups"].holding) {
+				mario.action = "JumpingHammering";
+			} else {
+				mario.action = "jumping";
+			}
 			let forceX = (gestures.swipeRight || gestures.swipeLeft)
 				? interpolateX(percent) * (direction === "right" ? -1 : 1)
 				: 0;
@@ -32,7 +41,12 @@ const jump = (mario, entities) => {
 			});
 		},
 		complete() {
-			mario.action = "idling";
+			if (mario["power-ups"].holding) {
+				mario.action = "idlingHammering";
+			} else {
+				mario.action = "idling";
+			}
+
 		}
 	};
 };
@@ -69,7 +83,11 @@ export default (entities, { events }) => {
 					{
 						if: (gestures.holdLeft || gestures.holdRight || gestures.hold) ,
 						then: () => {
-							char.action = "walking";
+							if (char["power-ups"].holding) {
+								char.action = "walkingHammering";
+							} else {
+								char.action = "walking";
+							}
 							if (gestures.hold) {
 								//console.log("hold")
 								Matter.Body.applyForce(char.body, char.body.position, {
@@ -83,7 +101,11 @@ export default (entities, { events }) => {
 					{
 						if: true,
 						then: () => {
-							char.action = "idling";
+							if (char["power-ups"].holding) {
+								char.action = "idlingHammering";
+							} else {
+								char.action = "idling";
+							}
 						}
 					}
 				];
