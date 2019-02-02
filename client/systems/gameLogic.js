@@ -37,12 +37,13 @@ const score = entities => {
             console.log("Mario scores!");
             mario["power-ups"].holding = false;
             console.log(mario["power-ups"].holding)
-            mario.actions = {
-                ...mario.actions,
-                // idling: mario.actions.MarioIdling,
-                // walking: mario.actions.MarioWalking,
-                // jumping: mario.actions.MarioJumping
-            };
+            // mario.actions = {
+            //     ...mario.actions,
+            //     idling: mario.actions.idling,
+            //     walking: mario.actions.walking,
+            //     jumping: mario.actions.jumping
+            // };
+            console.log(mario.actions.idlindg);
             mario.score++;
             console.log(mario.score)
             console.log(dino2.score)
@@ -54,12 +55,12 @@ const score = entities => {
             console.log("Dino2 scores!");
             dino2["power-ups"].holding = false;
             console.log(dino2["power-ups"].holding)
-            dino2.actions = {
-                ...dino2.actions,
-                // idling: dino2.actions.MarioIdling,
-                // walking: dino2.actions.MarioWalking,
-                // jumping: dino2.actions.MarioJumping
-            };
+            // dino2.actions = {
+            //     ...dino2.actions,
+            //     idling: dino2.actions.idling,
+            //     walking: dino2.actions.walking,
+            //     jumping: dino2.actions.jumping
+            // };
             dino2.score++;
             scored = true;
         }

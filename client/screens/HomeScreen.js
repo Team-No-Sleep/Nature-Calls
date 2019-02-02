@@ -22,6 +22,7 @@ import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
 
 import Game from "../components/game";
 import Lobby from "../components/lobby";
+import Leaderboard from "../components/leaderboard";
 
 
 
@@ -93,6 +94,8 @@ export default class HomeScreen extends React.Component {
           onClose={_ => this.toggleGame(false)} 
           containerStyle={styles.container}    
       />
+
+
       </View>
     );
   }
