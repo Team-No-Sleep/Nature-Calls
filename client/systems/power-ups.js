@@ -2,36 +2,8 @@ import Matter from "matter-js";
 import { distance, base, position, any } from "../utils";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 
-// const MarioIdling = resolveAssetSource(
-// 	require("../components/mario/mario-idling.gif")
-// );
-// const MarioWalking = resolveAssetSource(
-// 	require("../components/mario/mario-walking.gif")
-// );
-// const MarioJumping = resolveAssetSource(
-// 	require("../components/mario/mario-jumping.gif")
-// );
-// const MarioIdlingHammering = resolveAssetSource(
-// 	require("../components/mario/mario-idling-hammering.gif")
-// );
-// const MarioWalkingHammering = resolveAssetSource(
-// 	require("../components/mario/mario-walking-hammering.gif")
-// );
-// const MarioJumpingHammering = resolveAssetSource(
-// 	require("../components/mario/mario-walking-hammering.gif")
-// );
+
 let powerUpId = 0;
-
-MarioIdlingRed = require( "../components/mario/red/mario-idling.gif");
-MarioWalkingRed = require("../components/mario/red/mario-walking.gif");
-MarioJumpingRed = require("../components/mario/red/mario-jumping.gif");
-
-MarioIdlingGreen = require( "../components/mario/green/mario-idling.gif");
-MarioWalkingGreen = require("../components/mario/green/mario-walking.gif");
-MarioJumpingGreen = require("../components/mario/green/mario-jumping.gif");
-
-
-
 
 const pickupTP = entities => {
 	
