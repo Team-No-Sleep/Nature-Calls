@@ -1,9 +1,5 @@
 import Matter from "matter-js";
-<<<<<<< HEAD
-// import MarioIdling from "./mario-idling.gif";
-=======
 import MarioIdling from "../components/mario/mario-idling.gif";
->>>>>>> 929fd21a5fa30ec1a2be06b8ccc3a7ef759b0118
 
 
 let position = {};

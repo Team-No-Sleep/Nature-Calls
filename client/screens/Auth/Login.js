@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { View, Button, TextInput } from "react-native";
+import { View, Button, TextInput, StyleSheet } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { Container, Header, Conntent, Form, Item, Input, Label } from "native-base";
+import styles from "./styles";
 import API from "../../utils/API";
-// import "./login.css";
 
 export default class SignInScreen extends Component {
     state = {
@@ -33,13 +33,13 @@ export default class SignInScreen extends Component {
     }
     render() {
         return (
-            <Container>
-                <Form>
-                    <Item floatingLabel>
+            <Container style={styles.backImage}>
+                <Form >
+                    <Item floatingLabel style={styles.userNameTextBox}>
                         <Label>Username</Label>
                         <Input onChangeText={(value) => this.setState({ username: value })} />
                     </Item>
-                    <Item floatingLabel last>
+                    <Item floatingLabel last style={styles.userNameTextBox}>
                         <Label>Password</Label>
                         <Input secureTextEntry={true} onChangeText={(value) => this.setState({ password: value })}></Input>
                     </Item>
@@ -50,10 +50,11 @@ export default class SignInScreen extends Component {
                     <Button
                         title="Register"
                         onPress={() => this.signUp()}
-                        className="registerButton"
                     />
                 </Form>
             </Container>
         );
     }
 };
+
+
