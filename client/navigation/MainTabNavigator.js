@@ -10,9 +10,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 const HomeStack = createStackNavigator({
   Home: {
     screen: HomeScreen,
-    // navigationOptions: {
-      
-    // }
+ 
 
   }
 });
