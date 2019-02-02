@@ -8,9 +8,7 @@ module.exports = {
 	getServerUrl: () => {
 		let env = Constants.manifest.releaseChannel;
 		if(!env || env === "dev") {
-
-			return "http://localhost:3001";
-
+			return "http://10.18.239.86:19002";
 		}
 		if(env === "default") {
 			return Constants.manifest.extra.serverUrl;
