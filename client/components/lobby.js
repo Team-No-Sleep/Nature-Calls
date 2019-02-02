@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 
-import { StyleSheet, Modal, Alert, ImageBackground, Button, View, StatusBar } from "react-native";
+import { StyleSheet, Modal, Alert, ImageBackground,View, StatusBar } from "react-native";
 
+import { Container, Header, Content, Button, Text } from 'native-base';
 
 
 export default class Lobby extends PureComponent {
@@ -9,17 +10,40 @@ export default class Lobby extends PureComponent {
 
     render() {
         return(
-            // <View style={this.props.containerStyle}>
-            // {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
             <ImageBackground style={this.props.containerStyle} source={require("../assets/images/nature_calls_loading.png")}>
 
-                <Button title={"Play Game"} onPress={this.props.onPlayGame}></Button>
+            <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
+                <Text>Play Game</Text>
+            </Button>
+
+            <Button rounded success style={styles.button} onPress={this.props.onLeaderBoard}>
+                <Text>Leaderboard</Text>
+            </Button>
 
             </ImageBackground>
-            // </View>
 
         )
     }
     };
 
           
+
+    const styles = StyleSheet.create({
+
+        button: {
+                justifyContent: "center",
+                alignSelf: "stretch",
+                textAlignVertical: "center",
+                color: "#006400",
+                backgroundColor: "#006400",
+                position: "relative",
+                top: 180,
+                left: 450,
+                margin: 10,
+                width: 130,
+
+        },
+        
+    
+
+    });
