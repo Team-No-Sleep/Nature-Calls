@@ -10,6 +10,7 @@ import Barrier from "../components/barrier";
 import Mario from "../components/mario";
 import ToiletPaper from "../components/toiletPaper";
 import Outhouse from "../components/outhouse";
+// import Timer from "../components/timer";
 
 
 
@@ -33,6 +34,16 @@ export default restart => {
 
     return {
         physics: { engine: engine, world: world },
+
+        // timer: Timer(
+        //     world,
+        //     { 
+        //         x: cy + 160, 
+        //         y: offsetY + 405 
+        //     },
+        //     -1.5708,
+        //     platformWidth * 1.9
+        // ),
 
         // Tilemapping for the top level of the floor platform / FLOOR
         floorLevelOne: Platform(
