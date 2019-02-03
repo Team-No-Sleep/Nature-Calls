@@ -15,7 +15,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const dbConnection = require('./db') // loads our connection to the mongo database
 const passport = require('./passport')
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 
 // const websocket = socketio(server); //Initiate Socket
 

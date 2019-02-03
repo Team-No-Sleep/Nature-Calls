@@ -10,15 +10,6 @@ const scale = Math.min(width, 430) / 375;
 const cx = width / 2;
 const cy = height / 2;
 
-// const MarioIdling = resolveAssetSource(
-// 	require("../components/mario/mario-idling.gif")
-// );
-// const MarioWalking = resolveAssetSource(
-// 	require("../components/mario/mario-walking.gif")
-// );
-// const MarioJumping = resolveAssetSource(
-// 	require("../components/mario/mario-jumping.gif")
-// );
 const score = entities => {
 
     let mario = entities.mario;
