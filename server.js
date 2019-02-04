@@ -16,12 +16,10 @@ const MongoStore = require('connect-mongo')(session)
 const dbConnection = require('./db') // loads our connection to the mongo database
 const passport = require('./passport')
 const PORT = process.env.PORT || 3001
-
+const sessions = {}//user sessions for socket.io
 // const websocket = socketio(server); //Initiate Socket
 
-// websocket.on('channel1', (data) => {
-//   console.log('Greetings from RN app', data);
-// }
+
 
 // websocket.emit('channel2', 'new channel');
 // websocket.on('channel2', (obj) => {
@@ -36,7 +34,14 @@ app.get('/', function (req, res) {
 socketio.on('connection', function (socket) {
 	console.log(socket.id);
 	socket.on('update', () => socketio.emit('update'));
-
+	//sending dino positioning through socket
+	socket.on('position', (data) => {
+		socketio.emit('position',{
+			position: data
+		});
+		console.log('Greetings from RN app', data);
+	});
+	
 });
 
 // ===== Middleware ====
@@ -56,18 +61,18 @@ app.use(
 	})
 );
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
-  });
+});
 
 // ===== Passport ====
 app.use(passport.initialize());
 app.use(passport.session()); // will call the deserializeUser
 
 // ===== testing middleware =====
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	console.log('===== passport user =======');
 	console.log(req.session);
 	console.log(req.user);
@@ -100,10 +105,10 @@ if (process.env.NODE_ENV === 'production') {
 
 /* Express app ROUTING */
 console.log("server.js");
-app.use('/auth', require('./auth'));
+app.use('/auth', require('./auth')(sessions));
 
 // ====== Error handler ====
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
 	console.log('====== ERROR =======');
 	console.error(err.stack);
 	res.status(500);
