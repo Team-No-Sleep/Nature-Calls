@@ -30,20 +30,6 @@ const renderOpponentPosition = entities => {
         */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default (entities, { events, dispatch }) => {
     socketInformation();
     renderOpponentPosition(entities);
