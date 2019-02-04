@@ -24,7 +24,9 @@ const score = entities => {
         let rightPotty = {x: 62.6, y: 38};
         let scored;
 
-        if (mario["power-ups"].holding && distance(marioLocation, leftPotty) < 20) {
+        // if (mario["power-ups"].holding && distance(marioLocation, leftPotty) < 20) {
+            if (mario["power-ups"].holding) {
+
             console.log("Mario scores!");
             mario["power-ups"].holding = false;
             console.log(mario["power-ups"].holding)
@@ -55,14 +57,15 @@ const score = entities => {
 
 }
 
-const win = entities => {
+const win = (dispatch, entities) => {
     let mario = entities.mario;
     let dino2 = entities.dino2;
 
      //console.log(mario.score);
     // console.log(dino2.score);
-    if (mario.score >= 3) 
-        console.log("mario won!");
+    if (mario.score === 1) 
+         dispatch({ type: "game-over" });
+
    
 
 }
@@ -70,6 +73,6 @@ const win = entities => {
 
 export default (entities, {events, dispatch}) => {
     score(entities);
-    win(entities);
+    win(dispatch, entities);
     return entities;
 };
