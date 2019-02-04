@@ -2,7 +2,6 @@ import Matter from "matter-js";
 import { distance, base, position, any } from "../utils";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 
-
 let powerUpId = 0;
 
 const pickupTP = entities => {
