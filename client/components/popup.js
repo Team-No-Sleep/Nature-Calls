@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { ScrollView, View, Dimensions } from "react-native";
+import { ScrollView, View, Dimensions , StyleSheet} from "react-native";
 import * as Animatable from "react-native-animatable";
 import EStyleSheet from "react-native-extended-stylesheet";
 import Button from "./button";
@@ -16,60 +16,54 @@ export default class Popup extends PureComponent {
 
         //this.props.play();
 		return (
-			<Animatable.View
-				useNativeDriver
-				style={styles.container}
-				animation="bounceInUp"
-			>
-				<ScrollView
-					ref={"scrollView"}
-					onContentSizeChange={_ => {
-						this.refs.scrollView.scrollToEnd({
-							animated: true
-						});
-					}}
-					onLayout={({ nativeEvent: { layout: { height } } }) =>
-						this.setState({
-							scrollViewHeight: height
-						})}
-					contentContainerStyle={[
-						styles.scrollViewContainer,
-						{
-							minHeight: this.state.scrollViewHeight
-						}
-					]}
-				>
-					{this.props.children}
-				</ScrollView>
+			// <Animatable.View
+			// 	useNativeDriver
+			// 	style={styles.container}
+			// 	animation="fadeInLeft"
+            // >
+            <View style={styles.container}>
+                {this.props.children}
+                <Button 
+                onPress={this.props.onPlayAgain} style={styles.playGameButton}
+                >
+                
+                    Rematch!
+                </Button>
+                <Button onPress={this.props.onQuit} style={styles.cancelButton} >
+                    Back to Lobby
+                </Button> 
+            </View>
 
-				<Button 
-					onPress={this.props.onPlayAgain}>
-					Play Again?
-				</Button>
-				<Button onPress={this.props.onQuit}  >
-    Back to Lobby
-				</Button> 
-			</Animatable.View>
+				
+			// </Animatable.View>
 		);
 	}
 }
-const styles = EStyleSheet.create({
-
-    
+const styles = StyleSheet.create({
 	container: {
-		margin: 0,
+		margin: 100,
 		padding: 0,
 		flex: 1,
-		backgroundColor: "rgba(0,0,0,0.75)"
+        backgroundColor: "transparent",
+        transform: [{ rotate: '-90deg'}],
+        width: Dimensions.get("window").height,
+        height:  Dimensions.get("window").width * 0.3
+
+
 	},
-	scrollViewContainer: {
-		width: () =>
-			Math.min(
-				EStyleSheet.value("$donkeyKongMenuMaxWidth"),
-				Dimensions.get("window").width
-			),
+	playGameButton: {
+		maxWidth: Dimensions.get("window").height * 1.2,
 		alignSelf: "center",
-		justifyContent: "center"
+        marginBottom: 0,
+        position: "relative",
+        bottom: "40%",
+        
+	},
+	cancelButton: {
+		maxWidth: Dimensions.get("window").height * 1.2,
+		alignSelf: "center",
+        backgroundColor: "#ff4136",
+        position: "relative",
+        bottom: "40%",
 	}
-	
 });

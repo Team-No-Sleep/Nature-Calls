@@ -1,8 +1,10 @@
 import React, { PureComponent } from "react";
 import { View, Image } from "react-native";
 import * as Animatable from "react-native-animatable";
-import EStyleSheet from "react-native-extended-stylesheet";
+import StyleSheet from "react-native";
 import TypeWriter from "react-native-typewriter";
+import EStyleSheet from 'react-native-extended-stylesheet';
+
 
 export default class Message extends PureComponent {
 	render() {
@@ -12,6 +14,8 @@ export default class Message extends PureComponent {
 				style={styles.message}
 				animation={this.props.animation}
 			>
+						<Image style={styles.image} source={this.props.image} />
+
 				{this.props.children && (
 					<View style={styles.textContainer}>
 						<TypeWriter
@@ -25,6 +29,7 @@ export default class Message extends PureComponent {
 						</TypeWriter>
 					</View>
 				)}
+
 			</Animatable.View>
 		);
 	}
@@ -32,21 +37,26 @@ export default class Message extends PureComponent {
 
 const styles = EStyleSheet.create({
 	message: {
-		marginTop: 20
+		margin: 50
 	},
 	image: {
-		alignSelf: "center"
+		alignSelf: "center",
+		margin: 0,
+		height: "40%",
+		width: "40%"
 	},
 	textContainer: {
-		backgroundColor: "#FFF",
 		padding: 10,
 		borderRadius: 11,
 		marginLeft: 30,
 		marginRight: 30,
 		minHeight: 80
 	},
-	// text: {
-	// 	fontFamily: "$donkeyKongMenuFont",
-	// 	fontSize: 18
-	// }
+	text: {
+		textAlign: "center",
+		fontSize: 30,
+		color: "white"
+	}
 });
+
+EStyleSheet.build();

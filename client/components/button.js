@@ -37,15 +37,15 @@ export default class Button extends PureComponent {
 
   render() {
     return (
-        <Animatable.View useNativeDriver style={[styles.buttonContainer, this.props.style]} ref={"buttonContainer"}>
+        <Animatable.View useNativeDriver style={[styles1.buttonContainer, this.props.style]} ref={"buttonContainer"}>
           <TouchableOpacity
-            style={styles.textContainer}
+            style={styles1.textContainer}
             activeOpacity={1}
             onPressIn={this.onPressIn}
             onPressOut={this.onPressOut}
             onPress={this.onPress}
           >
-            <Animatable.Text style={[styles.text, this.props.theme]}>
+            <Animatable.Text style={[styles1.text, this.props.theme]}>
               {this.props.children}
             </Animatable.Text>
           </TouchableOpacity>
@@ -54,34 +54,36 @@ export default class Button extends PureComponent {
   }
 }
 
-const styles = EStyleSheet.create({
-  buttonContainer: {
-    backgroundColor: "$donkeyKongMenuPrimaryColor",
-    borderRadius: 11,
-    flexDirection: "row",
-    marginLeft: 30,
-    marginRight: 30,
-    marginTop: 20,
-    marginBottom: 20,
-    shadowOffset: { width: 0, height: 4 },
-    shadowColor: "$donkeyKongMenuSecondaryColor",
-    shadowOpacity: 1,
-    shadowRadius: 0,
-    elevation: 4
-  },
-  textContainer: {
-    backgroundColor: "transparent",
-    flex: 1,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  text: {
-    fontSize: 30,
-    color: "white",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowColor: "black",
-    textShadowRadius: 2,
-    fontFamily: "$donkeyKongMenuFont"
-  }
-});
+const styles1 = StyleSheet.create({
+    buttonContainer: {
+        backgroundColor: "green",
+        borderRadius: 11,
+        flexDirection: "row",
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop: 20,
+        marginBottom: 20,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 1,
+        shadowRadius: 0,
+        elevation: 4,
+        
+      },
+      textContainer: {
+        backgroundColor: "transparent",
+        flex: 1,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center"
+      },
+      text: {
+        fontSize: 20,
+        color: "white",
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowColor: "black",
+        textShadowRadius: 2,
+      }
+
+})
+
+

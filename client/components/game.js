@@ -12,6 +12,7 @@ export default class Game extends PureComponent {
       this.state = {
         running: false,
         gameOver: false,
+        player1Win: false
       };
     }
   
@@ -46,17 +47,23 @@ export default class Game extends PureComponent {
 
     handleEvent = ev => {
     switch (ev.type) {
-      case "game-over":
-        this.gameOver();
+      case "dino1-wins":
+        this.gameOver(1);
+        break;
+      case "dino2-wins":
+        this.gameOver(2);
         break;
     }
   };
   
-    gameOver = () => {
+    gameOver = (player) => {
       console.log("game Over")
+      let player1Win = (player === 1);
       this.setState({
         running: false,
-        gameOver: true
+        gameOver: true,
+        player1Win: player1Win
+
       });
   
       //-- Let the player wallow in their failure for a second or two..
@@ -92,12 +99,9 @@ export default class Game extends PureComponent {
             onEvent={this.handleEvent}
           >
             {this.state.gameOver && (
-              <GameOver onPlayAgain={this.restart} onQuit={this.quit} />
+              <GameOver onPlayAgain={this.restart} onQuit={this.quit} playerOneWon={this.state.player1Win} />
             )}
-{/*   
-            {this.state.princessRescued && (
-              <PrincessRescued onPlayAgain={this.restart} onQuit={this.quit} />
-            )} */}
+
           </GameEngine>
 
           </ImageBackground>
