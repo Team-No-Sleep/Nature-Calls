@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default (world, pos, color) => {
+export default (world, pos, color, isPlayerCharacter, characterId) => {
   let width = 30;
   let height = 40;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
@@ -92,6 +92,8 @@ export default (world, pos, color) => {
     body,
     size: { width, height },
     color,
+    isPlayerCharacter: isPlayerCharacter,
+    characterId: characterId,
     controls: {
       gestures: {},
       mode: "platform"

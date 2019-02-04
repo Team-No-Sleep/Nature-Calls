@@ -59,8 +59,5 @@ export default (entities, { events }) => {
 			hold
 		}
 	}
-
-
-
 	return entities;
 };
