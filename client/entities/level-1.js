@@ -322,7 +322,7 @@ export default restart => {
             ),
         dino2: Mario(
             world, //?
-            { x: cy + 20, y: 70 }, //starting position
+            { x: cy + 20, y: 300 }, //starting position
             color.dino2, // color chosen
             false, //isPlayerCharacter change this to true if you want to test the movement of dino2
             "dino2" //characterId it lets us identify which character the user has chosen
