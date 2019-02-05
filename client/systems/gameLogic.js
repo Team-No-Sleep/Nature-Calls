@@ -52,9 +52,6 @@ const score = entities => {
         }
 
     }
-
-
-
 }
 
 const win = (dispatch, entities) => {
@@ -74,7 +71,6 @@ const win = (dispatch, entities) => {
    
 
 }
-
 
 export default (entities, {events, dispatch}) => {
     score(entities);
