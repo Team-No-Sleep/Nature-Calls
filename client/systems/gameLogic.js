@@ -24,7 +24,6 @@ const score = entities => {
         let rightPottyLocation = entities.outhouse.position
         let scored;
 
-        console.log(distance(marioLocation, leftPottyLocation))
 
         if (mario["power-ups"].holding && distance(marioLocation, leftPottyLocation) < 32) {
             // if (mario["power-ups"].holding ) {
