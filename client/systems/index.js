@@ -9,8 +9,9 @@ import PowerUps from "./power-ups";
 import Joust from "./joust";
 import gameLogic from "./gameLogic";
 import renderOpponent from "./renderOpponent";
+import publishPlayer from "./publishPlayer";
 
-export default [
+export default (playersFromServer) => [
 	Input,
 	Controls,
 	Steering,
@@ -21,5 +22,6 @@ export default [
 	PowerUps,
 	Joust,
 	gameLogic,
-	renderOpponent
+	renderOpponent(playersFromServer),
+	publishPlayer
 ];

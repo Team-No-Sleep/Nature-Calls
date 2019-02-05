@@ -29,10 +29,10 @@ const renderOpponentPosition = entities => {
 
         */
 }
-
-export default (entities, { events, dispatch }) => {
-    socketInformation();
-    renderOpponentPosition(entities);
-
-	return entities;
+export default (playersFromServer)=>{
+    return (entities, { events, dispatch }) => {
+        socketInformation();
+        renderOpponentPosition(entities);
+        return entities;
+    };
 };

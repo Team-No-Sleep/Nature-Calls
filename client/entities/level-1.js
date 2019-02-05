@@ -17,7 +17,7 @@ const { width, height } = Dimensions.get("window");
 const scale = Math.min(width, 430) / 375;
 const cx = width / 2;
 const cy = height / 2;
-const offsetY = (width - 465) / 2 -180;
+const offsetY = (width - 465) / 2 - 180;
 const platformWidth = Math.min(width, 430);
 
 export default restart => {
