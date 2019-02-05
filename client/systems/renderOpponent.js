@@ -33,7 +33,6 @@ export default (playersFromServer)=>{
     return (entities, { events, dispatch }) => {
         socketInformation();
         renderOpponentPosition(entities);
-        console.log(playersFromServer);
         return entities;
     };
 };

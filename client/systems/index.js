@@ -9,6 +9,7 @@ import PowerUps from "./power-ups";
 import Joust from "./joust";
 import gameLogic from "./gameLogic";
 import renderOpponent from "./renderOpponent";
+import publishPlayer from "./publishPlayer";
 
 export default (playersFromServer) => [
 	Input,
@@ -21,5 +22,6 @@ export default (playersFromServer) => [
 	PowerUps,
 	Joust,
 	gameLogic,
-	renderOpponent(playersFromServer)
+	renderOpponent(playersFromServer),
+	publishPlayer
 ];

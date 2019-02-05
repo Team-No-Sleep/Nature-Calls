@@ -90,7 +90,7 @@ export default class Game extends PureComponent {
     return (
       <Modal
         transparent={false}
-        animationType="slide"
+        animationType="none"
         visible={this.props.visible}
         onRequestClose={this.quit}
       >
