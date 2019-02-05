@@ -3,6 +3,7 @@ import { StyleSheet, Modal, Alert, ImageBackground } from "react-native";
 import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
 import LevelOne from "../entities/level-1";
 import Systems from "../systems";
+import GameOver from "../components/gameOver";
 
 
 export default class Game extends PureComponent {
@@ -11,6 +12,7 @@ export default class Game extends PureComponent {
       this.state = {
         running: false,
         gameOver: false,
+        player1Win: false
       };
     }
   
@@ -23,6 +25,7 @@ export default class Game extends PureComponent {
     }
   
     restart = () => {
+       console.log("restarting")
       this.refs.engine.swap(LevelOne());
   
       this.setState({
@@ -41,10 +44,26 @@ export default class Game extends PureComponent {
   
       if (this.props.onClose) this.props.onClose();
     };
+
+    handleEvent = ev => {
+    switch (ev.type) {
+      case "dino1-wins":
+        this.gameOver(1);
+        break;
+      case "dino2-wins":
+        this.gameOver(2);
+        break;
+    }
+  };
   
-    gameOver = () => {
+    gameOver = (player) => {
+      console.log("game Over")
+      let player1Win = (player === 1);
       this.setState({
-        running: false
+        running: false,
+        gameOver: true,
+        player1Win: player1Win
+
       });
   
       //-- Let the player wallow in their failure for a second or two..
@@ -55,17 +74,6 @@ export default class Game extends PureComponent {
       }, 1000);
     };
   
-  
-    // handleEvent = ev => {
-    //   switch (ev.type) {
-    //     case "game-over":
-    //       this.gameOver();
-    //       break;
-    //     case "princess-rescued":
-    //       this.princessRescued();
-    //       break;
-    //   }
-    // };
   
     render() {
       return (
@@ -91,12 +99,9 @@ export default class Game extends PureComponent {
             onEvent={this.handleEvent}
           >
             {this.state.gameOver && (
-              <GameOver onPlayAgain={this.restart} onQuit={this.quit} />
+              <GameOver onPlayAgain={this.restart} onQuit={this.quit} playerOneWon={this.state.player1Win} />
             )}
-{/*   
-            {this.state.princessRescued && (
-              <PrincessRescued onPlayAgain={this.restart} onQuit={this.quit} />
-            )} */}
+
           </GameEngine>
 
           </ImageBackground>

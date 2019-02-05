@@ -324,10 +324,20 @@ export default restart => {
         ),
         
         //Spawns at the bottom
-
-        //ToDo: make a new mario object have an extra paramater that passes in color
-        mario: Mario(world, { x: cy +20, y: 600 }, color.dino1),
-        dino2: Mario(world, { x: cy + 20, y: 70 }, color.dino2),
+        mario: Mario(
+            world, //?
+            { x: cy +20, y: 600 }, //starting position 
+            color.dino1, //color chosen
+            true, //isPlayerCharacter change this to false if you want to test the movent of dino2
+            "mario" //characterId it lets us identify which character the user has chosen
+            ),
+        dino2: Mario(
+            world, //?
+            { x: cy + 20, y: 70 }, //starting position
+            color.dino2, // color chosen
+            false, //isPlayerCharacter change this to true if you want to test the movement of dino2
+            "dino2" //characterId it lets us identify which character the user has chosen
+            ),
 
         //Spawns on top of outhouse
         // mario: Mario(world, { x: cy - 210, y: 620 }), 

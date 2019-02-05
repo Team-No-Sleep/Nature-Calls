@@ -1,17 +1,17 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, ImageBackground, Text, Modal, Alert } from 'react-native';
-import SocketIOClient from 'socket.io-client';
+// import SocketIOClient from 'socket.io-client';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 // import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
 // import LevelOne from "./entities/level-1";
 // import Systems from "./systems";
 //import Orientation from 'react-native-orientation-locker';
-console.ignoredYellowBox = ['Remote debugger'];
-import { YellowBox } from 'react-native';
-YellowBox.ignoreWarnings([
-    'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?'
-]);
+// console.ignoredYellowBox = ['Remote debugger'];
+// import { YellowBox } from 'react-native';
+// YellowBox.ignoreWarnings([
+//     'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?'
+// ]);
 
 
 export default class App extends React.Component {
@@ -20,31 +20,31 @@ export default class App extends React.Component {
     isLoadingComplete: false,
     guestLogin: true
   };
-  constructor() {
-    super();
-    this.socket = SocketIOClient('http://localhost:3001');
-  }
+  // constructor() {
+  //   super();
+  //   this.socket = SocketIOClient('http://localhost:3001');
+  // }
 
-  // constructor(props) {
-  //   super(props);
-  //   this.socket = SocketIOClient('https://nature-calls.herokuapp.com/'); // replace 'environment.serverUrl' with your server url
-  //   this.socket.emit('channel1', 'Hi server'); // emits 'hi server' to your server
+  // // constructor(props) {
+  // //   super(props);
+  // //   this.socket = SocketIOClient('https://nature-calls.herokuapp.com/'); // replace 'environment.serverUrl' with your server url
+  // //   this.socket.emit('channel1', 'Hi server'); // emits 'hi server' to your server
 
-  //   // Listens to channel2 and display the data recieved
-  //   this.socket.on('channel2', (data) => {
-  //       console.log('Data recieved from server', data); //this will console 'channel 2'
-  //     });
-  //   }
+  // //   // Listens to channel2 and display the data recieved
+  // //   this.socket.on('channel2', (data) => {
+  // //       console.log('Data recieved from server', data); //this will console 'channel 2'
+  // //     });
+  // //   }
 
-  clicked = () => {
+  // clicked = () => {
 
 
-    const dataObj = {
-      action: 'click'
-    };
+  //   const dataObj = {
+  //     action: 'click'
+  //   };
 
-    this.socket.emit('channel2', dataObj);
-  }
+  //   this.socket.emit('channel2', dataObj);
+  // }
 
   // componentDidMount() {
   //   console.log(Orientation);

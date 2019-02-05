@@ -3,3 +3,5 @@ node_modules/
 npm-debug.*
 .env
 .DS_Store
+client/native-base-theme/components/
+client/native-base-theme/variables/
