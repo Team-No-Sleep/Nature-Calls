@@ -28,9 +28,11 @@ const joust = entities => {
                 if (dino2["power-ups"].holding) {
                     tpDropped = true;
                 }
-                let dino2Color = entities.dino2.color;
+                let isPlayerCharacter = dino2.isPlayerCharacter;
+                let characterId = dino2.characterId;
+                let dino2Color = dino2.color;
                 delete entities.dino2;
-                entities.dino2 = Mario(entities.physics.world, {x:  250, y: 65 }, dino2Color);
+                entities.dino2 = Mario(entities.physics.world, {x:  250, y: 65 }, dino2Color, isPlayerCharacter, characterId);
                 entities.dino2.score = score;
 
             } else if (mario.body.position.y < dino2.body.position.y  && !dino2["power-ups"].holding) {
@@ -39,15 +41,19 @@ const joust = entities => {
                 if (mario["power-ups"].holding) {
                     tpDropped = true;
                 }
-                let marioColor = entities.mario.color;
+                let marioColor = mario.color;
+                let isPlayerCharacter = mario.isPlayerCharacter;
+                let characterId = mario.characterId;
                 delete entities.mario
-                entities.mario = Mario(entities.physics.world, { x: 250, y: 600 }, marioColor);
+                entities.mario = Mario(entities.physics.world, { x: 250, y: 600 }, marioColor, isPlayerCharacter, characterId);
                 entities.mario.score = score;
+                console.log("here")
 
 
             }
 
             if (tpDropped) {
+                console
                 entities.toiletPaper = ToiletPaper( {x: cy + 125, y: cy} );
             }
 

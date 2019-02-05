@@ -7,6 +7,7 @@ export default (entities, { events }) => {
     let mario = entities.mario;
     let dino2 = entities.dino2;
     let chosenCharacter;
+    // console.log(mario.isPlayerCharacter);
     if (mario.isPlayerCharacter === true) {
         chosenCharacter = mario;
     } else if (dino2.isPlayerCharacter === true) {
@@ -24,7 +25,7 @@ export default (entities, { events }) => {
     let nextUpdateStr = JSON.stringify(nextUpdate);
     if(nextUpdateStr !== lastUpdate){
 
-        socket.emit('position', nextUpdate); // emits chosen character x and y coordinates the only dino that moves at the moment
+        //socket.emit('position', nextUpdate); // emits chosen character x and y coordinates the only dino that moves at the moment
         
         lastUpdate = nextUpdateStr;
     }
