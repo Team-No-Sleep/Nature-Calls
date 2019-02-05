@@ -26,7 +26,7 @@ const sessions = {}//user sessions for socket.io
 //   console.log('Object from RN app', obj);
 // }
 
-// ===== socket.io =====
+// ===== socket.io =====s
 app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/server/index.html');
 });
