@@ -1,10 +1,8 @@
 import Matter from "matter-js";
 import { interpolateBasis } from "d3-interpolate";
-import SocketIOClient from 'socket.io-client';
 import { find, filter, any } from "../utils";
 import { standing } from "../utils/platforms";
 import { collisionCategories } from "../utils/constants";
-const socket = SocketIOClient('http://localhost:3001');
 
 const jump = (mario, entities) => {
 	let gestures = mario.controls.gestures;
@@ -41,11 +39,6 @@ const jump = (mario, entities) => {
 				x: -forceY,
 				y: forceX
 			});
-			console.log(mario.body.position);
-			socket.emit('position', {
-				position: mario.body.position,
-				dino: mario.characterId
-			}); // emits mario x and y coordinates the only dino that moves at the moment
 		},
 		complete() {
 			if (mario["power-ups"].holding) {
@@ -62,12 +55,12 @@ export default (entities, { events }) => {
 	let mario = entities.mario;
 	let dino2 = entities.dino2;
 	let chosenCharacter;
-	// TODO: Make better data structure for holding which characters are alive
 	if(mario.isPlayerCharacter === true){
 		chosenCharacter = mario;
 	} else if(dino2.isPlayerCharacter === true) {
 		chosenCharacter = dino2;
 	}
+	// TODO: Make better data structure for holding which characters are alive
 	let characters = [chosenCharacter];
 		for (let char of characters) {
 			if (char) {
