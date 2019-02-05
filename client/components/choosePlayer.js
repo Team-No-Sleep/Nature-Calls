@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 
-import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image } from "react-native";
+import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image} from "react-native";
 
 import { Container, Header, Content, Button, Text } from 'native-base';
 
@@ -17,22 +17,27 @@ export default class ChoosePlayer extends PureComponent {
           animationType="fade"
           visible={this.props.visible}
           onRequestClose={this.quit}
-          supportedOrientations={['portrait', 'landscape']}
+          supportedOrientations={['landscape']}
             >
-                <ImageBackground style={this.props.containerStyle} source={require("../assets/backgrounds/userLogin-1.png")}>
-                <Text h2> ChoosePlayer</Text>
+                <ImageBackground style={this.props.containerStyle} source={require("../assets/backgrounds/landJungle.gif")}>
+                <View style={styles.buttonView}>
+                    <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
+                        <Text>Ready Up</Text>
+                    </Button>
 
-                <Image source={require("../assets/images/idlingDinoRed.gif")} />
+                    <Button rounded success style={styles.button} onPress={this.props.onLeaderBoard}>
+                        <Text>Leaderboard</Text>
+                    </Button>
+                </View>
 
-                <Image source={require("../assets/images/idlingDinoGreen.gif")} />
+                <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
+                
+                <View style={styles.dinoView}>
+                
+                    <Image style={styles.redDino} source={require("../assets/images/idlingDinoRed.gif")} />
 
-                <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
-                    <Text>Ready Up</Text>
-                </Button>
-
-                <Button rounded success style={styles.button} onPress={this.props.onLeaderBoard}>
-                    <Text>Leaderboard</Text>
-                </Button>
+                    <Image source={require("../assets/images/idlingDinoGreen.gif")} />
+                </View>
 
                 </ImageBackground>
             </Modal>
@@ -60,5 +65,28 @@ export default class ChoosePlayer extends PureComponent {
         },
         container: {
             flex: 1,
+          },
+
+          dinoView: {
+            flexDirection: 'row',
+            marginLeft: "25%",
+            marginTop: "5%"
+          },
+
+          buttonView: {
+            marginTop: "5%",
+            flexDirection: 'row',
+            marginLeft: "30%",
+          },
+
+          ChoosePlayerText: {
+            flexDirection: 'row',
+            marginLeft: "40%"
+          },
+
+          redDino: {
+            borderWidth: 5,
+            borderColor: "red",
+            borderRadius: 15
           }
     });
