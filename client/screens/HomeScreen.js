@@ -22,6 +22,7 @@ import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
 
 import Game from "../components/game";
 import Lobby from "../components/lobby";
+import ChoosePlayer from "../components/choosePlayer";
 import Leaderboard from "../components/leaderboard";
 
 
@@ -35,9 +36,10 @@ export default class HomeScreen extends React.Component {
   state = {
     user: null,
     gameVisible: false,
-    leaderboardVisible: false
+    leaderboardVisible: false,
+    choosePlayerVisible: false
     
-  }
+  } 
 
   toggleGame = gameVisible => {
     this.setState({
@@ -50,6 +52,14 @@ export default class HomeScreen extends React.Component {
       leaderboardVisible
     })
   }
+
+  toggleChoosePlayer = choosePlayerVisible => {
+    this.setState({
+      choosePlayerVisible
+    })
+  }
+
+
 
   // componentDidMount() {
   //   console.log(this.props.navigation.state.params.data.user);
@@ -83,10 +93,17 @@ export default class HomeScreen extends React.Component {
   {/* Lobby component or main menu? 
         Maybe in the Lobby you can have the log in, log out, register features.*/}
       <Lobby 
-          onPlayGame={_ => this.toggleGame(true)}
+          onPlayGame={_ => this.toggleChoosePlayer(true)}
           onLeaderBoard={_ => this.toggleLeaderboard(true)}
           containerStyle={styles.container}
 
+       />
+
+       < ChoosePlayer
+          onPlayGame={_ => this.toggleGame(true)}
+          onLeaderBoard={_ => this.toggleLeaderboard(true)}
+          containerStyle={styles.container}
+          visible={this.state.choosePlayerVisible}
        />
 
       <Game

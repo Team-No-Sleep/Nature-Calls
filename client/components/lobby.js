@@ -43,6 +43,9 @@ export default class Lobby extends PureComponent {
                 width: 130,
 
         },
+        container: {
+            flex: 1,
+          }
         
     
 
