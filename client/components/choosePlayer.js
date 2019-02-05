@@ -1,8 +1,10 @@
 import React, { PureComponent } from "react";
 
-import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar } from "react-native";
+import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image } from "react-native";
 
 import { Container, Header, Content, Button, Text } from 'native-base';
+
+
 
 
 export default class ChoosePlayer extends PureComponent {
@@ -18,13 +20,18 @@ export default class ChoosePlayer extends PureComponent {
           supportedOrientations={['portrait', 'landscape']}
             >
                 <ImageBackground style={this.props.containerStyle} source={require("../assets/backgrounds/userLogin-1.png")}>
+                <Text h2> ChoosePlayer</Text>
+
+                <Image source={require("../assets/images/idlingDinoRed.gif")} />
+
+                <Image source={require("../assets/images/idlingDinoGreen.gif")} />
 
                 <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
                     <Text>Ready Up</Text>
                 </Button>
 
                 <Button rounded success style={styles.button} onPress={this.props.onLeaderBoard}>
-                    <Text>Jump</Text>
+                    <Text>Leaderboard</Text>
                 </Button>
 
                 </ImageBackground>
@@ -45,9 +52,9 @@ export default class ChoosePlayer extends PureComponent {
                 color: "#006400",
                 backgroundColor: "#006400",
                 position: "relative",
-                top: 180,
-                left: 450,
-                margin: 10,
+                // top: 180,
+                // left: 450,
+                // margin: 10,
                 width: 130,
 
         },
