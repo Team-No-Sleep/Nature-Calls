@@ -15,6 +15,7 @@ export default class ChoosePlayer extends PureComponent {
           animationType="fade"
           visible={this.props.visible}
           onRequestClose={this.quit}
+          supportedOrientations={['portrait', 'landscape']}
             >
                 <ImageBackground style={this.props.containerStyle} source={require("../assets/backgrounds/userLogin-1.png")}>
 
