@@ -25,7 +25,7 @@ export default (entities, { events }) => {
     let nextUpdateStr = JSON.stringify(nextUpdate);
     if(nextUpdateStr !== lastUpdate){
 
-        //socket.emit('position', nextUpdate); // emits chosen character x and y coordinates the only dino that moves at the moment
+        socket.emit('position', nextUpdate); // emits chosen character x and y coordinates the only dino that moves at the moment
         
         lastUpdate = nextUpdateStr;
     }
