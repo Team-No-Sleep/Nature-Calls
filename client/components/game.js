@@ -16,7 +16,8 @@ export default class Game extends PureComponent {
       player: "player2",
       running: false,
       gameOver: false,
-      player1Win: false
+      player1Win: false,
+      player1: true
     };
   }
   componentDidMount() {
@@ -115,6 +116,7 @@ export default class Game extends PureComponent {
             // style={styles.game}
             systems={Systems(this.playerDataFromServer)}
             entities={LevelOne(null, this.state.player)}
+            //entities={LevelOne(null, this.state.player1)}
             touchProcessor={DefaultTouchProcessor({
               triggerPressEventBefore: 150,
               triggerLongPressEventAfter: 151

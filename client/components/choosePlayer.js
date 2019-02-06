@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 
-import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image } from "react-native";
+import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image, TouchableOpacity} from "react-native";
 
 import { Container, Header, Content, Button, Text } from 'native-base';
 
@@ -8,11 +8,24 @@ import { Container, Header, Content, Button, Text } from 'native-base';
 
 
 export default class ChoosePlayer extends PureComponent {
-    render() {
-        state = {
-            borderStyle: style = { borderWidth: 5, borderColor: "red", borderRadius: 15 }
+
+    state = {
+        dino1Pressed: false,
+        dino2Pressed: false
+    }
+    
+    dinoPressed = (dino) => {
+        if(dino) {
+            this.setState({dino1Pressed: true, dino2Pressed: false});
+        } else {
+            this.setState({dino2Pressed: true, dino1Pressed: false});
         }
-        return (
+    }
+
+    render() {
+
+        
+        return(
             <Modal
                 transparent={false}
                 animationType="fade"
@@ -33,61 +46,74 @@ export default class ChoosePlayer extends PureComponent {
 
                     <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
 
-                    <View style={styles.dinoView}>
+                <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
+                
+                <View style={styles.dinoView}>
 
-                        <Image source={require("../assets/images/idlingDinoRed.gif")} onPress={this.setState.borderStyle} />
+                <TouchableOpacity onPress={() => this.dinoPressed(true)}>
+                        <Image style={this.state.dino1Pressed ? styles.redDinoPressed : null} source={require("../assets/images/idlingDinoRed.gif")}/>
+                    </TouchableOpacity>
 
-                        <Image source={require("../assets/images/idlingDinoGreen.gif")} />
-                    </View>
+                    <TouchableOpacity onPress={() => this.dinoPressed(false)}>
+                        <Image source={require("../assets/images/idlingDinoGreen.gif")} style={this.state.dino2Pressed ? styles.greenDinoPressed : null}/>
+                    </TouchableOpacity>
+                </View>
 
                 </ImageBackground>
             </Modal>
 
         )
     }
-};
+    };
 
+          
+    
+    const styles = StyleSheet.create({
 
+        button: {
+                justifyContent: "center",
+                alignSelf: "stretch",
+                textAlignVertical: "center",
+                color: "#006400",
+                backgroundColor: "#006400",
+                position: "relative",
+                // top: 180,
+                // left: 450,
+                // margin: 10,
+                width: 130,
 
-const styles = StyleSheet.create({
+        },
+        container: {
+            flex: 1,
+          },
 
-    button: {
-        justifyContent: "center",
-        alignSelf: "stretch",
-        textAlignVertical: "center",
-        color: "#006400",
-        backgroundColor: "#006400",
-        position: "relative",
-        // top: 180,
-        // left: 450,
-        // margin: 10,
-        width: 130,
+          dinoView: {
+            flexDirection: 'row',
+            marginLeft: "25%",
+            marginTop: "5%"
+          },
 
-    },
-    container: {
-        flex: 1,
-    },
+          buttonView: {
+            marginTop: "5%",
+            flexDirection: 'row',
+            marginLeft: "30%",
+          },
 
-    dinoView: {
-        flexDirection: 'row',
-        marginLeft: "25%",
-        marginTop: "5%"
-    },
+          ChoosePlayerText: {
+            flexDirection: 'row',
+            marginLeft: "40%"
+          },
+          
 
-    buttonView: {
-        marginTop: "5%",
-        flexDirection: 'row',
-        marginLeft: "30%",
-    },
-
-    ChoosePlayerText: {
-        flexDirection: 'row',
-        marginLeft: "40%"
-    },
-
-    redDino: {
-        borderWidth: 5,
-        borderColor: "red",
-        borderRadius: 15
-    }
-});
+          redDinoPressed: {
+            borderWidth: 5,
+            borderColor: "red",
+            borderRadius: 15
+          },
+           
+          greenDinoPressed: {
+            borderWidth: 5,
+            borderColor: "green",
+            borderRadius: 15
+          },
+    });
