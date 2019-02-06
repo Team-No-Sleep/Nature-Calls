@@ -43,7 +43,8 @@ export default class HomeScreen extends React.Component {
 
   toggleGame = gameVisible => {
     this.setState({
-      gameVisible
+      gameVisible: gameVisible,
+      choosePlayerVisible: !gameVisible
     });
   };
 
