@@ -75,7 +75,7 @@ const win = (dispatch, entities) => {
 }
 
 const fall = (entities) => {
-    console.log(entities.mario.body.position.x >= height)
+    //console.log(entities.mario.body.position.x >= height)
     let mario = entities.mario;
     let dino2 = entities.dino2;
     let tpDropped;
