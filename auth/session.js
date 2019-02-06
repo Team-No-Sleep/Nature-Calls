@@ -5,6 +5,7 @@ module.exports = class Session {
         
     }
     getUser(){
+        console.log(this.user);
         return this.user;
     }
     getPosition(){
