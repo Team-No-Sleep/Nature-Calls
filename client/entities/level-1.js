@@ -168,30 +168,6 @@ export default restart => {
             platformWidth * 0.1
         ),
 
-
-        // Left barrier of landscap map
-        leftBarrier: Barrier(
-            world,
-            {  
-                x: cy + platformWidth / 8 - 10,
-                y: cy - 265
-            }, 
-            -1.5708,
-            width
-        ),
-        // Right barrier of landscap map
-        rightBarrier: Barrier(
-            world,
-            {
-                x: cy + platformWidth / 8 - 10,
-                y: cy +585
-            },
-            -1.5708,
-            width
-            
-            
-        ),
-
         // Tilemapping platform middle of the screen / UPPER LEFT MIDDLE ROCK RIGHT
         upperMiddlePlatRockRight: MiniRockRight(
             world,
