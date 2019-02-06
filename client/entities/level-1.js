@@ -18,7 +18,7 @@ const { width, height } = Dimensions.get("window");
 const scale = Math.min(width, 430) / 375;
 const cx = width / 2;
 const cy = height / 2;
-const offsetY = (width - 465) / 2 -180;
+const offsetY = (width - 465) / 2 - 180;
 const platformWidth = Math.min(width, 430);
 
 export default restart => {
@@ -333,7 +333,7 @@ export default restart => {
             ),
         dino2: Mario(
             world, //?
-            { x: cy + 20, y: 70 }, //starting position
+            { x: cy + 20, y: 300 }, //starting position
             color.dino2, // color chosen
             false, //isPlayerCharacter change this to true if you want to test the movement of dino2
             "dino2" //characterId it lets us identify which character the user has chosen
