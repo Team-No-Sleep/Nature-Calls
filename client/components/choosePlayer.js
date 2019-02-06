@@ -11,6 +11,9 @@ export default class ChoosePlayer extends PureComponent {
 
 
     render() {
+        state = {
+            borderStyle: style={borderWidth: 5, borderColor: "red", borderRadius: 15} 
+        }
         return(
             <Modal
           transparent={false}
@@ -34,7 +37,7 @@ export default class ChoosePlayer extends PureComponent {
                 
                 <View style={styles.dinoView}>
                 
-                    <Image style={styles.redDino} source={require("../assets/images/idlingDinoRed.gif")} />
+                    <Image source={require("../assets/images/idlingDinoRed.gif")} onPress={this.setState.borderStyle}/>
 
                     <Image source={require("../assets/images/idlingDinoGreen.gif")} />
                 </View>
