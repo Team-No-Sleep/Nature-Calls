@@ -20,7 +20,9 @@ const cy = height / 2;
 const offsetY = (width - 465) / 2 - 180;
 const platformWidth = Math.min(width, 430);
 
-export default (restart, player1) => {
+export default (restart, player) => {
+    console.log(player);
+//export default (restart, player1) => {
     //-- Cleanup existing entities..
     if (restart) Matter.Engine.clear(restart.physics.engine);
 
@@ -293,14 +295,16 @@ export default (restart, player1) => {
             world, //?
             { x: cy +20, y: 600 }, //starting position 
             color.dino1, //color chosen
-            !player1, //isPlayerCharacter change this to false if you want to test the movent of dino2
+            player === "player1" ? true : false, //isPlayerCharacter change this to false if you want to test the movent of dino2
+             //!player1,isPlayerCharacter change this to false if you want to test the movent of dino2
             "mario" //characterId it lets us identify which character the user has chosen
             ),
         dino2: Mario(
             world, //?
             { x: cy + 20, y: 300 }, //starting position
             color.dino2, // color chosen
-            player1, //isPlayerCharacter change this to true if you want to test the movement of dino2
+            player === "player2" ? true : false, //isPlayerCharacter change this to true if you want to test the movement of dino2
+             //player1,isPlayerCharacter change this to true if you want to test the movement of dino2
             "dino2" //characterId it lets us identify which character the user has chosen
             ),
 

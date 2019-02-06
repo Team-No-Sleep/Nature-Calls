@@ -32,15 +32,28 @@ app.get('/', function (req, res) {
 });
 
 socketio.on('connection', function (socket) {
+	//console.log(socketio.sockets);
+	let numberOfPlayers = socketio.engine.clientsCount;
+	console.log(socketio.engine.clientsCount);
 	console.log(socket.id);
 	socket.on('update', () => socketio.emit('update'));
+	// socket.on('isPlayer', (data) =>{
+	// 	socketio.emit('');
+	// });
 	//sending dino positioning through socket
 	socket.on('position', (data) => {
 		socketio.emit('position',{
-			position: data
+			position: data,
+			user: numberOfPlayers === 1 ? "player1" : "player2" 
 		});
-		console.log('Greetings from RN app', data);
+		// console.log('Greetings from RN app', data);
 	});
+	// socket.on("connect", (data) => {
+	// 	socketio.emit("connect", {
+	// 		user: numberOfPlayers === 1 ? "player1" : "player2" 
+	// 	});
+	// 	console.log(data);
+	// });
 	
 });
 
