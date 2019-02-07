@@ -59,12 +59,10 @@ export class Renderer extends PureComponent {
     }
     render() {
       return (
-        <Tile
-          source={TimerBg}
-          size={this.props.size}
-          position={this.props.body.position}
-          angle={this.props.body.angle}
-        />
+        <div>
+        <button onClick={this.startTimer}>Start</button>
+        m: {this.state.time.m} s: {this.state.time.s}
+        </div>
       );
     }
   }

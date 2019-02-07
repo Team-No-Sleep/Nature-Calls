@@ -7,18 +7,16 @@ import Matter from "matter-js"
 import TimerBg from "./timerBg.gif";
 import Tile from "../common/tile";
 
-export class Renderer extends PureComponent {
-    constructor() {
-        super();
-        this.state = { time: {}, seconds: 360 };
+export class Timer extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = { time: {}, seconds: 300 };
         this.timer = 0;
         this.startTimer = this.startTimer.bind(this);
         this.countDown = this.countDown.bind(this);
     }
     
     secondsToTime(secs){
-        let hours = Math.floor(secs / (60 * 60));
-    
         let divisor_for_minutes = secs % (60 * 60);
         let minutes = Math.floor(divisor_for_minutes / 60);
     
@@ -26,7 +24,6 @@ export class Renderer extends PureComponent {
         let seconds = Math.ceil(divisor_for_seconds);
     
         let obj = {
-            "h": hours,
             "m": minutes,
             "s": seconds
         };
@@ -59,14 +56,9 @@ export class Renderer extends PureComponent {
     }
     render() {
       return (
-		<Text>
-		m: {this.state.time.m} s: {this.state.time.s} TESTSETS
-			{/* <Tile
-			source={TimerBg}
-			size={this.props.size}
-			position={this.props.body.position}
-			angle={this.props.body.angle}
-			/> */}
+		  //I've set a tap on the timer to start it. Where the heck do i pass it to instead? Homescreen? ChoosePlayer?
+		<Text style = {[styles.timer]} onPress={this.startTimer}>
+        {this.state.time.m}: {this.state.time.s}
         </Text>
       );
     }
@@ -75,19 +67,27 @@ export class Renderer extends PureComponent {
 export default (pos) => {
 
     return {
-    animations: {},
-	// renderer: <Renderer />,
-	size: { width: 110, height: 75 },
-	position: pos,
-	source: TimerBg, 
-	renderer: <Tile />,
-	TimerBg: true,
-	angle: -1.5708
+    // animations: {},
+	renderer: <Timer />,
+	// renderer: <Tile />,
+	// size: { width: 20, height: 20 },
+	// position: pos,
+	// source: TimerBg, 
+	// TimerBg: true,
+	// angle: -1.5708
     };
 }
 
 const styles = StyleSheet.create({
     timer: {
-    position: "absolute"
+	fontSize: 30,
+	color: "#00A400",
+	textShadowOffset: { width: 0, height: 1 },
+	textShadowColor: "black",
+	textShadowRadius: 2,
+	transform: [{ rotate: '270deg'}],
+	marginTop: "80%",
+	marginRight: "80%",
+	fontWeight: "bold"
     }
 });

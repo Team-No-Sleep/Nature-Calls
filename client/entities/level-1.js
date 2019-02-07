@@ -41,7 +41,7 @@ export default (restart, player) => {
             {
                 x: cy - 170, 
                 y: offsetY + 408
-        },
+            },
         ),
 
         // Tilemapping for the top level of the floor platform / FLOOR
