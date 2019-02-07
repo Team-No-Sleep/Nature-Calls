@@ -60,7 +60,7 @@ export default class LeaderBoard extends PureComponent {
                     </List>
                 </Header>
                     <Content>
-                    {/* <List style={styles.list}> */}
+                    <List style={styles.list}>
                         <ListItem>
                             <Text>Username {"\t"}  Wins {"\t"} Rolls Delivered</Text>
                         </ListItem>
@@ -73,19 +73,7 @@ export default class LeaderBoard extends PureComponent {
                         <Text>{this.state.leaderBoard[1].local.username}            {this.state.leaderBoard[1].local.userWins}  Wins   {this.state.leaderBoard[1].local.userScores} Rolls Delivered</Text>
                         </ListItem>
 
-
-
-
-
-                         {/* })}  */}
-
-
-                        {/* <ListItem>
-                            <Text>{this.state.leaderBoard[0].local.username + "\t" + this.state.leaderBoard[0].local.userWins}</Text>
-                        </ListItem>
-                         */}
                     </List>
-                    {/* </List> */}
                     </Content>
                 </Container>
 
