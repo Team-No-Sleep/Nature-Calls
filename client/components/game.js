@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, Modal, Alert, ImageBackground } from "react-native";
 import { GameEngine, DefaultTouchProcessor } from "react-native-game-engine";
-import SocketIOClient from 'socket.io-client';
 import LevelOne from "../entities/level-1";
 import Systems from "../systems";
 import GameOver from "../components/gameOver";
@@ -14,35 +13,25 @@ YellowBox.ignoreWarnings([
 export default class Game extends PureComponent {
   constructor(props) {
     super(props);
-    this.socket = null;
     this.playerDataFromServer = {};
     this.state = {
-      player: "player2",
+      //player: "player1",
       running: false,
       gameOver: false,
       player1Win: false,
-      player1: true
+      //player1: true
     };
   }
   componentDidMount() {
-    this.socket = SocketIOClient("http://localhost:3001");
-    //this.socket.connect();
-    // this.socket.on("connect" , data => {
-    //   this.socket.emit("connect");
-    //   console.log(data);
-    //   if(this.state.running){
-    //     // this.playerDataFromServer[data.user] = data.position;
-    //   }
-    // });
-    this.socket.on("position" , data => {
-      console.log(data);
+   
+    this.props.socket.on("position" , data => {
+      //console.log(data);
       if(this.state.running){
-        this.playerDataFromServer[data.position.dino] = data.position;
-        this.playerDataFromServer[data.position.user] = data.user;
+        this.playerDataFromServer[data.dino] = data;
       }
-      this.setState ({
-        player: data.user
-      })
+      // this.setState ({
+      //   player: data.user
+      // })
     });
   }
   componentWillReceiveProps(nextProps) {
@@ -100,6 +89,7 @@ export default class Game extends PureComponent {
       this.setState({
         gameOver: true
       });
+      this.props.socket.emit("gameOver");
     }, 1000);
   };
 
@@ -118,8 +108,8 @@ export default class Game extends PureComponent {
           <GameEngine
             ref={"engine"}
             // style={styles.game}
-            systems={Systems(this.playerDataFromServer)}
-            entities={LevelOne(null, this.state.player)}
+            systems={Systems(this.playerDataFromServer, this.props.socket, this.props.user)}
+            entities={LevelOne(null, this.props.selectedDino)}
             //entities={LevelOne(null, this.state.player1)}
             touchProcessor={DefaultTouchProcessor({
               triggerPressEventBefore: 150,

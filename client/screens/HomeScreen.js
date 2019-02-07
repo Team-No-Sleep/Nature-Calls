@@ -24,6 +24,7 @@ import Game from "../components/game";
 import Lobby from "../components/lobby";
 import ChoosePlayer from "../components/choosePlayer";
 import Leaderboard from "../components/leaderboard";
+import { getServerUrl } from "../utils/constants";
 
 
 
@@ -37,6 +38,12 @@ export default class HomeScreen extends React.Component {
     user: null,
     gameVisible: false,
     leaderboardVisible: false,
+    choosePlayerVisible: false,
+    selectedDino: null
+  };
+  socket =  SocketIOClient(getServerUrl());
+  
+  toggleGame = gameVisible => {
     choosePlayerVisible: false
     
   } 
@@ -106,24 +113,48 @@ export default class HomeScreen extends React.Component {
   logout = () => {
     console.log ("logout press");
     API.logout()
-    .then(res => this.goHome())
-    .catch(err => console.log(err));
+      .then(res => this.goHome())
+      .catch(err => console.log(err));
   }
+
+  selectDino(dino){
+    this.setState({selectedDino: dino});
+  }
+
   render() {
     return (
       <View style={styles.container}>
-      {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
 
-  {/* Lobby component or main menu? 
+        {/* Lobby component or main menu? 
         Maybe in the Lobby you can have the log in, log out, register features.*/}
-      <Lobby 
+        <Lobby
           onPlayGame={_ => this.toggleChoosePlayer(true)}
           onLeaderBoard={_ => this.toggleLeaderboard(true)}
           containerStyle={styles.container}
           onLogOut={_ => this.logout()}
 
-       />
+        />
 
+        < ChoosePlayer
+          onPlayGame={_ => this.toggleGame(true)}
+          onLeaderBoard={_ => this.toggleLeaderboard(true)}
+          containerStyle={styles.container}
+          visible={this.state.choosePlayerVisible}
+          socket = {this.socket}
+          user = {this.props.navigation.state.params.data}
+          selectDino = {dino => this.selectDino(dino)}
+        />
+
+        <Game
+          visible={this.state.gameVisible}
+          onClose={_ => this.toggleGame(false)}
+          containerStyle={styles.container}
+          socket = {this.socket}
+          user = {this.props.navigation.state.params.data}
+          selectedDino = {this.state.selectedDino}
+        />
+            
        < ChoosePlayer
           onPlayGame={_ => this.toggleGame()}
           onLeaderBoard={_ => this.toggleLeaderboardFromChoose(true)}
