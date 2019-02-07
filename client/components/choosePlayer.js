@@ -27,22 +27,24 @@ export default class ChoosePlayer extends PureComponent {
         
         return(
             <Modal
-          transparent={false}
-          animationType="fade"
-          visible={this.props.visible}
-          onRequestClose={this.quit}
-          supportedOrientations={['landscape']}
+                transparent={false}
+                animationType="fade"
+                visible={this.props.visible}
+                onRequestClose={this.quit}
+                supportedOrientations={['landscape']}
             >
                 <ImageBackground style={this.props.containerStyle} source={require("../assets/backgrounds/landJungle.gif")}>
-                <View style={styles.buttonView}>
-                    <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
-                        <Text>Ready Up</Text>
-                    </Button>
+                    <View style={styles.buttonView}>
+                        <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
+                            <Text>Ready Up</Text>
+                        </Button>
 
-                    <Button rounded success style={styles.button} onPress={this.props.onLeaderBoard}>
-                        <Text>Leaderboard</Text>
-                    </Button>
-                </View>
+                        <Button rounded success style={styles.button} onPress={this.props.onLeaderBoard}>
+                            <Text>Leaderboard</Text>
+                        </Button>
+                    </View>
+
+                    <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
 
                 <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
                 
