@@ -2,8 +2,10 @@ import React, { PureComponent } from "react";
 
 import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image, TouchableOpacity} from "react-native";
 
-import { Container, Header, Content, Button, Text } from 'native-base';
 
+import { Container, Header, Content, Button, Text , Icon, Fab, Card, CardItem, Body} from 'native-base';
+
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 
 
@@ -34,6 +36,7 @@ export default class ChoosePlayer extends PureComponent {
                 supportedOrientations={['landscape']}
             >
                 <ImageBackground style={this.props.containerStyle} source={require("../assets/backgrounds/landJungle.gif")}>
+                
                     <View style={styles.buttonView}>
                         <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
                             <Text>Ready Up</Text>
@@ -48,9 +51,7 @@ export default class ChoosePlayer extends PureComponent {
                         </Button>
                     </View>
 
-                    <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
-
-                <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
+                    <View style={styles.ChoosePlayerText}><Text h1 style={{color: "#DAF7A6", fontWeight: "bold"}}>Choose Player</Text></View>
                 
                 <View style={styles.dinoView}>
 
@@ -62,6 +63,31 @@ export default class ChoosePlayer extends PureComponent {
                         <Image source={require("../assets/images/idlingDinoGreen.gif")} style={this.state.dino2Pressed ? styles.greenDinoPressed : null}/>
                     </TouchableOpacity>
                 </View>
+
+                <View style={{ flex: 1}}>
+                        <Fab
+                            active={this.state.active}
+                            direction="left"
+                            containerStyle={{ }}
+                            style={{ backgroundColor: 'black' }}
+                            position="bottomRight"
+                            onPress={() => this.setState({ active: !this.state.active })}>
+
+                            <Icon name="logo-game-controller-a" />
+
+                            <Grid disable>
+                                <Col style={{ backgroundColor: '#006400', height: 145, width: 455, borderRadius: 13, marginRight: 400,
+                                marginBottom: 75, borderWidth: 2, borderColor: "black" }}>
+                                    <Text style={styles.instructionText}>- Press on the RIGHT side of the Screen to move RIGHT.</Text>
+                                    <Text style={styles.instructionText}>- Press on the LEFT side of the Screen to move LEFT.</Text>
+                                    <Text style={styles.instructionText}>- Tap anywhere to JUMP.</Text>
+                                    <Text style={styles.instructionText}>- Double tap on EITHER side of the screen to JUMP in THAT direction after tapping to JUMP.</Text>
+                                    <Text style={styles.instructionText}>- It is not meant to be EASY</Text>
+                                </Col>
+                                
+                            </Grid>
+                        </Fab>
+                    </View>
 
                 </ImageBackground>
             </Modal>
@@ -81,9 +107,7 @@ export default class ChoosePlayer extends PureComponent {
                 color: "#006400",
                 backgroundColor: "#006400",
                 position: "relative",
-                // top: 180,
-                // left: 450,
-                // margin: 10,
+                margin: 5,
                 width: 130,
 
         },
@@ -93,19 +117,20 @@ export default class ChoosePlayer extends PureComponent {
 
           dinoView: {
             flexDirection: 'row',
-            marginLeft: "25%",
+            marginLeft: "33%",
             marginTop: "5%"
           },
 
           buttonView: {
-            marginTop: "5%",
+            marginTop: "2%",
             flexDirection: 'row',
-            marginLeft: "30%",
+            marginLeft: "35%",
           },
 
           ChoosePlayerText: {
             flexDirection: 'row',
-            marginLeft: "40%"
+            marginLeft: "45%",
+            marginTop: "2%"
           },
           
 
@@ -117,7 +142,13 @@ export default class ChoosePlayer extends PureComponent {
            
           greenDinoPressed: {
             borderWidth: 5,
-            borderColor: "green",
+            borderColor: "#006400",
             borderRadius: 15
           },
+          instructionText: {
+            fontSize: 15,
+            marginTop: 5,
+            marginBottom: 1
+
+          }
     });
