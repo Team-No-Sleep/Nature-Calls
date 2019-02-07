@@ -2,8 +2,10 @@ import React, { PureComponent } from "react";
 
 import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image, TouchableOpacity} from "react-native";
 
-import { Container, Header, Content, Button, Text } from 'native-base';
 
+import { Container, Header, Content, Button, Text , Icon, Fab, Card, CardItem, Body} from 'native-base';
+
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 
 
@@ -34,6 +36,7 @@ export default class ChoosePlayer extends PureComponent {
                 supportedOrientations={['landscape']}
             >
                 <ImageBackground style={this.props.containerStyle} source={require("../assets/backgrounds/landJungle.gif")}>
+                
                     <View style={styles.buttonView}>
                         <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
                             <Text>Ready Up</Text>
@@ -43,8 +46,6 @@ export default class ChoosePlayer extends PureComponent {
                             <Text>Leaderboard</Text>
                         </Button>
                     </View>
-
-                    
 
                     <View style={styles.ChoosePlayerText}><Text h1 style={{color: "#DAF7A6", fontWeight: "bold"}}>Choose Player</Text></View>
                 
@@ -58,6 +59,28 @@ export default class ChoosePlayer extends PureComponent {
                         <Image source={require("../assets/images/idlingDinoGreen.gif")} style={this.state.dino2Pressed ? styles.greenDinoPressed : null}/>
                     </TouchableOpacity>
                 </View>
+
+                <View style={{ flex: 1}}>
+                        <Fab
+                            active={this.state.active}
+                            direction="left"
+                            containerStyle={{ }}
+                            style={{ backgroundColor: '#5067FF' }}
+                            position="bottomRight"
+                            onPress={() => this.setState({ active: !this.state.active })}>
+                            <Icon name="share" />
+                        <Grid disable>
+                            <Col style={{ backgroundColor: '#635DB7', height: 135, width: 475, borderRadius: 13, marginRight: 400, marginBottom: 75 }}>
+                                <Text style={styles.instructionText}>- Press on the RIGHT side of the Screen to move RIGHT.</Text>
+                                <Text style={styles.instructionText}>- Press on the LEFT side of the Screen to move LEFT.</Text>
+                                <Text style={styles.instructionText}>- Tap anywhere to JUMP.</Text>
+                                <Text style={styles.instructionText}>- Double tap on EITHER side of the screen to move in THAT direction.</Text>
+                                <Text style={styles.instructionText}>- It is not meant to be EASY</Text>
+                            </Col>
+                            
+                        </Grid>
+                        </Fab>
+                    </View>
 
                 </ImageBackground>
             </Modal>
@@ -115,4 +138,8 @@ export default class ChoosePlayer extends PureComponent {
             borderColor: "green",
             borderRadius: 15
           },
+          instructionText: {
+            fontSize: 15,
+            marginTop: 5
+          }
     });
