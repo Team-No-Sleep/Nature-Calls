@@ -24,6 +24,7 @@ import Game from "../components/game";
 import Lobby from "../components/lobby";
 import ChoosePlayer from "../components/choosePlayer";
 import Leaderboard from "../components/leaderboard";
+import { getServerUrl } from "../utils/constants";
 
 
 
@@ -37,10 +38,11 @@ export default class HomeScreen extends React.Component {
     user: null,
     gameVisible: false,
     leaderboardVisible: false,
-    choosePlayerVisible: false
-    
-  } 
-
+    choosePlayerVisible: false,
+    selectedDino: null
+  };
+  socket =  SocketIOClient(getServerUrl());
+  
   toggleGame = gameVisible => {
     this.setState({
       gameVisible: gameVisible,
@@ -60,20 +62,6 @@ export default class HomeScreen extends React.Component {
     })
   }
 
-
-
-  // componentDidMount() {
-  //   console.log(this.props.navigation.state.params.data.user);
-  //   const user = this.props.navigation.state.params.data.user;
-  //   //this.props.navigation.setParams({ user });
-  //   const navigateAction = NavigationActions.setParams({
-  //     key: "id-1547683730508-2",
-  //     params: { user: user }
-  //   });
-  //   this.props.navigation.dispatch(navigateAction);
-  //   console.log("params set");
-  //   //this.props.navigation.goBack();
-  // }
   goHome = () => {
     const navigateAction = NavigationActions.navigate({
       routeName: "Auth"
@@ -83,35 +71,46 @@ export default class HomeScreen extends React.Component {
   }
   logout = () => {
     API.logout()
-    .then(res => this.goHome())
-    .catch(err => console.log(err));
+      .then(res => this.goHome())
+      .catch(err => console.log(err));
   }
+
+  selectDino(dino){
+    this.setState({selectedDino: dino});
+  }
+
   render() {
     return (
       <View style={styles.container}>
-      {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
 
-  {/* Lobby component or main menu? 
+        {/* Lobby component or main menu? 
         Maybe in the Lobby you can have the log in, log out, register features.*/}
-      <Lobby 
+        <Lobby
           onPlayGame={_ => this.toggleChoosePlayer(true)}
           onLeaderBoard={_ => this.toggleLeaderboard(true)}
           containerStyle={styles.container}
 
-       />
+        />
 
-       < ChoosePlayer
+        < ChoosePlayer
           onPlayGame={_ => this.toggleGame(true)}
           onLeaderBoard={_ => this.toggleLeaderboard(true)}
           containerStyle={styles.container}
           visible={this.state.choosePlayerVisible}
-       />
+          socket = {this.socket}
+          user = {this.props.navigation.state.params.data}
+          selectDino = {dino => this.selectDino(dino)}
+        />
 
-      <Game
+        <Game
           visible={this.state.gameVisible}
-          onClose={_ => this.toggleGame(false)} 
-          containerStyle={styles.container}    
-      />
+          onClose={_ => this.toggleGame(false)}
+          containerStyle={styles.container}
+          socket = {this.socket}
+          user = {this.props.navigation.state.params.data}
+          selectedDino = {this.state.selectedDino}
+        />
 
 
       </View>

@@ -11,7 +11,7 @@ import gameLogic from "./gameLogic";
 import renderOpponent from "./renderOpponent";
 import publishPlayer from "./publishPlayer";
 
-export default (playersFromServer) => [
+export default (playersFromServer, socket, user) => [
 	Input,
 	Controls,
 	Steering,
@@ -23,5 +23,5 @@ export default (playersFromServer) => [
 	Joust,
 	gameLogic,
 	renderOpponent(playersFromServer),
-	publishPlayer
+	publishPlayer(socket, user)
 ];

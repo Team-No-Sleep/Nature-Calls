@@ -295,7 +295,7 @@ export default (restart, player) => {
             world, //?
             { x: cy +20, y: 600 }, //starting position 
             color.dino1, //color chosen
-            player === "player1" ? true : false, //isPlayerCharacter change this to false if you want to test the movent of dino2
+            player === "mario" ? true : false, //isPlayerCharacter change this to false if you want to test the movent of dino2
              //!player1,isPlayerCharacter change this to false if you want to test the movent of dino2
             "mario" //characterId it lets us identify which character the user has chosen
             ),
@@ -303,7 +303,7 @@ export default (restart, player) => {
             world, //?
             { x: cy + 20, y: 300 }, //starting position
             color.dino2, // color chosen
-            player === "player2" ? true : false, //isPlayerCharacter change this to true if you want to test the movement of dino2
+            player === "dino2" ? true : false, //isPlayerCharacter change this to true if you want to test the movement of dino2
              //player1,isPlayerCharacter change this to true if you want to test the movement of dino2
             "dino2" //characterId it lets us identify which character the user has chosen
             ),

@@ -1,31 +1,84 @@
 import React, { PureComponent } from "react";
 
-import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image, TouchableOpacity} from "react-native";
+import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image, TouchableOpacity } from "react-native";
 
 import { Container, Header, Content, Button, Text } from 'native-base';
 
-
-
-
 export default class ChoosePlayer extends PureComponent {
-
-    state = {
-        dino1Pressed: false,
-        dino2Pressed: false
-    }
-    
-    dinoPressed = (dino) => {
-        if(dino) {
-            this.setState({dino1Pressed: true, dino2Pressed: false});
-        } else {
-            this.setState({dino2Pressed: true, dino1Pressed: false});
+    constructor(props) {
+        super(props);
+        this.state = {
+            dino1Pressed: false,
+            dino2Pressed: false,
+            dinoTaken: null
         }
+    }
+    componentDidMount() {
+        this.props.socket.on("dinoSelected", (dinoTaken) => {
+            console.log("dinoSelected", dinoTaken);
+            if(dinoTaken.user === this.props.user.local.username){
+                //ignore event about our selection
+                return;
+            }
+            let newState = {
+                dinoTaken: dinoTaken
+            };
+            if(dinoTaken.dino === "mario"){
+                newState["dino1Pressed"] = false;
+            }
+            if(dinoTaken.dino === "dino2"){
+                newState["dino2Pressed"] = false;
+            }
+            this.setState(newState);
+        });
+        this.props.socket.emit("registerPlayer", {user: this.props.user}, (err, data) => {
+            if(err){
+              console.log(err);
+            } else{
+              console.log("Your session is: ", data);
+              this.setState({dinoTaken: data.dinoTaken});
+            }
+          });
+    }
+
+    dinoPressed = (dino) => {
+        this.props.socket.emit("selectDino", {dino: dino, user: this.props.user}, (success)=>{
+            if(!success){
+                return;
+            }
+            if (dino === "mario") {
+                this.setState({ dino1Pressed: true, dino2Pressed: false });
+            } else if(dino === "dino2") {
+                this.setState({ dino2Pressed: true, dino1Pressed: false });
+            }
+            this.props.selectDino(dino);
+        });
     }
 
     render() {
 
-        
-        return(
+console.log("state");
+console.log(this.state);
+console.log(this.props.user);
+let marioDisabled = false;
+let dino2Disabled = false;
+let marioPlayerName = "Choose Player";
+let dino2PlayerName = "Choose Player";
+if(this.state.dinoTaken) {
+    if(this.state.dinoTaken.dino === "mario"){
+        marioDisabled = true;
+        marioPlayerName = this.state.dinoTaken.user;
+    } else if(this.state.dinoTaken.dino === "dino2"){
+        dino2Disabled = true;
+        dino2PlayerName = this.state.dinoTaken.user;
+    }
+}
+if(this.state.dino1Pressed === true) {
+    marioPlayerName = this.props.user.local.username;
+} else if(this.state.dino2Pressed === true){
+    dino2PlayerName = this.props.user.local.username;
+}
+        return (
             <Modal
                 transparent={false}
                 animationType="fade"
@@ -44,76 +97,82 @@ export default class ChoosePlayer extends PureComponent {
                         </Button>
                     </View>
 
-                    <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
+                    <View style={styles.ChoosePlayerText}><Text h1>{marioPlayerName}</Text></View>
 
-                <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
-                
-                <View style={styles.dinoView}>
+                    <View style={styles.ChoosePlayerText}><Text h1>{dino2PlayerName}</Text></View>
 
-                <TouchableOpacity onPress={() => this.dinoPressed(true)}>
-                        <Image style={this.state.dino1Pressed ? styles.redDinoPressed : null} source={require("../assets/images/idlingDinoRed.gif")}/>
-                    </TouchableOpacity>
+                    <View style={styles.dinoView}>
 
-                    <TouchableOpacity onPress={() => this.dinoPressed(false)}>
-                        <Image source={require("../assets/images/idlingDinoGreen.gif")} style={this.state.dino2Pressed ? styles.greenDinoPressed : null}/>
-                    </TouchableOpacity>
-                </View>
+                        <TouchableOpacity 
+                            onPress={() => this.dinoPressed("mario")}
+                            disabled={marioDisabled}
+                            >
+                            <Image style={this.state.dino1Pressed ? styles.redDinoPressed : null} source={require("../assets/images/idlingDinoRed.gif")} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity 
+                            onPress={() => this.dinoPressed("dino2")}
+                            disabled={dino2Disabled}
+                            >
+                            <Image source={require("../assets/images/idlingDinoGreen.gif")} style={this.state.dino2Pressed ? styles.greenDinoPressed : null} />
+                        </TouchableOpacity>
+                    </View>
 
                 </ImageBackground>
             </Modal>
 
         )
     }
-    };
+};
 
-          
-    
-    const styles = StyleSheet.create({
 
-        button: {
-                justifyContent: "center",
-                alignSelf: "stretch",
-                textAlignVertical: "center",
-                color: "#006400",
-                backgroundColor: "#006400",
-                position: "relative",
-                // top: 180,
-                // left: 450,
-                // margin: 10,
-                width: 130,
 
-        },
-        container: {
-            flex: 1,
-          },
+const styles = StyleSheet.create({
 
-          dinoView: {
-            flexDirection: 'row',
-            marginLeft: "25%",
-            marginTop: "5%"
-          },
+    button: {
+        justifyContent: "center",
+        alignSelf: "stretch",
+        textAlignVertical: "center",
+        color: "#006400",
+        backgroundColor: "#006400",
+        position: "relative",
+        // top: 180,
+        // left: 450,
+        // margin: 10,
+        width: 130,
 
-          buttonView: {
-            marginTop: "5%",
-            flexDirection: 'row',
-            marginLeft: "30%",
-          },
+    },
+    container: {
+        flex: 1,
+    },
 
-          ChoosePlayerText: {
-            flexDirection: 'row',
-            marginLeft: "40%"
-          },
-          
+    dinoView: {
+        flexDirection: 'row',
+        marginLeft: "25%",
+        marginTop: "5%"
+    },
 
-          redDinoPressed: {
-            borderWidth: 5,
-            borderColor: "red",
-            borderRadius: 15
-          },
-           
-          greenDinoPressed: {
-            borderWidth: 5,
-            borderColor: "green",
-            borderRadius: 15
-          },
-    });
+    buttonView: {
+        marginTop: "5%",
+        flexDirection: 'row',
+        marginLeft: "30%",
+    },
+
+    ChoosePlayerText: {
+        flexDirection: 'row',
+        marginLeft: "40%"
+    },
+
+
+    redDinoPressed: {
+        borderWidth: 5,
+        borderColor: "red",
+        borderRadius: 15
+    },
+
+    greenDinoPressed: {
+        borderWidth: 5,
+        borderColor: "green",
+        borderRadius: 15
+    },
+});
