@@ -60,6 +60,12 @@ export default class HomeScreen extends React.Component {
     })
   }
 
+  toggleLobby = lobbyVisible => {
+    this.setState({
+      lobbyVisible
+    })
+  }
+
 
 
   // componentDidMount() {
@@ -107,11 +113,21 @@ export default class HomeScreen extends React.Component {
           visible={this.state.choosePlayerVisible}
        />
 
+
+
       <Game
           visible={this.state.gameVisible}
           onClose={_ => this.toggleGame(false)} 
           containerStyle={styles.container}    
       />
+
+      <Leaderboard
+       visible={this.state.leaderboardVisible}
+       onClose={_ => this.toggleGame(false)} 
+       containerStyle={styles.container} 
+      />
+
+
 
 
       </View>

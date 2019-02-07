@@ -5,6 +5,10 @@ import SocketIOClient from 'socket.io-client';
 import LevelOne from "../entities/level-1";
 import Systems from "../systems";
 import GameOver from "../components/gameOver";
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings([
+    'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?'
+]);
 
 
 export default class Game extends PureComponent {
