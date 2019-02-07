@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 
 import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image, TouchableOpacity} from "react-native";
 
-import { Container, Content, Button, Text, List, ListItem } from 'native-base';
+import { Container, Header, Content, Button, Text, List, ListItem, Left } from 'native-base';
 
 import API from '../utils/API';
 
@@ -50,9 +50,17 @@ export default class LeaderBoard extends PureComponent {
                 <View style={styles.ChoosePlayerText}><Text h1>Leaderboard</Text></View>
                 
                 <Container>
-                    <Content>
+                <Header itemHeader first>
                     <List style={styles.list}>
 
+                        <Text>PLAYER</Text>
+                    </List>
+                    <List style={styles.list2}>
+                        <Text>SCORE</Text>
+                    </List>
+                </Header>
+                    <Content>
+                    {/* <List style={styles.list}> */}
                         <ListItem>
                             <Text>Username {"\t"}  Wins {"\t"} Rolls Delivered</Text>
                         </ListItem>
@@ -77,6 +85,7 @@ export default class LeaderBoard extends PureComponent {
                         </ListItem>
                          */}
                     </List>
+                    {/* </List> */}
                     </Content>
                 </Container>
 
@@ -114,6 +123,12 @@ export default class LeaderBoard extends PureComponent {
             flex: 1,
           },
 
+          ChoosePlayerText: {
+            marginTop: "5%",
+            marginBottom: "2%",
+            flexDirection: 'row',
+            marginLeft: "45%",
+          },
 
           buttonView: {
             marginTop: "2%",
@@ -122,15 +137,14 @@ export default class LeaderBoard extends PureComponent {
             marginLeft: "43%",
           },
 
-          ChoosePlayerText: {
-            marginTop: "5%",
-            marginBottom: "2%",
-            flexDirection: 'row',
-            marginLeft: "45%",
+          list: {
+            marginRight:"75%",
           },
 
-          list: {
-            
+          list2: {
+            marginLeft: "-25%",
           }
+
+
           
     });
