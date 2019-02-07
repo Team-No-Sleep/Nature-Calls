@@ -56,6 +56,7 @@ export class Timer extends PureComponent {
     }
     render() {
       return (
+		  //I've set a tap on the timer to start it. Where the heck do i pass it to instead? Homescreen? ChoosePlayer?
 		<Text style = {[styles.timer]} onPress={this.startTimer}>
         {this.state.time.m}: {this.state.time.s}
         </Text>
