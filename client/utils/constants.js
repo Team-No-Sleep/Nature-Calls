@@ -9,7 +9,6 @@ module.exports = {
 		let env = Constants.manifest.releaseChannel;
 		if(!env || env === "dev") {
 			return "http://192.168.1.232:3001";
-
 		}
 		if(env === "default") {
 			return Constants.manifest.extra.serverUrl;

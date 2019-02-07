@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 
-import { StyleSheet, Modal, Alert, ImageBackground,View, StatusBar } from "react-native";
+import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar } from "react-native";
 
 import { Container, Header, Content, Button, Text } from 'native-base';
 

@@ -3,6 +3,8 @@ import {distance, position} from "../utils";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 import ToiletPaper from "../components/toiletPaper";
 import { Dimensions } from "react-native";
+import Mario from "../components/mario";
+
 
 
 const { width, height } = Dimensions.get("window");
@@ -62,6 +64,11 @@ const win = (dispatch, entities) => {
     // console.log(dino2.score);
     if (mario.score === 3) {
          dispatch({ type: "dino1-wins" });
+
+//          db.users.update( 
+// {user: "socketid1??"},
+//  { $inc: { wins: 1 }},
+// )
     }
 
     if(dino2.score === 3) {
@@ -72,8 +79,58 @@ const win = (dispatch, entities) => {
 
 }
 
+const fall = (entities) => {
+    //console.log(entities.mario.body.position.x >= height)
+    let mario = entities.mario;
+    let dino2 = entities.dino2;
+    let tpDropped;
+
+    if (mario || dino2) {
+        
+        if (mario.body.position.x >= height) {
+            let score = mario.score;
+                if (mario["power-ups"].holding) {
+                    tpDropped = true;
+                }
+                let marioColor = mario.color;
+                let isPlayerCharacter = mario.isPlayerCharacter;
+                let characterId = mario.characterId;
+                delete entities.mario
+                entities.mario = Mario(entities.physics.world, { x: 250, y: 600 }, marioColor, isPlayerCharacter, characterId);
+                entities.mario.score = score;
+
+            }
+        
+
+        if (dino2.body.position.x >= height) {
+            let score = dino2.score;
+                if (dino2["power-ups"].holding) {
+                    tpDropped = true;
+                } 
+                let dino2Color = dino2.color;
+                let isPlayerCharacter = dino2.isPlayerCharacter;
+                let characterId = dino2.characterId;
+                delete entities.dino2
+                entities.dino2 = Mario(entities.physics.world, { x: 250, y: 600 }, dino2Color, isPlayerCharacter, characterId);
+                entities.dino2.score = score;
+
+            }
+
+        if (tpDropped) {
+        
+            entities.toiletPaper = ToiletPaper( {x: cy + 125, y: cy} );
+        }
+    }   
+}
+
+        
+
+    
+
+
 export default (entities, {events, dispatch}) => {
     score(entities);
     win(dispatch, entities);
+    fall(entities)
     return entities;
 };

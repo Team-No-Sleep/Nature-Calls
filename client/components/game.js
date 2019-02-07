@@ -5,6 +5,10 @@ import SocketIOClient from 'socket.io-client';
 import LevelOne from "../entities/level-1";
 import Systems from "../systems";
 import GameOver from "../components/gameOver";
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings([
+    'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?'
+]);
 
 
 export default class Game extends PureComponent {
@@ -13,19 +17,33 @@ export default class Game extends PureComponent {
     this.socket = null;
     this.playerDataFromServer = {};
     this.state = {
+      player: "player2",
       running: false,
       gameOver: false,
-      player1Win: false
+      player1Win: false,
+      player1: true
     };
   }
   componentDidMount() {
     this.socket = SocketIOClient("http://localhost:3001");
+    //this.socket.connect();
+    // this.socket.on("connect" , data => {
+    //   this.socket.emit("connect");
+    //   console.log(data);
+    //   if(this.state.running){
+    //     // this.playerDataFromServer[data.user] = data.position;
+    //   }
+    // });
     this.socket.on("position" , data => {
+      console.log(data);
       if(this.state.running){
         this.playerDataFromServer[data.position.dino] = data.position;
+        this.playerDataFromServer[data.position.user] = data.user;
       }
+      this.setState ({
+        player: data.user
+      })
     });
-
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.visible) {
@@ -101,7 +119,8 @@ export default class Game extends PureComponent {
             ref={"engine"}
             // style={styles.game}
             systems={Systems(this.playerDataFromServer)}
-            entities={LevelOne()}
+            entities={LevelOne(null, this.state.player)}
+            //entities={LevelOne(null, this.state.player1)}
             touchProcessor={DefaultTouchProcessor({
               triggerPressEventBefore: 150,
               triggerLongPressEventAfter: 151
