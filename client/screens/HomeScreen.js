@@ -43,16 +43,23 @@ export default class HomeScreen extends React.Component {
   };
   socket =  SocketIOClient(getServerUrl());
   
-  toggleGame = gameVisible => {
+  toggleGame = () => {
     this.setState({
-      gameVisible: gameVisible,
-      choosePlayerVisible: !gameVisible
+      gameVisible: true,
+      choosePlayerVisible: false
     });
   };
 
+  returnToLobby = () => {
+    this.setState({
+      gameVisible: false,
+      
+    })
+  }
+
   toggleLeaderboard = leaderboardVisible => {
     this.setState({
-      leaderboardVisible
+      leaderboardVisible: leaderboardVisible
     })
   }
 
@@ -62,6 +69,35 @@ export default class HomeScreen extends React.Component {
     })
   }
 
+  toggleLobby = lobbyVisible => {
+    this.setState({
+      lobbyVisible
+      
+    })
+  }
+
+  toggleLeaderboardFromChoose = leaderboardVisible => {
+    this.setState({
+      leaderboardVisible: leaderboardVisible,
+      choosePlayerVisible: !leaderboardVisible
+
+    })
+  }
+
+
+
+  // componentDidMount() {
+  //   console.log(this.props.navigation.state.params.data.user);
+  //   const user = this.props.navigation.state.params.data.user;
+  //   //this.props.navigation.setParams({ user });
+  //   const navigateAction = NavigationActions.setParams({
+  //     key: "id-1547683730508-2",
+  //     params: { user: user }
+  //   });
+  //   this.props.navigation.dispatch(navigateAction);
+  //   console.log("params set");
+  //   //this.props.navigation.goBack();
+  // }
   goHome = () => {
     const navigateAction = NavigationActions.navigate({
       routeName: "Auth"
@@ -70,6 +106,7 @@ export default class HomeScreen extends React.Component {
     //this.props.navigation.goBack();
   }
   logout = () => {
+    console.log ("logout press");
     API.logout()
       .then(res => this.goHome())
       .catch(err => console.log(err));
@@ -90,6 +127,7 @@ export default class HomeScreen extends React.Component {
           onPlayGame={_ => this.toggleChoosePlayer(true)}
           onLeaderBoard={_ => this.toggleLeaderboard(true)}
           containerStyle={styles.container}
+          onLogOut={_ => this.logout()}
 
         />
 
@@ -101,6 +139,7 @@ export default class HomeScreen extends React.Component {
           socket = {this.socket}
           user = {this.props.navigation.state.params.data}
           selectDino = {dino => this.selectDino(dino)}
+          onLogOut={_ => this.logout()}
         />
 
         <Game
@@ -111,6 +150,14 @@ export default class HomeScreen extends React.Component {
           user = {this.props.navigation.state.params.data}
           selectedDino = {this.state.selectedDino}
         />
+
+      <Leaderboard
+       visible={this.state.leaderboardVisible}
+       onClose={_ => this.toggleLeaderboard(false)} 
+       containerStyle={styles.container} 
+      />
+
+
 
 
       </View>

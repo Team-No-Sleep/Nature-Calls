@@ -2,7 +2,12 @@ import React, { PureComponent } from "react";
 
 import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image, TouchableOpacity } from "react-native";
 
-import { Container, Header, Content, Button, Text } from 'native-base';
+
+import { Container, Header, Content, Button, Text, Icon, Fab, Card, CardItem, Body } from 'native-base';
+
+import { Col, Row, Grid } from 'react-native-easy-grid';
+
+
 
 export default class ChoosePlayer extends PureComponent {
     constructor(props) {
@@ -16,39 +21,39 @@ export default class ChoosePlayer extends PureComponent {
     componentDidMount() {
         this.props.socket.on("dinoSelected", (dinoTaken) => {
             console.log("dinoSelected", dinoTaken);
-            if(dinoTaken.user === this.props.user.local.username){
+            if (dinoTaken.user === this.props.user.local.username) {
                 //ignore event about our selection
                 return;
             }
             let newState = {
                 dinoTaken: dinoTaken
             };
-            if(dinoTaken.dino === "mario"){
+            if (dinoTaken.dino === "mario") {
                 newState["dino1Pressed"] = false;
             }
-            if(dinoTaken.dino === "dino2"){
+            if (dinoTaken.dino === "dino2") {
                 newState["dino2Pressed"] = false;
             }
             this.setState(newState);
         });
-        this.props.socket.emit("registerPlayer", {user: this.props.user}, (err, data) => {
-            if(err){
-              console.log(err);
-            } else{
-              console.log("Your session is: ", data);
-              this.setState({dinoTaken: data.dinoTaken});
+        this.props.socket.emit("registerPlayer", { user: this.props.user }, (err, data) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Your session is: ", data);
+                this.setState({ dinoTaken: data.dinoTaken });
             }
-          });
+        });
     }
 
     dinoPressed = (dino) => {
-        this.props.socket.emit("selectDino", {dino: dino, user: this.props.user}, (success)=>{
-            if(!success){
+        this.props.socket.emit("selectDino", { dino: dino, user: this.props.user }, (success) => {
+            if (!success) {
                 return;
             }
             if (dino === "mario") {
                 this.setState({ dino1Pressed: true, dino2Pressed: false });
-            } else if(dino === "dino2") {
+            } else if (dino === "dino2") {
                 this.setState({ dino2Pressed: true, dino1Pressed: false });
             }
             this.props.selectDino(dino);
@@ -57,27 +62,27 @@ export default class ChoosePlayer extends PureComponent {
 
     render() {
 
-console.log("state");
-console.log(this.state);
-console.log(this.props.user);
-let marioDisabled = false;
-let dino2Disabled = false;
-let marioPlayerName = "Choose Player";
-let dino2PlayerName = "Choose Player";
-if(this.state.dinoTaken) {
-    if(this.state.dinoTaken.dino === "mario"){
-        marioDisabled = true;
-        marioPlayerName = this.state.dinoTaken.user;
-    } else if(this.state.dinoTaken.dino === "dino2"){
-        dino2Disabled = true;
-        dino2PlayerName = this.state.dinoTaken.user;
-    }
-}
-if(this.state.dino1Pressed === true) {
-    marioPlayerName = this.props.user.local.username;
-} else if(this.state.dino2Pressed === true){
-    dino2PlayerName = this.props.user.local.username;
-}
+        console.log("state");
+        console.log(this.state);
+        console.log(this.props.user);
+        let marioDisabled = false;
+        let dino2Disabled = false;
+        let marioPlayerName = "Choose Player";
+        let dino2PlayerName = "Choose Player";
+        if (this.state.dinoTaken) {
+            if (this.state.dinoTaken.dino === "mario") {
+                marioDisabled = true;
+                marioPlayerName = this.state.dinoTaken.user;
+            } else if (this.state.dinoTaken.dino === "dino2") {
+                dino2Disabled = true;
+                dino2PlayerName = this.state.dinoTaken.user;
+            }
+        }
+        if (this.state.dino1Pressed === true) {
+            marioPlayerName = this.props.user.local.username;
+        } else if (this.state.dino2Pressed === true) {
+            dino2PlayerName = this.props.user.local.username;
+        }
         return (
             <Modal
                 transparent={false}
@@ -87,6 +92,7 @@ if(this.state.dino1Pressed === true) {
                 supportedOrientations={['landscape']}
             >
                 <ImageBackground style={this.props.containerStyle} source={require("../assets/backgrounds/landJungle.gif")}>
+
                     <View style={styles.buttonView}>
                         <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
                             <Text>Ready Up</Text>
@@ -95,27 +101,62 @@ if(this.state.dino1Pressed === true) {
                         <Button rounded success style={styles.button} onPress={this.props.onLeaderBoard}>
                             <Text>Leaderboard</Text>
                         </Button>
+
+                        <Button rounded success style={styles.button} onPress={this.props.onLogOut}>
+                            <Text>Log Out</Text>
+                        </Button>
                     </View>
 
-                    <View style={styles.ChoosePlayerText}><Text h1>{marioPlayerName}</Text></View>
-
-                    <View style={styles.ChoosePlayerText}><Text h1>{dino2PlayerName}</Text></View>
+                    <View style={styles.ChoosePlayerText}>
+                        <Text h1 style={{ color: "black", fontWeight: "bold", marginRight: "7%" }}>{marioPlayerName}</Text>
+                        <Text h1 style={{ color: "black", fontWeight: "bold" }}>{dino2PlayerName}</Text>
+                    </View>
 
                     <View style={styles.dinoView}>
 
-                        <TouchableOpacity 
-                            onPress={() => this.dinoPressed("mario")}
-                            disabled={marioDisabled}
-                            >
-                            <Image style={this.state.dino1Pressed ? styles.redDinoPressed : null} source={require("../assets/images/idlingDinoRed.gif")} />
-                        </TouchableOpacity>
+                        <View style={styles.dinoView}>
 
-                        <TouchableOpacity 
-                            onPress={() => this.dinoPressed("dino2")}
-                            disabled={dino2Disabled}
+                            <TouchableOpacity
+                                onPress={() => this.dinoPressed("mario")}
+                                disabled={marioDisabled}
                             >
-                            <Image source={require("../assets/images/idlingDinoGreen.gif")} style={this.state.dino2Pressed ? styles.greenDinoPressed : null} />
-                        </TouchableOpacity>
+                                <Image style={this.state.dino1Pressed ? styles.redDinoPressed : null} source={require("../assets/images/idlingDinoRed.gif")} />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                onPress={() => this.dinoPressed("dino2")}
+                                disabled={dino2Disabled}
+                            >
+                                <Image source={require("../assets/images/idlingDinoGreen.gif")} style={this.state.dino2Pressed ? styles.greenDinoPressed : null} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    {/* This is the start to the controls button */}
+                    <View style={{ flex: 1 }}>
+                        <Fab
+                            active={this.state.active}
+                            direction="left"
+                            containerStyle={{}}
+                            style={{ backgroundColor: 'black' }}
+                            position="bottomRight"
+                            onPress={() => this.setState({ active: !this.state.active })}>
+
+                            <Icon name="logo-game-controller-a" />
+
+                            <Grid disable>
+                                <Col style={{
+                                    backgroundColor: '#006400', height: 145, width: 455, borderRadius: 13, marginRight: 400,
+                                    marginBottom: 75, borderWidth: 2, borderColor: "black"
+                                }}>
+                                    <Text style={styles.instructionText}>- Press on the RIGHT side of the Screen to move RIGHT.</Text>
+                                    <Text style={styles.instructionText}>- Press on the LEFT side of the Screen to move LEFT.</Text>
+                                    <Text style={styles.instructionText}>- Tap anywhere to JUMP.</Text>
+                                    <Text style={styles.instructionText}>- Double tap on EITHER side of the screen to JUMP in THAT direction after tapping to JUMP.</Text>
+                                    <Text style={styles.instructionText}>- It is not meant to be EASY</Text>
+                                </Col>
+
+                            </Grid>
+                        </Fab>
                     </View>
 
                 </ImageBackground>
@@ -136,9 +177,7 @@ const styles = StyleSheet.create({
         color: "#006400",
         backgroundColor: "#006400",
         position: "relative",
-        // top: 180,
-        // left: 450,
-        // margin: 10,
+        margin: 5,
         width: 130,
 
     },
@@ -148,19 +187,20 @@ const styles = StyleSheet.create({
 
     dinoView: {
         flexDirection: 'row',
-        marginLeft: "25%",
-        marginTop: "5%"
+        marginLeft: "30%"
+
     },
 
     buttonView: {
         marginTop: "5%",
         flexDirection: 'row',
-        marginLeft: "30%",
+        marginLeft: "25%",
     },
 
     ChoosePlayerText: {
         flexDirection: 'row',
-        marginLeft: "40%"
+        marginLeft: "32%",
+        marginTop: "2%"
     },
 
 
@@ -172,7 +212,13 @@ const styles = StyleSheet.create({
 
     greenDinoPressed: {
         borderWidth: 5,
-        borderColor: "green",
+        borderColor: "#006400",
         borderRadius: 15
     },
+    instructionText: {
+        fontSize: 15,
+        marginTop: 5,
+        marginBottom: 1
+
+    }
 });

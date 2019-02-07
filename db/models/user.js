@@ -14,7 +14,11 @@ const userSchema = new Schema({
 	google: {
 		googleId: { type: String, required: false }
 	},
-	photos: []
+	photos: [],
+
+	userWins: 0,
+
+	userScores: 0
 	// local: {
 	// 	email: { type: String, unique: true },
 	// 	password: { type: String }

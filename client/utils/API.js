@@ -13,5 +13,10 @@ export default{
     },
     registerUser: (userObj) => {
         return axios.post(`${getServerUrl()}/auth/signup`,userObj)
+    },
+
+    getLeaderBoard: () => {
+        console.log("SUH")
+        return axios.get(`${getServerUrl()}/auth/leaderBoard`);
     }
 }
