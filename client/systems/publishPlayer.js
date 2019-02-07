@@ -41,7 +41,7 @@ export default (socket, user) => {
             throttle(() => {
 
                 socket.emit('position', {
-                    hasTp: chosenCharacter["power-ups"].holding,
+                    action: chosenCharacter.action,
                     position: chosenCharacter.body.position,
                     dino: chosenCharacter.characterId
                 }); // emits chosen character x and y coordinates the only dino that moves at the moment

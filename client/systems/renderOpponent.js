@@ -42,6 +42,7 @@ export default (playersFromServer)=>{
             // chosenUpdate.position.y = scaleCoordinates(chosenUpdate.position.y, chosenUpdate.screenWidth, currentScreenWidth);
             // chosenUpdate.position.x = scaleCoordinates(chosenUpdate.position.x, chosenUpdate.screenHeight, currentScreenHeight);
             Matter.Body.setPosition(chosenCharacter.body, chosenUpdate.position);
+            chosenCharacter.action = chosenUpdate.action;
             //delete playersFromServer[chosenCharacter.characterId];
         }
 
