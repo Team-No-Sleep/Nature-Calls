@@ -30,31 +30,64 @@ const sessions = {}//user sessions for socket.io
 app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/server/index.html');
 });
+//generate session ids for socket
+function generateId(len) {
+	let result = "";
+	for (let i = 0; i < len; i++) {
+		result += Math.floor(Math.random() * 10);
+	}
+	return result;
+}
+
+function isDinoSelected(dino){
+	for(let key in sessions){
+		if(sessions[key].dino === dino){
+			return sessions[key];
+		}
+	}
+	return null;
+}
 
 socketio.on('connection', function (socket) {
 	//console.log(socketio.sockets);
-	let numberOfPlayers = socketio.engine.clientsCount;
-	console.log(socketio.engine.clientsCount);
+
+	console.log("CONNECTED USERS: ", socketio.engine.clientsCount);
 	console.log(socket.id);
 	socket.on('update', () => socketio.emit('update'));
-	// socket.on('isPlayer', (data) =>{
-	// 	socketio.emit('');
-	// });
+
 	//sending dino positioning through socket
 	socket.on('position', (data) => {
-		socketio.emit('position',{
-			position: data,
-			user: numberOfPlayers === 1 ? "player1" : "player2" 
-		});
-		// console.log('Greetings from RN app', data);
+		//let numberOfPlayers = socketio.engine.clientsCount;
+		socketio.emit('position', data);
+		//console.log(data);
 	});
-	// socket.on("connect", (data) => {
-	// 	socketio.emit("connect", {
-	// 		user: numberOfPlayers === 1 ? "player1" : "player2" 
-	// 	});
-	// 	console.log(data);
-	// });
-	
+	socket.on("registerPlayer", (data, callback) => {
+		console.log(data);
+		sessions[data.user.local.username] = {
+			user: data.user.local.username,
+			dino: null
+		};
+		let marioSelected = isDinoSelected("mario");
+		let dino2Selected = isDinoSelected("dino2");
+		console.log(marioSelected);
+		console.log(dino2Selected);
+		callback(null, {
+			success: true,
+			dinoTaken:  (marioSelected) ? marioSelected : dino2Selected 
+		});
+	});
+	socket.on("selectDino", (data, callback) => {
+		console.log(data);
+		if(isDinoSelected(data.dino)){
+			callback(false);
+		}
+		sessions[data.user.local.username].dino = data.dino;
+		socketio.emit("dinoSelected", {
+			dino: data.dino,
+			user: data.user.local.username
+		});
+		callback(true);
+	});
 });
 
 // ===== Middleware ====

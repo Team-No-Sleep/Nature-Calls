@@ -1,56 +1,44 @@
 import Matter from "matter-js";
-import {distance, position} from "../utils";
+import { distance, position } from "../utils";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 import ToiletPaper from "../components/toiletPaper";
 import { Dimensions } from "react-native";
 import Mario from "../components/mario";
-
-
 
 const { width, height } = Dimensions.get("window");
 const cx = width / 2;
 const cy = height / 2;
 
 const score = entities => {
-
     let mario = entities.mario;
     let dino2 = entities.dino2;
-    const marioLocation = mario.body.position;
-    const dino2Location = dino2.body.position;
+    let chosenCharacter = null;
+    let chosenPotty = null;
+    // console.log(mario.isPlayerCharacter);
+    if (mario.isPlayerCharacter === true) {
+        chosenCharacter = mario;
+        chosenPotty = entities.outhouse2.position;
+    } else if (dino2.isPlayerCharacter === true) {
+        chosenCharacter = dino2;
+        chosenPotty = entities.outhouse.position;
+    }
     //console.log(mario["power-ups"].holding)
 
-    if (mario || dino2) {
-
-        
-        let leftPottyLocation = entities.outhouse2.position;
-        let rightPottyLocation = entities.outhouse.position
+    if (chosenCharacter) {
+const chosenCharacterLocation = chosenCharacter.body.position;
         let scored;
 
-
-        if (mario["power-ups"].holding && distance(marioLocation, leftPottyLocation) < 32) {
+        if (chosenCharacter["power-ups"].holding && distance(chosenCharacterLocation, chosenPotty) < 32) {
             // if (mario["power-ups"].holding ) {
-            console.log("Mario scores!");
-            mario["power-ups"].holding = false;
-            console.log(mario["power-ups"].holding)
-
-            console.log(mario.actions.idlindg);
-            mario.score++;
-            console.log(mario.score)
-            console.log(dino2.score)
-            scored = true; 
-
-
-        } 
-        if (dino2["power-ups"].holding && distance(dino2Location, rightPottyLocation) < 32) {
-            console.log("Dino2 scores!");
-            dino2["power-ups"].holding = false;
-            console.log(dino2["power-ups"].holding)
-
-            dino2.score++;
+            console.log(chosenCharacter, "scores!");
+            chosenCharacter["power-ups"].holding = false;
+            console.log(chosenCharacter["power-ups"].holding)
+            chosenCharacter.score++;
+            console.log(chosenCharacter.score);
             scored = true;
         }
         if (scored) {
-            entities.toiletPaper = ToiletPaper( {x: cy + 125, y: cy} )
+            entities.toiletPaper = ToiletPaper({ x: cy + 125, y: cy })
         }
 
     }
@@ -59,76 +47,54 @@ const score = entities => {
 const win = (dispatch, entities) => {
     let mario = entities.mario;
     let dino2 = entities.dino2;
-
-     //console.log(mario.score);
-    // console.log(dino2.score);
-    if (mario.score === 3) {
-         dispatch({ type: "dino1-wins" });
-
-//          db.users.update( 
-// {user: "socketid1??"},
-//  { $inc: { wins: 1 }},
-// )
+    let chosenCharacter = null;
+    if (mario.isPlayerCharacter === true) {
+        chosenCharacter = mario;
+    } else if (dino2.isPlayerCharacter === true) {
+        chosenCharacter = dino2;
     }
-
-    if(dino2.score === 3) {
-        dispatch({type: "dino2-wins"});
+    if (chosenCharacter.score === 3) {
+        dispatch({ type: `${chosenCharacter.characterId}-wins`});
     }
-
-   
-
 }
 
 const fall = (entities) => {
     //console.log(entities.mario.body.position.x >= height)
     let mario = entities.mario;
     let dino2 = entities.dino2;
+    let chosenCharacter = null;
+    if (mario.isPlayerCharacter === true) {
+        chosenCharacter = mario;
+    } else if (dino2.isPlayerCharacter === true) {
+        chosenCharacter = dino2;
+    }
+    // let mario = entities.mario;
+    // let dino2 = entities.dino2;
     let tpDropped;
 
-    if (mario || dino2) {
-        
-        if (mario.body.position.x >= height) {
-            let score = mario.score;
-                if (mario["power-ups"].holding) {
-                    tpDropped = true;
-                }
-                let marioColor = mario.color;
-                let isPlayerCharacter = mario.isPlayerCharacter;
-                let characterId = mario.characterId;
-                delete entities.mario
-                entities.mario = Mario(entities.physics.world, { x: 250, y: 600 }, marioColor, isPlayerCharacter, characterId);
-                entities.mario.score = score;
+    if (chosenCharacter) {
 
+        if (chosenCharacter.body.position.x >= height) {
+            let score = chosenCharacter.score;
+            if (chosenCharacter["power-ups"].holding) {
+                tpDropped = true;
             }
-        
-
-        if (dino2.body.position.x >= height) {
-            let score = dino2.score;
-                if (dino2["power-ups"].holding) {
-                    tpDropped = true;
-                } 
-                let dino2Color = dino2.color;
-                let isPlayerCharacter = dino2.isPlayerCharacter;
-                let characterId = dino2.characterId;
-                delete entities.dino2
-                entities.dino2 = Mario(entities.physics.world, { x: 250, y: 600 }, dino2Color, isPlayerCharacter, characterId);
-                entities.dino2.score = score;
-
-            }
+            let marioColor = chosenCharacter.color;
+            let isPlayerCharacter = chosenCharacter.isPlayerCharacter;
+            let characterId = chosenCharacter.characterId;
+            delete entities[characterId];
+            entities[characterId] = Mario(entities.physics.world, { x: 250, y: 600 }, marioColor, isPlayerCharacter, characterId);
+            entities[characterId].score = score;
+        }
 
         if (tpDropped) {
-        
-            entities.toiletPaper = ToiletPaper( {x: cy + 125, y: cy} );
+
+            entities.toiletPaper = ToiletPaper({ x: cy + 125, y: cy });
         }
-    }   
+    }
 }
 
-        
-
-    
-
-
-export default (entities, {events, dispatch}) => {
+export default (entities, { events, dispatch }) => {
     score(entities);
     win(dispatch, entities);
     fall(entities)

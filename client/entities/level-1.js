@@ -10,6 +10,7 @@ import Barrier from "../components/barrier";
 import Mario from "../components/mario";
 import ToiletPaper from "../components/toiletPaper";
 import Outhouse from "../components/outhouse";
+import Timer from "../components/timer";
 
 
 
@@ -35,6 +36,13 @@ export default (restart, player) => {
 
     return {
         physics: { engine: engine, world: world },
+
+        timer: Timer(
+            {
+                x: cy - 170, 
+                y: offsetY + 408
+            },
+        ),
 
         // Tilemapping for the top level of the floor platform / FLOOR
         floorLevelOne: Platform(
@@ -282,12 +290,14 @@ export default (restart, player) => {
                 x: cy - 145, 
                 y: offsetY + 115
             },
+            color.red
         ),
         outhouse2: Outhouse( 
             {
                 x: cy - 145, 
                 y: offsetY + 710,
             },
+            color.green
         ),
         
         //Spawns at the bottom
@@ -295,7 +305,7 @@ export default (restart, player) => {
             world, //?
             { x: cy +20, y: 600 }, //starting position 
             color.dino1, //color chosen
-            player === "player1" ? true : false, //isPlayerCharacter change this to false if you want to test the movent of dino2
+            player === "mario" ? true : false, //isPlayerCharacter change this to false if you want to test the movent of dino2
              //!player1,isPlayerCharacter change this to false if you want to test the movent of dino2
             "mario" //characterId it lets us identify which character the user has chosen
             ),
@@ -303,7 +313,7 @@ export default (restart, player) => {
             world, //?
             { x: cy + 20, y: 300 }, //starting position
             color.dino2, // color chosen
-            player === "player2" ? true : false, //isPlayerCharacter change this to true if you want to test the movement of dino2
+            player === "dino2" ? true : false, //isPlayerCharacter change this to true if you want to test the movement of dino2
              //player1,isPlayerCharacter change this to true if you want to test the movement of dino2
             "dino2" //characterId it lets us identify which character the user has chosen
             ),

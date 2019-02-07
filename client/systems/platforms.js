@@ -55,67 +55,67 @@ export default (entities, { events }) => {
 	let mario = entities.mario;
 	let dino2 = entities.dino2;
 	let chosenCharacter;
-	if(mario.isPlayerCharacter === true){
+	if (mario.isPlayerCharacter === true) {
 		chosenCharacter = mario;
-	} else if(dino2.isPlayerCharacter === true) {
+	} else if (dino2.isPlayerCharacter === true) {
 		chosenCharacter = dino2;
 	}
-	// TODO: Make better data structure for holding which characters are alive
-	let characters = [chosenCharacter];
-		for (let char of characters) {
-			if (char) {
-				if (char.controls.mode !== "platform") return entities;
+	// TODO: Make better data structure for holding which chosenCharacter are alive
+	
 
-				Matter.Sleeping.set(char.body, false);
-				char.body.collisionFilter.mask = collisionCategories.barrier | collisionCategories.platform;
+	if (chosenCharacter) {
+		if (chosenCharacter.controls.mode !== "platform") return entities;
 
-				let platforms = filter(entities, "platform");
-				let gestures = char.controls.gestures;
-				// let grounded = any(platforms, p => standing(p, char));
-				let jumping = char.animations.jump;
-				// if(grounded) {
-				// 	console.log("grounded")
-				// }
+		Matter.Sleeping.set(chosenCharacter.body, false);
+		chosenCharacter.body.collisionFilter.mask = collisionCategories.barrier | collisionCategories.platform;
 
-				let actions = [
-					{
-						if: !jumping && (gestures.tap || gestures.swipeUp),
-						then: () => {
-							char.animations.jump = jump(char, entities);
-						}
-					},
-					{
-						if: (gestures.holdLeft || gestures.holdRight || gestures.hold) ,
-						then: () => {
-							if (char["power-ups"].holding) {
-								char.action = "walkingHammering";
-							} else {
-								char.action = "walking";
-							}
-							if (gestures.hold) {
-								//console.log("hold")
-								Matter.Body.applyForce(char.body, char.body.position, {
-									x: 0,
-									y: char.direction.horizontal === "right" ? -2.5 : 2.5
-								});
-							} 
-						},
-					},
+		let platforms = filter(entities, "platform");
+		let gestures = chosenCharacter.controls.gestures;
+		// let grounded = any(platforms, p => standing(p, chosenCharacter));
+		let jumping = chosenCharacter.animations.jump;
+		// if(grounded) {
+		// 	console.log("grounded")
+		// }
 
-					{
-						if: true,
-						then: () => {
-							if (char["power-ups"].holding) {
-								char.action = "idlingHammering";
-							} else {
-								char.action = "idling";
-							}
-						}
+		let actions = [
+			{
+				if: !jumping && (gestures.tap || gestures.swipeUp),
+				then: () => {
+					chosenCharacter.animations.jump = jump(chosenCharacter, entities);
+				}
+			},
+			{
+				if: (gestures.holdLeft || gestures.holdRight || gestures.hold),
+				then: () => {
+					if (chosenCharacter["power-ups"].holding) {
+						chosenCharacter.action = "walkingHammering";
+					} else {
+						chosenCharacter.action = "walking";
 					}
-				];
+					if (gestures.hold) {
+						//console.log("hold")
+						Matter.Body.applyForce(chosenCharacter.body, chosenCharacter.body.position, {
+							x: 0,
+							y: chosenCharacter.direction.horizontal === "right" ? -2.5 : 2.5
+						});
+					}
+				},
+			},
 
-				find(actions, "if").then();
-		}
+			{
+				if: true,
+				then: () => {
+					if (chosenCharacter["power-ups"].holding) {
+						chosenCharacter.action = "idlingHammering";
+					} else {
+						chosenCharacter.action = "idling";
+					}
+				}
+			}
+		];
+
+		find(actions, "if").then();
+
 
 	}
 

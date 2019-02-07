@@ -43,7 +43,7 @@ module.exports = (sessions) => {
 				console.log(`Deleting ${cleanUser.local.password}`)
 				delete cleanUser.local.password
 			}
-			res.json({ user: cleanUser })
+			res.json(cleanUser)
 		}
 	)
 
@@ -92,19 +92,6 @@ module.exports = (sessions) => {
 				return res.json(savedUser)
 			})
 		})
-	})
-	//generate session ids for socket
-	function generateId(len) {
-		let result = "";
-		for (let i = 0; i < len; i++) {
-			result += Math.floor(Math.random() * 10);
-		}
-		return result;
-	}
-	router.post('/create_session', (req, res) => {
-		const sessionId = generateId(24);
-		sessions[sessionId] = new Session(req.user);
-		res.json({success: true, sessionKey: sessionId});
 	})
 	return router;
 }
