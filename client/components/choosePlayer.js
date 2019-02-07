@@ -47,11 +47,14 @@ export default class ChoosePlayer extends PureComponent {
                         </Button>
 
                         <Button rounded success style={styles.button} onPress={this.props.onLogOut}>
-                            <Text>LogOut</Text>
+                            <Text>Log Out</Text>
                         </Button>
                     </View>
 
-                    <View style={styles.ChoosePlayerText}><Text h1 style={{color: "#DAF7A6", fontWeight: "bold"}}>Choose Player</Text></View>
+                    <View style={styles.ChoosePlayerText}>
+                        <Text h1 style={{color: "black", fontWeight: "bold" , marginRight: "7%"}}>Choose Player</Text>
+                        <Text h1 style={{color: "black", fontWeight: "bold"}}>Choose Player 2</Text>
+                    </View>
                 
                 <View style={styles.dinoView}>
 
@@ -64,6 +67,7 @@ export default class ChoosePlayer extends PureComponent {
                     </TouchableOpacity>
                 </View>
 
+                {/* This is the start to the controls button */}
                 <View style={{ flex: 1}}>
                         <Fab
                             active={this.state.active}
@@ -117,19 +121,19 @@ export default class ChoosePlayer extends PureComponent {
 
           dinoView: {
             flexDirection: 'row',
-            marginLeft: "33%",
-            marginTop: "5%"
+            marginLeft: "30%"
+            
           },
 
           buttonView: {
-            marginTop: "2%",
+            marginTop: "5%",
             flexDirection: 'row',
-            marginLeft: "35%",
+            marginLeft: "25%",
           },
 
           ChoosePlayerText: {
             flexDirection: 'row',
-            marginLeft: "45%",
+            marginLeft: "32%",
             marginTop: "2%"
           },
           

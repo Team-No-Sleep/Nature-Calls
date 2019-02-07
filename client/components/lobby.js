@@ -41,10 +41,10 @@ export default class Lobby extends PureComponent {
                 color: "#006400",
                 backgroundColor: "#006400",
                 position: "relative",
-                top: "22%",
-                right: "-150%",
-                margin: 10,
-                width: 130,
+                top: "30%",
+                marginLeft: "65%",
+                marginBottom: "2%",
+                width: "25%",
 
         },
         container: {
