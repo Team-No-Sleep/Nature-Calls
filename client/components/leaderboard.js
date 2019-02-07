@@ -4,26 +4,40 @@ import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image, Touc
 
 import { Container, Content, Button, Text, List, ListItem } from 'native-base';
 
+import API from '../utils/API';
+
+
 
 
 
 export default class LeaderBoard extends PureComponent {
 
     state = {
-        dino1Pressed: false,
-        dino2Pressed: false
+        leaderBoard: []
+        
     }
     
-    dinoPressed = (dino) => {
-        if(dino) {
-            this.setState({dino1Pressed: true, dino2Pressed: false});
-        } else {
-            this.setState({dino2Pressed: true, dino1Pressed: false});
-        }
+    componentDidMount() {
+        
+        API.getLeaderBoard().then(res => {
+            console.log(res.data);
+            
+            this.setState({leaderBoard: res.data});
+            console.log(this.state.leaderBoard[0].local.username)
+            
+        })
+
     }
 
+    
+
     render() {
+        if(this.state.leaderBoard.length === 0) {
+                return null;
+        }
+
         return(
+            
             <Modal
           transparent={false}
           animationType="fade"
@@ -38,27 +52,36 @@ export default class LeaderBoard extends PureComponent {
                 <Container>
                     <Content>
                     <List style={styles.list}>
+
                         <ListItem>
-                        <Text>Dave Anderson</Text>
+                            <Text>Username {"\t"}  Wins {"\t"} Rolls Delivered</Text>
                         </ListItem>
+                        {/* {this.state.leaderBoard.map(user => { this SHOULD WORK?!?!?!*/} 
                         <ListItem>
-                        <Text>Lakshmi Strom</Text>
+                            <Text>{this.state.leaderBoard[0].local.username}            {this.state.leaderBoard[0].local.userWins}  Wins   {this.state.leaderBoard[0].local.userScores} Rolls Delivered</Text>
                         </ListItem>
+
                         <ListItem>
-                        <Text>Trae Shanks</Text>
+                        <Text>{this.state.leaderBoard[1].local.username}            {this.state.leaderBoard[1].local.userWins}  Wins   {this.state.leaderBoard[1].local.userScores} Rolls Delivered</Text>
                         </ListItem>
-                        <ListItem>
-                        <Text>Kelvin Paje</Text>
+
+
+
+
+
+                         {/* })}  */}
+
+
+                        {/* <ListItem>
+                            <Text>{this.state.leaderBoard[0].local.username + "\t" + this.state.leaderBoard[0].local.userWins}</Text>
                         </ListItem>
-                        <ListItem>
-                        <Text>Jules Azuma</Text>
-                        </ListItem>
+                         */}
                     </List>
                     </Content>
                 </Container>
 
                 <View style={styles.buttonView}>
-                    <Button rounded success style={styles.button} onPress={this.props.onLobby}>
+                    <Button rounded success style={styles.button} onPress={this.props.onClose}>
                         <Text>Go Back</Text>
                     </Button>
                 </View>

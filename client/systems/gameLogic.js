@@ -71,7 +71,7 @@ const win = (dispatch, entities) => {
 // )
     }
 
-    if(dino2.score === 3) {
+    if(dino2.score === 1) {
         dispatch({type: "dino2-wins"});
     }
 

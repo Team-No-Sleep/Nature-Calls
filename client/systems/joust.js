@@ -47,13 +47,11 @@ const joust = entities => {
                 delete entities.mario
                 entities.mario = Mario(entities.physics.world, { x: 250, y: 600 }, marioColor, isPlayerCharacter, characterId);
                 entities.mario.score = score;
-                console.log("here")
-
 
             }
 
             if (tpDropped) {
-                console
+                
                 entities.toiletPaper = ToiletPaper( {x: cy + 125, y: cy} );
             }
 
