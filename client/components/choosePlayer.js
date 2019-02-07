@@ -69,20 +69,23 @@ export default class ChoosePlayer extends PureComponent {
                             active={this.state.active}
                             direction="left"
                             containerStyle={{ }}
-                            style={{ backgroundColor: '#5067FF' }}
+                            style={{ backgroundColor: 'black' }}
                             position="bottomRight"
                             onPress={() => this.setState({ active: !this.state.active })}>
-                            <Icon name="share" />
-                        <Grid disable>
-                            <Col style={{ backgroundColor: '#635DB7', height: 135, width: 475, borderRadius: 13, marginRight: 400, marginBottom: 75 }}>
-                                <Text style={styles.instructionText}>- Press on the RIGHT side of the Screen to move RIGHT.</Text>
-                                <Text style={styles.instructionText}>- Press on the LEFT side of the Screen to move LEFT.</Text>
-                                <Text style={styles.instructionText}>- Tap anywhere to JUMP.</Text>
-                                <Text style={styles.instructionText}>- Double tap on EITHER side of the screen to move in THAT direction.</Text>
-                                <Text style={styles.instructionText}>- It is not meant to be EASY</Text>
-                            </Col>
-                            
-                        </Grid>
+
+                            <Icon name="logo-game-controller-a" />
+
+                            <Grid disable>
+                                <Col style={{ backgroundColor: '#006400', height: 145, width: 455, borderRadius: 13, marginRight: 400,
+                                marginBottom: 75, borderWidth: 2, borderColor: "black" }}>
+                                    <Text style={styles.instructionText}>- Press on the RIGHT side of the Screen to move RIGHT.</Text>
+                                    <Text style={styles.instructionText}>- Press on the LEFT side of the Screen to move LEFT.</Text>
+                                    <Text style={styles.instructionText}>- Tap anywhere to JUMP.</Text>
+                                    <Text style={styles.instructionText}>- Double tap on EITHER side of the screen to JUMP in THAT direction after tapping to JUMP.</Text>
+                                    <Text style={styles.instructionText}>- It is not meant to be EASY</Text>
+                                </Col>
+                                
+                            </Grid>
                         </Fab>
                     </View>
 
@@ -139,11 +142,13 @@ export default class ChoosePlayer extends PureComponent {
            
           greenDinoPressed: {
             borderWidth: 5,
-            borderColor: "green",
+            borderColor: "#006400",
             borderRadius: 15
           },
           instructionText: {
             fontSize: 15,
-            marginTop: 5
+            marginTop: 5,
+            marginBottom: 1
+
           }
     });
