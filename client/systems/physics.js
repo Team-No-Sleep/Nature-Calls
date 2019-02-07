@@ -7,22 +7,21 @@ import { collisionCategories } from "../utils/constants";
 const updatePlatformCollisionFilters = entities => {
 	let mario = entities.mario;
 	let dino2 = entities.dino2;
+	let chosenCharacter = null;
+	// console.log(mario.isPlayerCharacter);
+	if (mario.isPlayerCharacter === true) {
+		chosenCharacter = mario;
+	} else if (dino2.isPlayerCharacter === true) {
+		chosenCharacter = dino2;
+	}
 	let platforms = filter(entities, "platform");
-	if (mario) {
-		let active = filter(platforms, p => aboveTopEdge(p, shift(base(mario), 0, -20)));
+	if (chosenCharacter) {
+		let active = filter(platforms, p => aboveTopEdge(p, shift(base(chosenCharacter), 0, -20)));
 		active.forEach(x => {
 			x.body.collisionFilter.mask = collisionCategories.mario;
 		});
 	}
 
-	if (dino2) {
-
-		let active2 = filter(platforms, p => aboveTopEdge(p, shift(base(dino2), 0, -20)));
-
-		active2.forEach(x => {
-			x.body.collisionFilter.mask = collisionCategories.mario;
-		});	
-	}
 
 	return entities;
 };
@@ -36,12 +35,16 @@ const updatePhysicsEngine = (entities, time) => {
 //keeps sprite from rolling when interacting with entities
 const setMarioUpright = entities => {
 	let mario = entities.mario;
-	let dino2 = entities.dino2
-	if (mario) {
-		Matter.Body.setAngle(mario.body, 0);
+	let dino2 = entities.dino2;
+	let chosenCharacter = null;
+	// console.log(mario.isPlayerCharacter);
+	if (mario.isPlayerCharacter === true) {
+		chosenCharacter = mario;
+	} else if (dino2.isPlayerCharacter === true) {
+		chosenCharacter = dino2;
 	}
-	if (dino2) {
-		Matter.Body.setAngle(dino2.body, 0);
+	if (chosenCharacter) {
+		Matter.Body.setAngle(chosenCharacter.body, 0);
 	}
 };
 

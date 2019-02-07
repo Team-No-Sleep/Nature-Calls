@@ -57,8 +57,9 @@ socketio.on('connection', function (socket) {
 
 	//sending dino positioning through socket
 	socket.on('position', (data) => {
-		let numberOfPlayers = socketio.engine.clientsCount;
+		//let numberOfPlayers = socketio.engine.clientsCount;
 		socketio.emit('position', data);
+		//console.log(data);
 	});
 	socket.on("registerPlayer", (data, callback) => {
 		console.log(data);
