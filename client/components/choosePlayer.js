@@ -44,9 +44,9 @@ export default class ChoosePlayer extends PureComponent {
                         </Button>
                     </View>
 
-                    <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
+                    
 
-                <View style={styles.ChoosePlayerText}><Text h1>Choose Player</Text></View>
+                    <View style={styles.ChoosePlayerText}><Text h1 style={{color: "#DAF7A6", fontWeight: "bold"}}>Choose Player</Text></View>
                 
                 <View style={styles.dinoView}>
 
@@ -77,9 +77,7 @@ export default class ChoosePlayer extends PureComponent {
                 color: "#006400",
                 backgroundColor: "#006400",
                 position: "relative",
-                // top: 180,
-                // left: 450,
-                // margin: 10,
+                margin: 5,
                 width: 130,
 
         },
@@ -89,19 +87,20 @@ export default class ChoosePlayer extends PureComponent {
 
           dinoView: {
             flexDirection: 'row',
-            marginLeft: "25%",
+            marginLeft: "33%",
             marginTop: "5%"
           },
 
           buttonView: {
-            marginTop: "5%",
+            marginTop: "2%",
             flexDirection: 'row',
-            marginLeft: "30%",
+            marginLeft: "35%",
           },
 
           ChoosePlayerText: {
             flexDirection: 'row',
-            marginLeft: "40%"
+            marginLeft: "45%",
+            marginTop: "2%"
           },
           
 
