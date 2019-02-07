@@ -64,6 +64,11 @@ const win = (dispatch, entities) => {
     // console.log(dino2.score);
     if (mario.score === 3) {
          dispatch({ type: "dino1-wins" });
+
+//          db.users.update( 
+// {user: "socketid1??"},
+//  { $inc: { wins: 1 }},
+// )
     }
 
     if(dino2.score === 3) {
@@ -101,7 +106,7 @@ const fall = (entities) => {
             let score = dino2.score;
                 if (dino2["power-ups"].holding) {
                     tpDropped = true;
-                }
+                } 
                 let dino2Color = dino2.color;
                 let isPlayerCharacter = dino2.isPlayerCharacter;
                 let characterId = dino2.characterId;
