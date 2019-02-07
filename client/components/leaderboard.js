@@ -75,20 +75,15 @@ export default class LeaderBoard extends PureComponent {
 
 
 
-
-
                          {/* })}  */}
-
-
                         {/* <ListItem>
                             <Text>{this.state.leaderBoard[0].local.username + "\t" + this.state.leaderBoard[0].local.userWins}</Text>
                         </ListItem>
                          */}
-                   
+                    {/* </List> */}
                     {/* </List> */}
                     </Content>
                 </Container>
-
                 <View style={styles.buttonView}>
                     <Button rounded success style={styles.button} onPress={this.props.onClose}>
                         <Text>Go Back</Text>

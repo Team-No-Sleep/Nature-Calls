@@ -104,6 +104,7 @@ export default class HomeScreen extends React.Component {
     //this.props.navigation.goBack();
   }
   logout = () => {
+    console.log ("logout press");
     API.logout()
     .then(res => this.goHome())
     .catch(err => console.log(err));
@@ -119,6 +120,7 @@ export default class HomeScreen extends React.Component {
           onPlayGame={_ => this.toggleChoosePlayer(true)}
           onLeaderBoard={_ => this.toggleLeaderboard(true)}
           containerStyle={styles.container}
+          onLogOut={_ => this.logout()}
 
        />
 
@@ -127,6 +129,7 @@ export default class HomeScreen extends React.Component {
           onLeaderBoard={_ => this.toggleLeaderboardFromChoose(true)}
           containerStyle={styles.container}
           visible={this.state.choosePlayerVisible}
+          onLogOut={_ => this.logout()}
        />
 
 

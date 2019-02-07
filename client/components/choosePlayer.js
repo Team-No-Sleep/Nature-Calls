@@ -45,6 +45,10 @@ export default class ChoosePlayer extends PureComponent {
                         <Button rounded success style={styles.button} onPress={this.props.onLeaderBoard}>
                             <Text>Leaderboard</Text>
                         </Button>
+
+                        <Button rounded success style={styles.button} onPress={this.props.onLogOut}>
+                            <Text>LogOut</Text>
+                        </Button>
                     </View>
 
                     <View style={styles.ChoosePlayerText}><Text h1 style={{color: "#DAF7A6", fontWeight: "bold"}}>Choose Player</Text></View>

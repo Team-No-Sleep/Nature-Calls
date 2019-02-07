@@ -20,6 +20,10 @@ export default class Lobby extends PureComponent {
                 <Text>Leaderboard</Text>
             </Button>
 
+            <Button rounded success style={styles.button} onPress={this.props.onLogOut}>
+                <Text>Log Out</Text>
+            </Button>
+
             </ImageBackground>
 
         )
