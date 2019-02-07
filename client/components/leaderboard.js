@@ -84,7 +84,7 @@ export default class LeaderBoard extends PureComponent {
                             <Text>{this.state.leaderBoard[0].local.username + "\t" + this.state.leaderBoard[0].local.userWins}</Text>
                         </ListItem>
                          */}
-                    </List>
+                   
                     {/* </List> */}
                     </Content>
                 </Container>
