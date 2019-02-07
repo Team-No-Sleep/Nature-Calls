@@ -43,11 +43,6 @@ export default class HomeScreen extends React.Component {
   };
   socket =  SocketIOClient(getServerUrl());
   
-  toggleGame = gameVisible => {
-    choosePlayerVisible: false
-    
-  } 
-
   toggleGame = () => {
     this.setState({
       gameVisible: true,
@@ -144,6 +139,7 @@ export default class HomeScreen extends React.Component {
           socket = {this.socket}
           user = {this.props.navigation.state.params.data}
           selectDino = {dino => this.selectDino(dino)}
+          onLogOut={_ => this.logout()}
         />
 
         <Game
@@ -154,22 +150,6 @@ export default class HomeScreen extends React.Component {
           user = {this.props.navigation.state.params.data}
           selectedDino = {this.state.selectedDino}
         />
-            
-       < ChoosePlayer
-          onPlayGame={_ => this.toggleGame()}
-          onLeaderBoard={_ => this.toggleLeaderboardFromChoose(true)}
-          containerStyle={styles.container}
-          visible={this.state.choosePlayerVisible}
-          onLogOut={_ => this.logout()}
-       />
-
-
-
-      <Game
-          visible={this.state.gameVisible}
-          onClose={_ => this.returnToLobby()} 
-          containerStyle={styles.container}    
-      />
 
       <Leaderboard
        visible={this.state.leaderboardVisible}
