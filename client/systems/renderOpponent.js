@@ -1,3 +1,5 @@
+import Matter from "matter-js";
+import { Dimensions } from "react-native";
 let position = {};
 
 export default (playersFromServer)=>{
@@ -29,14 +31,24 @@ export default (playersFromServer)=>{
         if (!chosenCharacter || !chosenUpdate) {
             return entities;
         } else{
-            console.log(chosenCharacter);
+            //console.log(chosenCharacter);
+            //console.log(chosenUpdate);
             //chosenCharacter.body.position.x = chosenUpdate.x;
             //chosenCharacter.body.position.y = chosenUpdate.y;
-            chosenCharacter.body.position =  chosenUpdate.position;
-            delete playersFromServer[chosenCharacter.characterId];
+            //chosenCharacter.body.position =  chosenUpdate.position;
+            
+            // let currentScreenWidth = Dimensions.get("window").width;
+            // let currentScreenHeight = Dimensions.get("window").height;
+            // chosenUpdate.position.y = scaleCoordinates(chosenUpdate.position.y, chosenUpdate.screenWidth, currentScreenWidth);
+            // chosenUpdate.position.x = scaleCoordinates(chosenUpdate.position.x, chosenUpdate.screenHeight, currentScreenHeight);
+            Matter.Body.setPosition(chosenCharacter.body, chosenUpdate.position);
+            //delete playersFromServer[chosenCharacter.characterId];
         }
 
 
         return entities;
     };
 };
+function scaleCoordinates(coordinate, originalDimension, newDimension){
+    return coordinate / originalDimension * newDimension;
+}

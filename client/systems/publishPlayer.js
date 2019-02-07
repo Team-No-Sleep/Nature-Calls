@@ -1,19 +1,20 @@
+import { Dimensions } from "react-native";
 let lastUpdate = "";
-function limiter(wait){
+function limiter(wait) {
     let isCalled = false;
 
-    return function(fn){
-        if (!isCalled){
+    return function (fn) {
+        if (!isCalled) {
             fn();
             isCalled = true;
-            setTimeout(function(){
+            setTimeout(function () {
                 isCalled = false;
             }, wait)
         }
     };
 }
 export default (socket, user) => {
-    let throttle = limiter(500);
+    let throttle = limiter(30);
     return (entities, { events }) => {
         let mario = entities.mario;
         let dino2 = entities.dino2;
@@ -28,25 +29,26 @@ export default (socket, user) => {
         if (chosenCharacter === null) {
             return entities;
         }
-        let nextUpdate = {
-            x: chosenCharacter.body.position.x.toFixed(1),
-            y: chosenCharacter.body.position.y.toFixed(1),
-            dino: chosenCharacter.characterId,
-            user: user
-        };
-        let nextUpdateStr = JSON.stringify(nextUpdate);
-        if (nextUpdateStr !== lastUpdate) {
+        // let nextUpdate = {
+        //     x: chosenCharacter.body.position.x.toFixed(1),
+        //     y: chosenCharacter.body.position.y.toFixed(1),
+        //     dino: chosenCharacter.characterId,
+        //     user: user
+        // };
+        //let nextUpdateStr = JSON.stringify(nextUpdate);
+        //if (nextUpdateStr !== lastUpdate) {
 
-            throttle( () => {
+            throttle(() => {
 
                 socket.emit('position', {
+                    hasTp: chosenCharacter["power-ups"].holding,
                     position: chosenCharacter.body.position,
                     dino: chosenCharacter.characterId
                 }); // emits chosen character x and y coordinates the only dino that moves at the moment
-    console.log(nextUpdate);
-                lastUpdate = nextUpdateStr;
+                //console.log(nextUpdate);
+                //lastUpdate = nextUpdateStr;
             });
-        }
+        //}
         return entities;
     }
 };
