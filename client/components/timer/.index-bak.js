@@ -4,7 +4,7 @@ import {
     Text,
   } from 'react-native';
 import Matter from "matter-js"
-import TimerBg from "./timerBg.gif";
+import TimerBg from "./timerBg.png";
 import Tile from "../common/tile";
 
 export class Renderer extends PureComponent {
@@ -59,35 +59,47 @@ export class Renderer extends PureComponent {
     }
     render() {
       return (
-		<Text>
-		m: {this.state.time.m} s: {this.state.time.s} TESTSETS
-			{/* <Tile
-			source={TimerBg}
-			size={this.props.size}
-			position={this.props.body.position}
-			angle={this.props.body.angle}
-			/> */}
-        </Text>
+        <Tile
+          source={TimerBg}
+          size={this.props.size}
+          position={this.props.body.position}
+          angle={this.props.body.angle}
+        />
       );
     }
   }
 
-export default (pos) => {
 
-    return {
-    animations: {},
-	// renderer: <Renderer />,
-	size: { width: 110, height: 75 },
-	position: pos,
-	source: TimerBg, 
-	renderer: <Tile />,
-	TimerBg: true,
-	angle: -1.5708
-    };
-}
 
+   
+    // render() {
+    //     <Text>
+    //         <Button 
+    //             onPress={this.startTimer}
+    //             title="Test timer"
+    //         />
+    //         m: {this.state.time.m} s: {this.state.time.s}
+    //     </Text>
+    // }
+  
 const styles = StyleSheet.create({
     timer: {
     position: "absolute"
     }
 });
+
+export default (pos) => {
+    let width = 220;
+    let height = 150;
+    let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height);
+      Matter.World.add(world, [body]);
+
+    return {
+    body,
+    size: { width, height },
+    animations: {},
+    renderer: <Renderer />
+    };
+}
+  
+//   ReactDOM.render(<Timer/>, document.getElementById('View'));

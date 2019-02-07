@@ -10,7 +10,7 @@ import Barrier from "../components/barrier";
 import Mario from "../components/mario";
 import ToiletPaper from "../components/toiletPaper";
 import Outhouse from "../components/outhouse";
-// import Timer from "../components/timer";
+import Timer from "../components/timer";
 
 
 
@@ -35,15 +35,12 @@ export default restart => {
     return {
         physics: { engine: engine, world: world },
 
-        // timer: Timer(
-        //     world,
-        //     { 
-        //         x: cy + 160, 
-        //         y: offsetY + 405 
-        //     },
-        //     -1.5708,
-        //     platformWidth * 1.9
-        // ),
+        timer: Timer(
+            {
+                x: cy - 170, 
+                y: offsetY + 408
+        },
+        ),
 
         // Tilemapping for the top level of the floor platform / FLOOR
         floorLevelOne: Platform(
@@ -315,12 +312,14 @@ export default restart => {
                 x: cy - 145, 
                 y: offsetY + 115
             },
+            color.red
         ),
         outhouse2: Outhouse( 
             {
                 x: cy - 145, 
                 y: offsetY + 710,
             },
+            color.green
         ),
         
         //Spawns at the bottom
