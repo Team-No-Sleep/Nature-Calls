@@ -8,7 +8,6 @@ import { Container, Header, Content, Button, Text, Icon, Fab, Card, CardItem, Bo
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
 
-
 export default class ChoosePlayer extends PureComponent {
     constructor(props) {
         super(props);
@@ -114,22 +113,19 @@ export default class ChoosePlayer extends PureComponent {
 
                     <View style={styles.dinoView}>
 
-                        <View style={styles.dinoView}>
+                        <TouchableOpacity
+                            onPress={() => this.dinoPressed("mario")}
+                            disabled={marioDisabled}
+                        >
+                            <Image style={this.state.dino1Pressed ? styles.redDinoPressed : null} source={require("../assets/images/idlingDinoRed.gif")} />
+                        </TouchableOpacity>
 
-                            <TouchableOpacity
-                                onPress={() => this.dinoPressed("mario")}
-                                disabled={marioDisabled}
-                            >
-                                <Image style={this.state.dino1Pressed ? styles.redDinoPressed : null} source={require("../assets/images/idlingDinoRed.gif")} />
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                onPress={() => this.dinoPressed("dino2")}
-                                disabled={dino2Disabled}
-                            >
-                                <Image source={require("../assets/images/idlingDinoGreen.gif")} style={this.state.dino2Pressed ? styles.greenDinoPressed : null} />
-                            </TouchableOpacity>
-                        </View>
+                        <TouchableOpacity
+                            onPress={() => this.dinoPressed("dino2")}
+                            disabled={dino2Disabled}
+                        >
+                            <Image source={require("../assets/images/idlingDinoGreen.gif")} style={this.state.dino2Pressed ? styles.greenDinoPressed : null} />
+                        </TouchableOpacity>
                     </View>
                     {/* This is the start to the controls button */}
                     <View style={{ flex: 1 }}>
@@ -165,6 +161,58 @@ export default class ChoosePlayer extends PureComponent {
         )
     }
 };
+
+
+
+const styles = StyleSheet.create({
+
+    button: {
+        justifyContent: "center",
+        alignSelf: "stretch",
+        textAlignVertical: "center",
+        color: "#006400",
+        backgroundColor: "#006400",
+        position: "relative",
+        // top: 180,
+        // left: 450,
+        // margin: 10,
+        width: 130,
+
+    },
+    container: {
+        flex: 1,
+    },
+
+    dinoView: {
+        flexDirection: 'row',
+        marginLeft: "25%",
+        marginTop: "5%"
+    },
+
+    buttonView: {
+        marginTop: "5%",
+        flexDirection: 'row',
+        marginLeft: "30%",
+    },
+
+    ChoosePlayerText: {
+        flexDirection: 'row',
+        marginLeft: "40%"
+    },
+
+
+    redDinoPressed: {
+        borderWidth: 5,
+        borderColor: "red",
+        borderRadius: 15
+    },
+
+    greenDinoPressed: {
+        borderWidth: 5,
+        borderColor: "green",
+        borderRadius: 15
+    },
+});
 
 
 
