@@ -12,14 +12,17 @@ export default class SignUp extends Component {
         password: "",
         firstName: "",
         lastName: "",
-        photo: ""
+        photo: "",
+        userWins : 0,
+        userScores : 0,
+
     }
     signUp = () => {
         //deconstruct state object
-        const { username, password, firstName, lastName, photo } = this.state;
+        const { username, password, firstName, lastName, photo, userWins, userScores } = this.state;
 
         //create newUser object to be sent to database
-        const newUser = { username, password, firstName, lastName, photo };
+        const newUser = { username, password, firstName, lastName, photo, userWins, userScores };
 
         API.registerUser(newUser)
             .then(res => {
