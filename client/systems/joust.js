@@ -1,16 +1,26 @@
 import Matter from "matter-js";
 import {distance, position} from "../utils";
-import  resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
+import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 import Mario from "../components/mario";
 import ToiletPaper from "../components/toiletPaper";
 import { Dimensions } from "react-native";
-
 
 const { width, height } = Dimensions.get("window");
 const scale = Math.min(width, 430) / 375;
 const cx = width / 2;
 const cy = height / 2;
-
+const MarioIdling = resolveAssetSource(
+	require("../components/mario/green/mario-idling.gif")
+);
+const DinoIdling = resolveAssetSource(
+	require("../components/mario/red/mario-idling.gif")
+);
+const MarioDead = resolveAssetSource(
+	require("../components/mario/green/mario-dead.gif")
+);
+const DinoDead = resolveAssetSource(
+	require("../components/mario/red/mario-dead.gif")
+);
 
 
 const joust = entities => {
@@ -61,13 +71,11 @@ const joust = entities => {
     }
 }
 
+export default (entities, {events, dispatch}) => {
+    joust(entities);
 
-
-    export default (entities, {events, dispatch}) => {
-        joust(entities);
-
-        return entities;
-    };
+    return entities;
+};
 
 
 
