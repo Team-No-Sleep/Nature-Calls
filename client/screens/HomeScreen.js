@@ -41,16 +41,23 @@ export default class HomeScreen extends React.Component {
     
   } 
 
-  toggleGame = gameVisible => {
+  toggleGame = () => {
     this.setState({
-      gameVisible: gameVisible,
-      choosePlayerVisible: !gameVisible
+      gameVisible: true,
+      choosePlayerVisible: false
     });
   };
 
+  returnToLobby = () => {
+    this.setState({
+      gameVisible: false,
+      
+    })
+  }
+
   toggleLeaderboard = leaderboardVisible => {
     this.setState({
-      leaderboardVisible
+      leaderboardVisible: leaderboardVisible
     })
   }
 
@@ -63,6 +70,15 @@ export default class HomeScreen extends React.Component {
   toggleLobby = lobbyVisible => {
     this.setState({
       lobbyVisible
+      
+    })
+  }
+
+  toggleLeaderboardFromChoose = leaderboardVisible => {
+    this.setState({
+      leaderboardVisible: leaderboardVisible,
+      choosePlayerVisible: !leaderboardVisible
+
     })
   }
 
@@ -109,8 +125,8 @@ export default class HomeScreen extends React.Component {
        />
 
        < ChoosePlayer
-          onPlayGame={_ => this.toggleGame(true)}
-          onLeaderBoard={_ => this.toggleLeaderboard(true)}
+          onPlayGame={_ => this.toggleGame()}
+          onLeaderBoard={_ => this.toggleLeaderboardFromChoose(true)}
           containerStyle={styles.container}
           visible={this.state.choosePlayerVisible}
           onLogOut={_ => this.logout()}
@@ -120,13 +136,13 @@ export default class HomeScreen extends React.Component {
 
       <Game
           visible={this.state.gameVisible}
-          onClose={_ => this.toggleGame(false)} 
+          onClose={_ => this.returnToLobby()} 
           containerStyle={styles.container}    
       />
 
       <Leaderboard
        visible={this.state.leaderboardVisible}
-       onClose={_ => this.toggleGame(false)} 
+       onClose={_ => this.toggleLeaderboard(false)} 
        containerStyle={styles.container} 
       />
 
