@@ -57,6 +57,20 @@ module.exports = (sessions) => {
 		}
 	})
 
+	router.get('/leaderBoard', (req, res) => {
+		User.find({}, (err, users) => {
+            if(users) {
+				let sortedUsers = users.sort((user1, user2) => {
+					return user2.local.userWins - user1.local.userWins;
+				})
+				return res.json(sortedUsers)
+				
+            } else {
+                return res.json(err)
+            }
+        });
+	})
+
 	router.post('/signup', (req, res) => {
 		const { username, password } = req.body
 		// ADD VALIDATION
@@ -66,9 +80,12 @@ module.exports = (sessions) => {
 					error: `Sorry, already a user with the username: ${username}`
 				})
 			}
+
 			const newUser = new User({
 				'local.username': username,
-				'local.password': password
+				'local.password': password,
+				'local.userWins': 0,
+				'local.userScores': 0
 			})
 			newUser.save((err, savedUser) => {
 				if (err) return res.json(err)
