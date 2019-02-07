@@ -163,59 +163,6 @@ export default class ChoosePlayer extends PureComponent {
 };
 
 
-
-const styles = StyleSheet.create({
-
-    button: {
-        justifyContent: "center",
-        alignSelf: "stretch",
-        textAlignVertical: "center",
-        color: "#006400",
-        backgroundColor: "#006400",
-        position: "relative",
-        // top: 180,
-        // left: 450,
-        // margin: 10,
-        width: 130,
-
-    },
-    container: {
-        flex: 1,
-    },
-
-    dinoView: {
-        flexDirection: 'row',
-        marginLeft: "25%",
-        marginTop: "5%"
-    },
-
-    buttonView: {
-        marginTop: "5%",
-        flexDirection: 'row',
-        marginLeft: "30%",
-    },
-
-    ChoosePlayerText: {
-        flexDirection: 'row',
-        marginLeft: "40%"
-    },
-
-
-    redDinoPressed: {
-        borderWidth: 5,
-        borderColor: "red",
-        borderRadius: 15
-    },
-
-    greenDinoPressed: {
-        borderWidth: 5,
-        borderColor: "green",
-        borderRadius: 15
-    },
-});
-
-
-
 const styles = StyleSheet.create({
 
     button: {
