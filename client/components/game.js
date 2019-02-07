@@ -13,7 +13,9 @@ YellowBox.ignoreWarnings([
 export default class Game extends PureComponent {
   constructor(props) {
     super(props);
-    this.playerDataFromServer = {};
+    this.playerDataFromServer = {
+      tp: ""
+    };
     this.state = {
       //player: "player1",
       running: false,
@@ -32,6 +34,12 @@ export default class Game extends PureComponent {
       // this.setState ({
       //   player: data.user
       // })
+    });
+
+    this.props.socket.on("tp-status-change", data => {
+      if(this.state.running){
+        this.playerDataFromServer["tp"] = data;
+      }
     });
   }
   componentWillReceiveProps(nextProps) {

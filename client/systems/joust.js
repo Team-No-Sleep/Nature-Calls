@@ -1,5 +1,5 @@
 import Matter from "matter-js";
-import {distance, position} from "../utils";
+import { distance, position } from "../utils";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 import Mario from "../components/mario";
 import ToiletPaper from "../components/toiletPaper";
@@ -10,26 +10,26 @@ const scale = Math.min(width, 430) / 375;
 const cx = width / 2;
 const cy = height / 2;
 const MarioIdling = resolveAssetSource(
-	require("../components/mario/green/mario-idling.gif")
+    require("../components/mario/green/mario-idling.gif")
 );
 const DinoIdling = resolveAssetSource(
-	require("../components/mario/red/mario-idling.gif")
+    require("../components/mario/red/mario-idling.gif")
 );
 const MarioDead = resolveAssetSource(
-	require("../components/mario/green/mario-dead.gif")
+    require("../components/mario/green/mario-dead.gif")
 );
 const DinoDead = resolveAssetSource(
-	require("../components/mario/red/mario-dead.gif")
+    require("../components/mario/red/mario-dead.gif")
 );
 
 
-const joust = entities => {
+const joust = (entities, socket) => {
 
     let mario = entities.mario;
     let dino2 = entities.dino2;
     let tpDropped;
     if (mario && dino2) {
-        if( distance(mario.body.position, dino2.body.position) < 20) {
+        if (distance(mario.body.position, dino2.body.position) < 20) {
             console.log("they are touching");
             // console.log(mario.body.position.y);
             if (mario.body.position.y > dino2.body.position.y && !mario["power-ups"].holding) {
@@ -42,10 +42,10 @@ const joust = entities => {
                 let characterId = dino2.characterId;
                 let dino2Color = dino2.color;
                 delete entities.dino2;
-                entities.dino2 = Mario(entities.physics.world, {x:  250, y: 65 }, dino2Color, isPlayerCharacter, characterId);
+                entities.dino2 = Mario(entities.physics.world, { x: 250, y: 65 }, dino2Color, isPlayerCharacter, characterId);
                 entities.dino2.score = score;
 
-            } else if (mario.body.position.y < dino2.body.position.y  && !dino2["power-ups"].holding) {
+            } else if (mario.body.position.y < dino2.body.position.y && !dino2["power-ups"].holding) {
                 console.log("dino2 kills mario");
                 let score = mario.score;
                 if (mario["power-ups"].holding) {
@@ -61,18 +61,20 @@ const joust = entities => {
             }
 
             if (tpDropped) {
-                
-                entities.toiletPaper = ToiletPaper( {x: cy + 125, y: cy} );
+                socket.emit("tp-status-change", "");
+                // entities.toiletPaper = ToiletPaper( {x: cy + 125, y: cy} );
             }
 
         }
     }
 }
 
-export default (entities, {events, dispatch}) => {
-    joust(entities);
+export default (socket) => {
+    return (entities, { events, dispatch }) => {
+        joust(entities, socket);
 
-    return entities;
+        return entities;
+    }
 };
 
 

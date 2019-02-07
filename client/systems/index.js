@@ -19,9 +19,9 @@ export default (playersFromServer, socket, user) => [
 	Animation,
 	Camera,
 	Physics,
-	PowerUps,
-	Joust,
-	gameLogic,
+	PowerUps(playersFromServer, socket),
+	Joust(socket),
+	gameLogic(socket),
 	renderOpponent(playersFromServer),
 	publishPlayer(socket, user)
 ];

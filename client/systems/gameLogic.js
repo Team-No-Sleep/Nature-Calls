@@ -1,7 +1,7 @@
 import Matter from "matter-js";
 import { distance, position } from "../utils";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
-import ToiletPaper from "../components/toiletPaper";
+
 import { Dimensions } from "react-native";
 import Mario from "../components/mario";
 
@@ -9,7 +9,7 @@ const { width, height } = Dimensions.get("window");
 const cx = width / 2;
 const cy = height / 2;
 
-const score = entities => {
+const score = (entities, socket) => {
     let mario = entities.mario;
     let dino2 = entities.dino2;
     let chosenCharacter = null;
@@ -25,7 +25,7 @@ const score = entities => {
     //console.log(mario["power-ups"].holding)
 
     if (chosenCharacter) {
-const chosenCharacterLocation = chosenCharacter.body.position;
+        const chosenCharacterLocation = chosenCharacter.body.position;
         let scored;
 
         if (chosenCharacter["power-ups"].holding && distance(chosenCharacterLocation, chosenPotty) < 32) {
@@ -38,7 +38,8 @@ const chosenCharacterLocation = chosenCharacter.body.position;
             scored = true;
         }
         if (scored) {
-            entities.toiletPaper = ToiletPaper({ x: cy + 125, y: cy })
+            //entities.toiletPaper = ToiletPaper({ x: cy + 125, y: cy })
+            socket.emit("tp-status-change", "");
         }
 
     }
@@ -54,11 +55,11 @@ const win = (dispatch, entities) => {
         chosenCharacter = dino2;
     }
     if (chosenCharacter.score === 3) {
-        dispatch({ type: `${chosenCharacter.characterId}-wins`});
+        dispatch({ type: `${chosenCharacter.characterId}-wins` });
     }
 }
 
-const fall = (entities) => {
+const fall = (entities, socket) => {
     //console.log(entities.mario.body.position.x >= height)
     let mario = entities.mario;
     let dino2 = entities.dino2;
@@ -88,15 +89,17 @@ const fall = (entities) => {
         }
 
         if (tpDropped) {
-
-            entities.toiletPaper = ToiletPaper({ x: cy + 125, y: cy });
+            socket.emit("tp-status-change", "");
+            //entities.toiletPaper = ToiletPaper({ x: cy + 125, y: cy });
         }
     }
 }
 
-export default (entities, { events, dispatch }) => {
-    score(entities);
-    win(dispatch, entities);
-    fall(entities)
-    return entities;
+export default (socket) => {
+    return (entities, { events, dispatch }) => {
+        score(entities, socket);
+        win(dispatch, entities);
+        fall(entities, socket)
+        return entities;
+    }
 };

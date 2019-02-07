@@ -17,6 +17,7 @@ const dbConnection = require('./db') // loads our connection to the mongo databa
 const passport = require('./passport')
 const PORT = process.env.PORT || 3001
 const sessions = {}//user sessions for socket.io
+let tpHolder = "";
 // const websocket = socketio(server); //Initiate Socket
 
 
@@ -87,6 +88,13 @@ socketio.on('connection', function (socket) {
 			user: data.user.local.username
 		});
 		callback(true);
+	});
+	socket.on("tp-status-change", data => {
+		if((tpHolder === "" && (data === "mario" || data === "dino2")) ||
+		 ((tpHolder === "mario" || tpHolder === "dino2") && data === "")){
+			tpHolder = data;
+			socketio.emit("tp-status-change", data);
+		}
 	});
 });
 
