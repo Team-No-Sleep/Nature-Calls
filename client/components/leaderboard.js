@@ -64,15 +64,15 @@ export default class LeaderBoard extends PureComponent {
                         <ListItem>
                             <Text>Username {"\t"}  Wins {"\t"} Rolls Delivered</Text>
                         </ListItem>
-                        {/* {this.state.leaderBoard.map(user => { this SHOULD WORK?!?!?!*/} 
+                        {this.state.leaderBoard.map(user => {  
                         <ListItem>
-                            <Text>{this.state.leaderBoard[0].local.username}            {this.state.leaderBoard[0].local.userWins}  Wins   {this.state.leaderBoard[0].local.userScores} Rolls Delivered</Text>
+                            <Text>{user.local.username}            {user.local.userWins}  Wins   {this.state.leaderBoard[0].local.userScores} Rolls Delivered</Text>
                         </ListItem>
+                        })}
 
                         <ListItem>
                         <Text>{this.state.leaderBoard[1].local.username}            {this.state.leaderBoard[1].local.userWins}  Wins   {this.state.leaderBoard[1].local.userScores} Rolls Delivered</Text>
                         </ListItem>
-
                     </List>
 
 
