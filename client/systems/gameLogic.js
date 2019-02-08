@@ -23,6 +23,11 @@ const score = (entities, socket) => {
         chosenPotty = entities.outhouse.position;
     }
     //console.log(mario["power-ups"].holding)
+    data = {
+        score: chosenCharacter.score,
+        characterId: chosenCharacter.characterId
+    }
+    socket.emit("score", data);
 
     if (chosenCharacter) {
         const chosenCharacterLocation = chosenCharacter.body.position;
@@ -34,7 +39,8 @@ const score = (entities, socket) => {
             chosenCharacter["power-ups"].holding = false;
             console.log(chosenCharacter["power-ups"].holding)
             chosenCharacter.score++;
-            console.log(chosenCharacter.score);
+            console.log("mario score is " + mario.score);
+            console.log("dino2 score is" + dino2.score)
             scored = true;
         }
         if (scored) {
@@ -54,8 +60,10 @@ const win = (dispatch, entities) => {
     } else if (dino2.isPlayerCharacter === true) {
         chosenCharacter = dino2;
     }
-    if (chosenCharacter.score === 3) {
-        dispatch({ type: `${chosenCharacter.characterId}-wins` });
+    if (mario.score >= 3) {
+        dispatch({ type: 'dino1-wins' });
+    } else if (dino2.score >= 3) {
+        dispatch({ type: 'dino2-wins'});
     }
 }
 

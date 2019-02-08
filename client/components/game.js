@@ -16,6 +16,7 @@ export default class Game extends PureComponent {
     this.playerDataFromServer = {
       tp: ""
     };
+
     this.state = {
       //player: "player1",
       running: false,
@@ -41,6 +42,15 @@ export default class Game extends PureComponent {
         this.playerDataFromServer["tp"] = data;
       }
     });
+
+    this.props.socket.on("score", data => {
+      if(this.state.running) { 
+        // console.log(data.score);
+        // console.log(data.characterId)
+        this.playerDataFromServer[data.characterId + "-score"] = data.score;
+        //console.log(this.playerDataFromServer[characterId + "-score"])
+      }    
+    })
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.visible) {

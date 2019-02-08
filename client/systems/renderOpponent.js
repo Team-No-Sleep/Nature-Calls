@@ -19,18 +19,22 @@ export default (playersFromServer)=>{
         let dino2 = entities.dino2;
         let chosenCharacter = null;
         let chosenUpdate = null;
+        let chosenUpdateScore = 0;
         // console.log(mario.isPlayerCharacter);
         if (mario.isPlayerCharacter === false) {
             chosenUpdate = playersFromServer["mario"];
+            chosenUpdateScore = playersFromServer[mario.characterId + "-score"];
             chosenCharacter = mario;
         } else if (dino2.isPlayerCharacter === false) {
             chosenUpdate = playersFromServer["dino2"];
+            chosenUpdateScore = playersFromServer[dino2.characterId + "-score"];
             chosenCharacter = dino2;
         }
         //handles dinos dying
         if (!chosenCharacter || !chosenUpdate) {
             return entities;
         } else{
+
             //console.log(chosenCharacter);
             //console.log(chosenUpdate);
             //chosenCharacter.body.position.x = chosenUpdate.x;
@@ -42,7 +46,14 @@ export default (playersFromServer)=>{
             // chosenUpdate.position.y = scaleCoordinates(chosenUpdate.position.y, chosenUpdate.screenWidth, currentScreenWidth);
             // chosenUpdate.position.x = scaleCoordinates(chosenUpdate.position.x, chosenUpdate.screenHeight, currentScreenHeight);
             Matter.Body.setPosition(chosenCharacter.body, chosenUpdate.position);
+
             chosenCharacter.action = chosenUpdate.action;
+            chosenCharacter.score = chosenUpdateScore;
+            // console.log(chosenUpdateScore);
+            // console.log(chosenCharacter.score);
+            // console.log("dino2 score is" + dino2.score);
+            // console.log("mario score is" + mario.score);
+            //console.log(chosenCharacter.score);
             //delete playersFromServer[chosenCharacter.characterId];
         }
 
