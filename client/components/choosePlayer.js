@@ -95,9 +95,8 @@ export default class ChoosePlayer extends PureComponent {
                         <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
                             <Text>Ready Up</Text>
                         </Button>
-                        {/* This should be a leaderboard button no a go back button */}
                         <Button rounded success style={styles.button} onPress={this.props.onLeaderBoard}>
-                            <Text>Go Back</Text> 
+                            <Text>Leaderboard</Text> 
                         </Button>
 
                         <Button rounded success style={styles.button} onPress={this.props.onLogOut}>
