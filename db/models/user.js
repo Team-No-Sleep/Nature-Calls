@@ -9,16 +9,15 @@ const userSchema = new Schema({
 	lastName: { type: String, unique: false },
 	local: {
 		username: { type: String, unique: false, required: false },
-		password: { type: String, unique: false, required: false }
+		password: { type: String, unique: false, required: false },
+		userWins: {type: Number, required: true},
+		userScores: {type: Number, required: true}
 	},
 	google: {
 		googleId: { type: String, required: false }
 	},
-	photos: [],
-
-	userWins: 0,
-
-	userScores: 0
+	photos: []
+	
 	// local: {
 	// 	email: { type: String, unique: true },
 	// 	password: { type: String }

@@ -75,6 +75,8 @@ export default class LeaderBoard extends PureComponent {
                         </ListItem>
 
                     </List>
+
+
                     </Content>
                 </Container>
                 <View style={styles.buttonView}>
