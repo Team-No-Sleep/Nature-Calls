@@ -133,7 +133,7 @@ export default class HomeScreen extends React.Component {
 
         < ChoosePlayer
           onPlayGame={_ => this.toggleGame(true)}
-          onLeaderBoard={_ => this.toggleLeaderboard(true)}
+          onLeaderBoard={_ => this.toggleLeaderboardFromChoose(true)}
           containerStyle={styles.container}
           visible={this.state.choosePlayerVisible}
           socket = {this.socket}
@@ -205,6 +205,7 @@ export default class HomeScreen extends React.Component {
     );
   };
 }
+
 
 const styles = StyleSheet.create({
   container: {

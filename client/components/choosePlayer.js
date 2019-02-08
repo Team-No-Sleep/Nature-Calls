@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 
 import { StyleSheet, Modal, Alert, ImageBackground, View, StatusBar, Image, TouchableOpacity } from "react-native";
 
-import { Container, Header, Content, Button, Text, Icon, Fab, Card, CardItem, Body } from 'native-base';
+import { Container, Header, Content, Button, Text, Icon, Fab } from 'native-base';
 
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
@@ -95,9 +95,9 @@ export default class ChoosePlayer extends PureComponent {
                         <Button rounded success style={styles.button} onPress={this.props.onPlayGame}>
                             <Text>Ready Up</Text>
                         </Button>
-
+                        {/* This should be a leaderboard button no a go back button */}
                         <Button rounded success style={styles.button} onPress={this.props.onLeaderBoard}>
-                            <Text>Leaderboard</Text>
+                            <Text>Go Back</Text> 
                         </Button>
 
                         <Button rounded success style={styles.button} onPress={this.props.onLogOut}>
@@ -175,19 +175,19 @@ const styles = StyleSheet.create({
 
     dinoView: {
         flexDirection: 'row',
-        marginLeft: "30%"
+        marginLeft: "28%"
 
     },
 
     buttonView: {
         marginTop: "5%",
         flexDirection: 'row',
-        marginLeft: "25%",
+        marginLeft: "18%",
     },
 
     ChoosePlayerText: {
         flexDirection: 'row',
-        marginLeft: "32%",
+        marginLeft: "30%",
         marginTop: "2%"
     },
 
